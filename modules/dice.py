@@ -2,7 +2,7 @@ from bot import bot
 import random
 
 
-@bot.command(pass_context=True)
+@bot.command()
 async def r(ctx):
 	msg = ctx.message
 	dice = msg.content
@@ -18,25 +18,28 @@ async def r(ctx):
 		return
 
 	res = roll_die(int(dice))
-
 	if res:
-		await bot.say(f"{msg.author.mention}\nRolling d{dice}: **{res}**")
+		await ctx.send(f"{msg.author.mention}\nRolling d{dice}: **{res}**")
 	else:
 		await invalid()
 
 
-@bot.command(pass_context=True)
+@bot.command()
+async def fuckhead(ctx):
+	await ctx.send("Happy Birthday Spencer!")
+
+
+@bot.command()
 async def rr(ctx):
 	msg = ctx.message
 	parts = msg.split()
 	print(parts)
 
 	if not parts[1] or not parts[1].split('d'):
-		await bot.say("Incorrect usage. Must use format NdX. (N=0+, X=4,6,8,10,12,20)")
+		await ctx.send("Incorrect usage. Must use format NdX. (N=0+, X=4,6,8,10,12,20)")
 	else:
-
 		for _ in range(parts[1].split('d')[0]):
-			await bot.say(f"{msg.author}\n")
+			await ctx.send(f"{msg.author}\n")
 
 
 def roll_die(sides):

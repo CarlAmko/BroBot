@@ -1,3 +1,3 @@
 from discord.ext import commands
 
-bot = commands.Bot(command_prefix='!', description='BroBot')
+bot = commands.Bot(command_prefix='!')

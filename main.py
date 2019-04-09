@@ -4,30 +4,22 @@ from bot import bot
 import modules.dice
 
 
+@bot.event
 async def on_ready():
 	print(f'Logged in as {bot.user.name} -- {bot.user.id}.')
 
 
-# async def on_message(message):
-# 	if not message.author.bot:
-# 		process_commands(message)
-
-@bot.command(pass_context=True)
-async def mention(ctx):
-	msg = ctx.message
-	await bot.say(f"{ctx.message.author.mention} said {msg.content}.")
-
-
-@bot.command(pass_context=True)
-async def joined(ctx):
-	"""Says when a member joined."""
-	user = ctx.message.author
-	await bot.say(f"{user.mention} joined Discord on {user.joined_at}.")
+@bot.event
+async def on_message(message):
+	if not message.author.bot:
+		await bot.process_commands(message)
 
 
 @bot.command()
-async def test():
-	await bot.say("Test output command!")
+async def joined(ctx):
+	"""Says when a member joined."""
+	user = ctx.message.author
+	await ctx.send(f"{user.mention} joined Discord on {user.joined_at}.")
 
 
 # Load env vars
