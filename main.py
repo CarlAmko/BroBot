@@ -15,13 +15,6 @@ async def on_message(message):
 		await bot.process_commands(message)
 
 
-@bot.command()
-async def joined(ctx):
-	"""Says when a member joined."""
-	user = ctx.message.author
-	await ctx.send(f"{user.mention} joined Discord on {user.joined_at}.")
-
-
 # Load env vars
 load_dotenv()
 
