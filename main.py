@@ -1,7 +1,7 @@
-import os
-from dotenv import load_dotenv
+import env
 from bot import bot
 import modules.dice
+import modules.game_price
 
 
 @bot.event
@@ -15,10 +15,5 @@ async def on_message(message):
 		await bot.process_commands(message)
 
 
-# Load env vars
-load_dotenv()
-
-bot_secret = os.getenv("BOT_TOKEN")
-print(f"Using bot secret token: {bot_secret}")
-
-bot.run(bot_secret)
+print(f"Using bot secret token: {env.bot_secret}")
+bot.run(env.bot_secret)
