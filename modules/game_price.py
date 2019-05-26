@@ -22,13 +22,17 @@ async def price(ctx):
 	print(f"Querying '{query}'...")
 
 	# send request to API
-	resp = requests.get(url=f'{env.game_api_url}steam/{query}').json()
+	resp = json.loads(requests.get(url=f'{env.game_api_url}{query}').json())
 	print(f'Got response: {resp}')
 
 	# Check if response found a game for query
-	if 'No result found' in resp:
+	if not resp["results"]:
 		await ctx.send(f'{msg.author.mention} No game found for search term: \'{query}\'')
 	else:
-		data = json.loads(resp)
+		data = resp["results"]
 		# format and reply response
-		await ctx.send(f'{msg.author.mention} Found game on Steam:\n*{data["name"]}* @ **${data["price"] / 100}**')
+		await ctx.send(f'{msg.author.mention} Found game...\n')
+		for res in data:
+			res = json.loads(res)
+			print(f'Parsing result: {res}')
+			await ctx.send(f'{res["name"]} for **${res["price"] / 100}** on *{res["provider"].capitalize()}*')
