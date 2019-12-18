@@ -2,6 +2,8 @@ import env
 from bot import bot
 import modules.dice
 import modules.game_price
+import modules.admin
+import modules.change_color
 
 
 @bot.event
