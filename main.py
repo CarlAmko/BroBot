@@ -1,9 +1,8 @@
+import http.server
+import socketserver
+
 import env
 from bot import bot
-import modules.dice
-import modules.game_price
-import modules.admin
-import modules.change_color
 
 
 @bot.event
@@ -16,6 +15,9 @@ async def on_message(message):
 	if not message.author.bot:
 		await bot.process_commands(message)
 
+
+# Start up web server to maintain connection on hosting provider
+socketserver.TCPServer(('', env.port), http.server.SimpleHTTPRequestHandler).serve_forever()
 
 print(f"Using bot secret token: {env.bot_secret}")
 bot.run(env.bot_secret)
