@@ -1,7 +1,7 @@
 import random
 import re
 
-from bot import bot
+from modules import bot
 
 valid_dice = [4, 6, 8, 10, 12, 20]
 

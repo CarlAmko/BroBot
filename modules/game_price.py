@@ -1,8 +1,7 @@
-import json
-
 import requests
+
 import env
-from bot import bot
+from modules import bot
 
 
 @bot.command()
@@ -15,24 +14,31 @@ async def price(ctx):
 
 	# check for valid input
 	if not splits or len(splits) < 2:
-		await ctx.send(f'{msg.author.mention} Invalid input. Example: !price *GAME*.')
+		await ctx.send(f'{msg.author.mention} Invalid input. Example: !price <GAME>.')
 
 	# extract query from list
 	query = splits[1]
 	print(f"Querying '{query}'...")
 
 	# send request to API
-	resp = json.loads(requests.get(url=f'{env.game_api_url}{query}').json())
-	print(f'Got response: {resp}')
+	params = {'query': query}
+	resp_json = requests.get(url=f'{env.game_api_url}', params=params).json()
+	print(f'Got response: {resp_json}')
 
-	# Check if response found a game for query
-	if not resp["results"]:
-		await ctx.send(f'{msg.author.mention} No game found for search term: \'{query}\'')
+	num_results = len(resp_json)
+	if resp_json and num_results > 1:
+		human_readable_names = {
+			'hb': 'Humble Bundle',
+			'steam': 'Steam',
+			'g2a': 'G2A'
+		}
+
+		lines = []
+		for resp in resp_json:
+			provider = human_readable_names[resp['provider']]
+			lines.append(f'{resp["name"]} on **{provider}** for **${resp["price"]}**.')
+
+		line_str = "\n\t".join(lines)
+		await ctx.send(f'{msg.author.mention}, found {num_results} results for \'{query}\':\n\t{line_str}')
 	else:
-		data = resp["results"]
-		# format and reply response
-		await ctx.send(f'{msg.author.mention} Found game...\n')
-		for res in data:
-			res = json.loads(res)
-			print(f'Parsing result: {res}')
-			await ctx.send(f'{res["name"]} for **${res["price"] / 100}** on *{res["provider"].capitalize()}*')
+		await ctx.send(f'{msg.author.mention} No game found for search term: \'{query}\'')
