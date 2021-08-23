@@ -2,7 +2,7 @@
 from discord import Guild, VoiceChannel, Member
 
 import env
-from modules import bot, dice, game_price
+from modules import bot, dice, game_price, reddit
 
 
 def get_guild() -> Guild:
