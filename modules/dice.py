@@ -12,7 +12,7 @@ async def r(ctx):
 	text = msg.content
 
 	async def invalid():
-		await ctx.send("Invalid usage. Must use format NdX. (N=0+, X=4,6,8,10,12,20)")
+		await ctx.send("Invalid usage. Use as '!r NdX'. (N=0+, X=4,6,8,10,12,20)")
 
 	# Check if input matches expected dice pattern
 	matches = re.findall(r"([\s0-9])d(\d{1,2})", text) or None
