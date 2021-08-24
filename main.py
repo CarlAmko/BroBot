@@ -2,15 +2,8 @@
 from discord import Guild, VoiceChannel, Member
 
 import env
-from modules import bot, dice, game_price, reddit, randomizer
-
-
-def get_guild() -> Guild:
-	return bot.get_guild(int(env.guild_id))
-
-
-def get_members_channel(guild: Guild) -> VoiceChannel:
-	return guild.get_channel(int(env.member_channel_id))
+from modules import bot, dice, game_price, reddit, randomizer, poll
+from modules.core import get_guild, get_members_channel
 
 
 async def adjust_member_count():
@@ -46,5 +39,4 @@ async def on_message(message):
 
 
 if __name__ == '__main__':
-	print(f"Using bot secret token: {env.bot_secret}")
 	bot.run(env.bot_secret)
