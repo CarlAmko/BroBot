@@ -12,9 +12,12 @@ async def poll(ctx: Context):
 	text = msg.content
 	author = ctx.message.author
 
+	async def fail(error: str = 'Invalid usage.'):
+		await ctx.send(f'{error} Please use as **!poll "What are we playing?" "Choice 1" "Choice 2"**.')
+
 	choices = re.findall(r'"(.*?)"', text) or None
 	if not choices:
-		await ctx.send(f'No choices provided. Please use as **!poll "What are we playing?" "Choice 1" "Choice 2"**.')
+		await fail()
 		return
 
 	question = choices[0]
@@ -22,7 +25,11 @@ async def poll(ctx: Context):
 
 	num_poll_options = len(choices)
 	if num_poll_options > 9:
-		await ctx.send(f'Cannot provide more than 9 choices.')
+		await fail(error='Too many choices provided.')
+		return
+
+	if num_poll_options == 0:
+		await fail()
 		return
 
 	def get_emoji(index: int) -> str:
