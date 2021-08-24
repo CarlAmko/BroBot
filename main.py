@@ -11,7 +11,7 @@ async def adjust_member_count():
 	if guild is not None:
 		channel: VoiceChannel = get_members_channel(guild)
 		if channel is not None:
-			await channel.edit(reason=None, name=f'Member Count: {guild.member_count}')
+			await channel.edit(reason=None, name=f'Members: {guild.member_count}')
 
 
 @bot.event
