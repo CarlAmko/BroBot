@@ -1,0 +1,9 @@
+version: "2.4"
+
+services:
+  user_db:
+    image: redis:alpine3.14
+    ports:
+      - "6379:6379"
+    mem_limit: 126m
+

@@ -11,3 +11,5 @@ member_channel_id = os.getenv("MEMBER_CHANNEL_ID")
 
 reddit_client_id = os.getenv("REDDIT_API_CLIENT_ID")
 reddit_client_secret = os.getenv("REDDIT_API_CLIENT_SECRET")
+
+redis_endpoint = os.getenv("REDIS_ENDPOINT")

@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
+import discord
 from discord import Guild, VoiceChannel, Member
 
 import env
-from modules import bot, dice, game_price, reddit, randomizer, poll, audio
+from modules import bot, dice, game_price, reddit, randomizer, poll, scheduler, audio
 from modules.core import get_guild, get_members_channel
 
 
@@ -38,5 +39,8 @@ async def on_message(message):
 		await bot.process_commands(message)
 
 
+client = discord.Client()
+
 if __name__ == '__main__':
+	bot.loop.create_task(scheduler.process_scheduled_tasks())
 	bot.run(env.bot_secret)
