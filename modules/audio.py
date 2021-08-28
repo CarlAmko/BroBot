@@ -62,14 +62,19 @@ async def play(ctx: Context, url: str):
 		await ctx.send(f'{author.mention} is not in a voice channel! Please join a voice channel first.')
 		return
 
-	clients = bot.voice_clients
-	# If not connected to voice, connect.
-	if len(clients) == 0:
-		await voice.channel.connect()
-		clients = bot.voice_clients
+	voice_clients = bot.voice_clients
+	voice_client = voice_clients[0] if len(voice_clients) > 0 else None
+
+	# If not connected to any voice channel, connect to user.
+	if not voice_client:
+		voice_client = await voice.channel.connect()
+
+	# If connected to a different voice channel than the user, change to user's voice channel.
+	if voice_client.channel.name != voice.channel.name:
+		await voice_client.disconnect()
+		voice_client = await voice.channel.connect()
 
 	audio = await YTDLSource.from_url(url, loop=bot.loop, stream=True)
-	voice_client: VoiceClient = clients[0]
 
 	# Stop any currently playing audio.
 	voice_client.stop()
