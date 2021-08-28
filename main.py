@@ -2,7 +2,7 @@
 from discord import Guild, VoiceChannel, Member
 
 import env
-from modules import bot, dice, game_price, reddit, randomizer, poll
+from modules import bot, dice, game_price, reddit, randomizer, poll, audio
 from modules.core import get_guild, get_members_channel
 
 
