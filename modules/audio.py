@@ -2,13 +2,11 @@ import asyncio
 
 import discord
 import emoji
-import youtube_dl
+from yt_dlp import YoutubeDL
 from discord import VoiceClient
 from discord.ext.commands import Context
 
 from modules import bot
-
-youtube_dl.utils.bug_reports_message = lambda: ''
 
 ytdl_format_options = {
 	'format': 'bestaudio/best',
@@ -27,7 +25,7 @@ ffmpeg_options = {
 	'options': '-vn'
 }
 
-ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
+ytdl = YoutubeDL(ytdl_format_options)
 
 
 class YTDLSource(discord.PCMVolumeTransformer):
