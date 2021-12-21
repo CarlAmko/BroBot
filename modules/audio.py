@@ -50,6 +50,9 @@ async def _leave_voice_channels():
 	for client in bot.voice_clients:
 		await client.disconnect()
 
+def _is_in_voice_channel() -> bool:
+	voice_clients = bot.voice_clients
+	return len(voice_clients) > 0
 
 @bot.command()
 async def play(ctx: Context, url: str):
@@ -114,3 +117,14 @@ async def resume(ctx: Context):
 		voice_client: VoiceClient = voice_clients[0]
 		voice_client.resume()
 		await ctx.message.add_reaction(emoji.emojize(':thumbs_up:'))
+
+
+async def check_if_alone():
+	while True:
+		if _is_in_voice_channel():
+			for voice_client in bot.voice_clients:
+				# Only one member means it's alone.
+				if len(voice_client.channel.members) == 1:
+					await voice_client.disconnect()
+		# Loop every minute.
+		await asyncio.sleep(60)
