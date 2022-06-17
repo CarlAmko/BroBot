@@ -128,8 +128,11 @@ async def volume(ctx: Context, new_volume: int):
 	if ctx.voice_client is None:
 		return await ctx.send("Not connected to a voice channel.")
 
-	ctx.voice_client.source.volume = new_volume / 100
-	await ctx.send(f"Changed volume to {new_volume}%")
+	if ctx.voice_client.source:
+		ctx.voice_client.source.volume = new_volume / 100
+		await ctx.send(f"Changed volume to {new_volume}%")
+	else:
+		await ctx.send("No audio playing. Please play something first before attempting to change volume.")
 
 
 async def check_if_alone():
