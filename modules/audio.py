@@ -119,7 +119,7 @@ async def resume(ctx: Context):
 		await ctx.send('No audio playing.')
 	else:
 		voice_client: VoiceClient = voice_clients[0]
-		voice_client.resume()volume
+		voice_client.resume()
 		await ctx.message.add_reaction(emoji.emojize(':thumbs_up:'))
 
 
