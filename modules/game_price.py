@@ -1,23 +1,24 @@
 import requests
+from discord.ext.commands import Context
 
 import env
 from modules import bot
 
 
 @bot.command()
-async def price(ctx):
+async def price(ctx: Context):
 	msg = ctx.message
 	text = msg.content
 
 	# split off command from message
-	splits = text.split(" ", 1)
+	request = text.split(" ", 1)
 
 	# check for valid input
-	if not splits or len(splits) < 2:
+	if not request or len(request) < 2:
 		await ctx.send(f'{msg.author.mention} Invalid input. Example: !price <GAME>.')
 
 	# extract query from list
-	query = splits[1]
+	query = request[1]
 	print(f"Querying '{query}'...")
 
 	# send request to API
