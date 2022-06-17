@@ -140,6 +140,7 @@ async def check_if_alone():
 		if _is_in_voice_channel():
 			for voice_client in bot.voice_clients:
 				# Only one member means it's alone.
+				print(voice_client.channel.members)
 				if len(voice_client.channel.members) == 1:
 					await voice_client.disconnect()
 		# Loop every minute.
