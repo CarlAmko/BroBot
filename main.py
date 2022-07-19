@@ -44,4 +44,4 @@ client = discord.Client()
 if __name__ == '__main__':
 	bot.loop.create_task(scheduler.process_scheduled_tasks())
 	bot.loop.create_task(audio.check_if_alone())
-	bot.run(env.bot_secret)
+	bot.run(env.BOT_SECRET)

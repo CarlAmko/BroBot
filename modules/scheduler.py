@@ -14,7 +14,7 @@ from pytz import BaseTzInfo, UnknownTimeZoneError
 import env
 from modules import bot
 
-db = redis.Redis(host=env.redis_endpoint)
+db = redis.Redis(host=env.REDIS_ENDPOINT)
 
 
 @dataclass(frozen=True)

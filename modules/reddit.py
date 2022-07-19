@@ -6,8 +6,8 @@ import env
 from modules import bot
 
 reddit = asyncpraw.Reddit(
-	client_id=env.reddit_client_id,
-	client_secret=env.reddit_client_secret,
+	client_id=env.REDDIT_CLIENT_ID,
+	client_secret=env.REDDIT_CLIENT_SECRET,
 	user_agent="BroBot"
 )
 

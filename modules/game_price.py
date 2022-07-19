@@ -23,7 +23,7 @@ async def price(ctx: Context):
 
 	# send request to API
 	params = {'query': query}
-	resp_json = requests.get(url=f'{env.game_api_url}', params=params).json()
+	resp_json = requests.get(url=f'{env.GAME_API_URL}', params=params).json()
 	print(f'Got response: {resp_json}')
 
 	num_results = len(resp_json)
