@@ -1,8 +1,4 @@
 import os
-from dotenv import load_dotenv
-
-# Load env vars
-load_dotenv()
 
 BOT_SECRET = os.getenv("BOT_TOKEN")
 GAME_API_URL = os.getenv("GAME_API_URL")

@@ -5,7 +5,7 @@ with open("README.md", 'r') as f:
 
 setup(
 	name='BroBot',
-	version='1.0.1',
+	version='1.0.2',
 	description='Discord bot for the bros.',
 	license="MIT",
 	long_description=long_description,
