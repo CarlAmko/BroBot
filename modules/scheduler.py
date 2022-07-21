@@ -6,15 +6,12 @@ from typing import Optional, List
 
 import pytz
 import recurrent
-import redis
 from discord import Member
 from discord.ext.commands import Context
 from pytz import BaseTzInfo, UnknownTimeZoneError
 
-import env
+from db import db
 from modules import bot
-
-db = redis.Redis(host=env.REDIS_ENDPOINT)
 
 
 @dataclass(frozen=True)

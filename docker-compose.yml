@@ -1,9 +1,30 @@
-version: "2.4"
+version: "3.9"
 
 services:
-  user_db:
-    image: redis:alpine3.14
+  brobot:
+    build: .
+    environment:
+      - BOT_TOKEN=$BOT_TOKEN
+      - GUILD_ID=$GUILD_ID
+      - MEMBER_CHANNEL_ID=$MEMBER_CHANNEL_ID
+      - WORDLE_CHANNEL_ID=$WORDLE_CHANNEL_ID
+      - REDDIT_API_CLIENT_ID=$REDDIT_API_CLIENT_ID
+      - REDDIT_API_CLIENT_SECRET=$REDDIT_API_CLIENT_SECRET
+      - REDIS_ENDPOINT=$REDIS_ENDPOINT
+      - GAME_API_ENDPOINT=$GAME_API_ENDPOINT
+  db:
+    image: redis:7-alpine
     ports:
       - "6379:6379"
-    mem_limit: 126m
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    volumes:
+      - redis_data:/data
+    deploy:
+      resources:
+        limits:
+          memory: 126m
 
+
+volumes:
+  redis_data:
