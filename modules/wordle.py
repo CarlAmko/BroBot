@@ -46,7 +46,7 @@ async def wordle(ctx: Context):
                 chars_remaining[c].add(i)
             num_guesses_used = 0
             prev_guess_stack = []
-            await ctx.send('Wordle game started! Type !gw to guess a word.')
+            await ctx.send('Wordle game started! Type !gw to guess a word or !clearwordle to stop a game in progress.')
 
 
 @bot.command()
