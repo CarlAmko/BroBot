@@ -1,0 +1,4002 @@
+[
+    {
+        "word": "around",
+        "score": 6183
+    },
+    {
+        "word": "affect",
+        "score": 5826
+    },
+    {
+        "word": "become",
+        "score": 5302
+    },
+    {
+        "word": "offset",
+        "score": 4283
+    },
+    {
+        "word": "access",
+        "score": 3948
+    },
+    {
+        "word": "albeit",
+        "score": 3791
+    },
+    {
+        "word": "action",
+        "score": 3726
+    },
+    {
+        "word": "bridge",
+        "score": 3700
+    },
+    {
+        "word": "advise",
+        "score": 3444
+    },
+    {
+        "word": "office",
+        "score": 3160
+    },
+    {
+        "word": "assume",
+        "score": 3145
+    },
+    {
+        "word": "assess",
+        "score": 3072
+    },
+    {
+        "word": "appeal",
+        "score": 3044
+    },
+    {
+        "word": "advice",
+        "score": 3043
+    },
+    {
+        "word": "artery",
+        "score": 3023
+    },
+    {
+        "word": "obtuse",
+        "score": 3015
+    },
+    {
+        "word": "breach",
+        "score": 3001
+    },
+    {
+        "word": "beetle",
+        "score": 2945
+    },
+    {
+        "word": "adress",
+        "score": 2907
+    },
+    {
+        "word": "better",
+        "score": 2847
+    },
+    {
+        "word": "unique",
+        "score": 2826
+    },
+    {
+        "word": "agency",
+        "score": 2767
+    },
+    {
+        "word": "accrue",
+        "score": 2668
+    },
+    {
+        "word": "badger",
+        "score": 2606
+    },
+    {
+        "word": "beauty",
+        "score": 2585
+    },
+    {
+        "word": "attack",
+        "score": 2582
+    },
+    {
+        "word": "orange",
+        "score": 2564
+    },
+    {
+        "word": "across",
+        "score": 2542
+    },
+    {
+        "word": "acumen",
+        "score": 2541
+    },
+    {
+        "word": "aspect",
+        "score": 2487
+    },
+    {
+        "word": "object",
+        "score": 2470
+    },
+    {
+        "word": "anchor",
+        "score": 2400
+    },
+    {
+        "word": "accent",
+        "score": 2397
+    },
+    {
+        "word": "breath",
+        "score": 2369
+    },
+    {
+        "word": "agenda",
+        "score": 2294
+    },
+    {
+        "word": "aghast",
+        "score": 2279
+    },
+    {
+        "word": "astute",
+        "score": 2273
+    },
+    {
+        "word": "benign",
+        "score": 2248
+    },
+    {
+        "word": "advent",
+        "score": 2218
+    },
+    {
+        "word": "arcane",
+        "score": 2211
+    },
+    {
+        "word": "burden",
+        "score": 2184
+    },
+    {
+        "word": "adhere",
+        "score": 2183
+    },
+    {
+        "word": "attend",
+        "score": 2158
+    },
+    {
+        "word": "affirm",
+        "score": 2128
+    },
+    {
+        "word": "opaque",
+        "score": 2113
+    },
+    {
+        "word": "apathy",
+        "score": 2101
+    },
+    {
+        "word": "assert",
+        "score": 2095
+    },
+    {
+        "word": "barrel",
+        "score": 2092
+    },
+    {
+        "word": "averse",
+        "score": 2075
+    },
+    {
+        "word": "avatar",
+        "score": 2071
+    },
+    {
+        "word": "beyond",
+        "score": 2062
+    },
+    {
+        "word": "accord",
+        "score": 2050
+    },
+    {
+        "word": "afford",
+        "score": 2050
+    },
+    {
+        "word": "abject",
+        "score": 2042
+    },
+    {
+        "word": "blight",
+        "score": 2025
+    },
+    {
+        "word": "allude",
+        "score": 1968
+    },
+    {
+        "word": "uphold",
+        "score": 1960
+    },
+    {
+        "word": "accept",
+        "score": 1946
+    },
+    {
+        "word": "blazen",
+        "score": 1943
+    },
+    {
+        "word": "assure",
+        "score": 1924
+    },
+    {
+        "word": "assign",
+        "score": 1921
+    },
+    {
+        "word": "ardent",
+        "score": 1915
+    },
+    {
+        "word": "animus",
+        "score": 1908
+    },
+    {
+        "word": "active",
+        "score": 1898
+    },
+    {
+        "word": "absurd",
+        "score": 1862
+    },
+    {
+        "word": "oblige",
+        "score": 1857
+    },
+    {
+        "word": "animal",
+        "score": 1847
+    },
+    {
+        "word": "brazen",
+        "score": 1845
+    },
+    {
+        "word": "alight",
+        "score": 1842
+    },
+    {
+        "word": "august",
+        "score": 1832
+    },
+    {
+        "word": "bubble",
+        "score": 1822
+    },
+    {
+        "word": "anemia",
+        "score": 1819
+    },
+    {
+        "word": "bottom",
+        "score": 1818
+    },
+    {
+        "word": "option",
+        "score": 1817
+    },
+    {
+        "word": "bright",
+        "score": 1804
+    },
+    {
+        "word": "outlet",
+        "score": 1784
+    },
+    {
+        "word": "beacon",
+        "score": 1780
+    },
+    {
+        "word": "behold",
+        "score": 1772
+    },
+    {
+        "word": "aplomb",
+        "score": 1763
+    },
+    {
+        "word": "button",
+        "score": 1762
+    },
+    {
+        "word": "alumni",
+        "score": 1760
+    },
+    {
+        "word": "attain",
+        "score": 1758
+    },
+    {
+        "word": "budget",
+        "score": 1757
+    },
+    {
+        "word": "bereft",
+        "score": 1755
+    },
+    {
+        "word": "attest",
+        "score": 1754
+    },
+    {
+        "word": "branch",
+        "score": 1747
+    },
+    {
+        "word": "accede",
+        "score": 1745
+    },
+    {
+        "word": "broach",
+        "score": 1745
+    },
+    {
+        "word": "baffle",
+        "score": 1743
+    },
+    {
+        "word": "online",
+        "score": 1739
+    },
+    {
+        "word": "buffer",
+        "score": 1734
+    },
+    {
+        "word": "oracle",
+        "score": 1716
+    },
+    {
+        "word": "answer",
+        "score": 1706
+    },
+    {
+        "word": "behind",
+        "score": 1705
+    },
+    {
+        "word": "butter",
+        "score": 1705
+    },
+    {
+        "word": "obtain",
+        "score": 1704
+    },
+    {
+        "word": "bestow",
+        "score": 1698
+    },
+    {
+        "word": "update",
+        "score": 1672
+    },
+    {
+        "word": "before",
+        "score": 1667
+    },
+    {
+        "word": "assist",
+        "score": 1666
+    },
+    {
+        "word": "belief",
+        "score": 1654
+    },
+    {
+        "word": "buffet",
+        "score": 1648
+    },
+    {
+        "word": "banter",
+        "score": 1636
+    },
+    {
+        "word": "backup",
+        "score": 1596
+    },
+    {
+        "word": "barren",
+        "score": 1595
+    },
+    {
+        "word": "ornery",
+        "score": 1577
+    },
+    {
+        "word": "allure",
+        "score": 1569
+    },
+    {
+        "word": "aerial",
+        "score": 1560
+    },
+    {
+        "word": "aspire",
+        "score": 1556
+    },
+    {
+        "word": "bitter",
+        "score": 1555
+    },
+    {
+        "word": "bother",
+        "score": 1545
+    },
+    {
+        "word": "broker",
+        "score": 1543
+    },
+    {
+        "word": "blithe",
+        "score": 1542
+    },
+    {
+        "word": "artist",
+        "score": 1541
+    },
+    {
+        "word": "appear",
+        "score": 1537
+    },
+    {
+        "word": "bundle",
+        "score": 1535
+    },
+    {
+        "word": "otiose",
+        "score": 1533
+    },
+    {
+        "word": "odious",
+        "score": 1530
+    },
+    {
+        "word": "binary",
+        "score": 1523
+    },
+    {
+        "word": "bottle",
+        "score": 1517
+    },
+    {
+        "word": "asylum",
+        "score": 1515
+    },
+    {
+        "word": "aurora",
+        "score": 1508
+    },
+    {
+        "word": "ad hoc",
+        "score": 1507
+    },
+    {
+        "word": "amount",
+        "score": 1501
+    },
+    {
+        "word": "assent",
+        "score": 1497
+    },
+    {
+        "word": "banana",
+        "score": 1497
+    },
+    {
+        "word": "acuity",
+        "score": 1496
+    },
+    {
+        "word": "breech",
+        "score": 1475
+    },
+    {
+        "word": "origin",
+        "score": 1459
+    },
+    {
+        "word": "allege",
+        "score": 1458
+    },
+    {
+        "word": "behest",
+        "score": 1456
+    },
+    {
+        "word": "adroit",
+        "score": 1452
+    },
+    {
+        "word": "arrest",
+        "score": 1441
+    },
+    {
+        "word": "bigley",
+        "score": 1434
+    },
+    {
+        "word": "barely",
+        "score": 1421
+    },
+    {
+        "word": "analog",
+        "score": 1409
+    },
+    {
+        "word": "utopia",
+        "score": 1408
+    },
+    {
+        "word": "batter",
+        "score": 1405
+    },
+    {
+        "word": "avenue",
+        "score": 1385
+    },
+    {
+        "word": "berate",
+        "score": 1384
+    },
+    {
+        "word": "awhile",
+        "score": 1382
+    },
+    {
+        "word": "battle",
+        "score": 1378
+    },
+    {
+        "word": "affair",
+        "score": 1376
+    },
+    {
+        "word": "absorb",
+        "score": 1372
+    },
+    {
+        "word": "orchid",
+        "score": 1365
+    },
+    {
+        "word": "border",
+        "score": 1364
+    },
+    {
+        "word": "breeze",
+        "score": 1360
+    },
+    {
+        "word": "oyster",
+        "score": 1360
+    },
+    {
+        "word": "apogee",
+        "score": 1357
+    },
+    {
+        "word": "bounce",
+        "score": 1337
+    },
+    {
+        "word": "adverb",
+        "score": 1332
+    },
+    {
+        "word": "adduce",
+        "score": 1328
+    },
+    {
+        "word": "bucket",
+        "score": 1325
+    },
+    {
+        "word": "amidst",
+        "score": 1324
+    },
+    {
+        "word": "assail",
+        "score": 1312
+    },
+    {
+        "word": "assets",
+        "score": 1310
+    },
+    {
+        "word": "orient",
+        "score": 1310
+    },
+    {
+        "word": "atrium",
+        "score": 1307
+    },
+    {
+        "word": "ordeal",
+        "score": 1300
+    },
+    {
+        "word": "output",
+        "score": 1297
+    },
+    {
+        "word": "abrupt",
+        "score": 1281
+    },
+    {
+        "word": "abjure",
+        "score": 1275
+    },
+    {
+        "word": "betray",
+        "score": 1274
+    },
+    {
+        "word": "oeuvre",
+        "score": 1274
+    },
+    {
+        "word": "beckon",
+        "score": 1273
+    },
+    {
+        "word": "accost",
+        "score": 1272
+    },
+    {
+        "word": "adjust",
+        "score": 1266
+    },
+    {
+        "word": "bureau",
+        "score": 1264
+    },
+    {
+        "word": "almond",
+        "score": 1261
+    },
+    {
+        "word": "bullet",
+        "score": 1260
+    },
+    {
+        "word": "arrant",
+        "score": 1259
+    },
+    {
+        "word": "utmost",
+        "score": 1257
+    },
+    {
+        "word": "admire",
+        "score": 1256
+    },
+    {
+        "word": "always",
+        "score": 1256
+    },
+    {
+        "word": "ashame",
+        "score": 1255
+    },
+    {
+        "word": "unwind",
+        "score": 1247
+    },
+    {
+        "word": "bypass",
+        "score": 1242
+    },
+    {
+        "word": "acquit",
+        "score": 1239
+    },
+    {
+        "word": "occult",
+        "score": 1227
+    },
+    {
+        "word": "append",
+        "score": 1223
+    },
+    {
+        "word": "oppose",
+        "score": 1214
+    },
+    {
+        "word": "arouse",
+        "score": 1206
+    },
+    {
+        "word": "adagio",
+        "score": 1196
+    },
+    {
+        "word": "abound",
+        "score": 1193
+    },
+    {
+        "word": "opioid",
+        "score": 1193
+    },
+    {
+        "word": "avulse",
+        "score": 1182
+    },
+    {
+        "word": "outfit",
+        "score": 1181
+    },
+    {
+        "word": "amoral",
+        "score": 1178
+    },
+    {
+        "word": "arrive",
+        "score": 1167
+    },
+    {
+        "word": "bamboo",
+        "score": 1163
+    },
+    {
+        "word": "bayete",
+        "score": 1156
+    },
+    {
+        "word": "attire",
+        "score": 1155
+    },
+    {
+        "word": "absent",
+        "score": 1145
+    },
+    {
+        "word": "blonde",
+        "score": 1145
+    },
+    {
+        "word": "avista",
+        "score": 1144
+    },
+    {
+        "word": "author",
+        "score": 1140
+    },
+    {
+        "word": "attach",
+        "score": 1137
+    },
+    {
+        "word": "afraid",
+        "score": 1135
+    },
+    {
+        "word": "urbane",
+        "score": 1135
+    },
+    {
+        "word": "abroad",
+        "score": 1133
+    },
+    {
+        "word": "biased",
+        "score": 1133
+    },
+    {
+        "word": "boring",
+        "score": 1126
+    },
+    {
+        "word": "broken",
+        "score": 1123
+    },
+    {
+        "word": "burrow",
+        "score": 1119
+    },
+    {
+        "word": "bustle",
+        "score": 1114
+    },
+    {
+        "word": "oriole",
+        "score": 1112
+    },
+    {
+        "word": "basket",
+        "score": 1111
+    },
+    {
+        "word": "amalie",
+        "score": 1107
+    },
+    {
+        "word": "bonnet",
+        "score": 1107
+    },
+    {
+        "word": "accuse",
+        "score": 1103
+    },
+    {
+        "word": "brutal",
+        "score": 1099
+    },
+    {
+        "word": "outlaw",
+        "score": 1098
+    },
+    {
+        "word": "bounty",
+        "score": 1096
+    },
+    {
+        "word": "buckle",
+        "score": 1094
+    },
+    {
+        "word": "autumn",
+        "score": 1086
+    },
+    {
+        "word": "oxford",
+        "score": 1083
+    },
+    {
+        "word": "unison",
+        "score": 1081
+    },
+    {
+        "word": "bellow",
+        "score": 1080
+    },
+    {
+        "word": "africa",
+        "score": 1079
+    },
+    {
+        "word": "annual",
+        "score": 1075
+    },
+    {
+        "word": "apollo",
+        "score": 1072
+    },
+    {
+        "word": "behalf",
+        "score": 1061
+    },
+    {
+        "word": "actual",
+        "score": 1058
+    },
+    {
+        "word": "offend",
+        "score": 1055
+    },
+    {
+        "word": "badass",
+        "score": 1053
+    },
+    {
+        "word": "autism",
+        "score": 1049
+    },
+    {
+        "word": "optics",
+        "score": 1044
+    },
+    {
+        "word": "banner",
+        "score": 1034
+    },
+    {
+        "word": "bodega",
+        "score": 1032
+    },
+    {
+        "word": "amazon",
+        "score": 1031
+    },
+    {
+        "word": "babble",
+        "score": 1031
+    },
+    {
+        "word": "bovine",
+        "score": 1028
+    },
+    {
+        "word": "borrow",
+        "score": 1025
+    },
+    {
+        "word": "abrade",
+        "score": 1021
+    },
+    {
+        "word": "alcove",
+        "score": 1021
+    },
+    {
+        "word": "bedlam",
+        "score": 1019
+    },
+    {
+        "word": "billet",
+        "score": 1017
+    },
+    {
+        "word": "barter",
+        "score": 1016
+    },
+    {
+        "word": "bronze",
+        "score": 1015
+    },
+    {
+        "word": "beside",
+        "score": 1012
+    },
+    {
+        "word": "acacia",
+        "score": 1008
+    },
+    {
+        "word": "burner",
+        "score": 1005
+    },
+    {
+        "word": "bandit",
+        "score": 1000
+    },
+    {
+        "word": "bruise",
+        "score": 997
+    },
+    {
+        "word": "onager",
+        "score": 996
+    },
+    {
+        "word": "octave",
+        "score": 994
+    },
+    {
+        "word": "urgent",
+        "score": 990
+    },
+    {
+        "word": "antics",
+        "score": 989
+    },
+    {
+        "word": "browse",
+        "score": 989
+    },
+    {
+        "word": "ambush",
+        "score": 988
+    },
+    {
+        "word": "useful",
+        "score": 988
+    },
+    {
+        "word": "billow",
+        "score": 987
+    },
+    {
+        "word": "astray",
+        "score": 984
+    },
+    {
+        "word": "bridle",
+        "score": 973
+    },
+    {
+        "word": "ascent",
+        "score": 967
+    },
+    {
+        "word": "beaver",
+        "score": 966
+    },
+    {
+        "word": "barrow",
+        "score": 965
+    },
+    {
+        "word": "outset",
+        "score": 961
+    },
+    {
+        "word": "buster",
+        "score": 960
+    },
+    {
+        "word": "ordain",
+        "score": 960
+    },
+    {
+        "word": "ballot",
+        "score": 956
+    },
+    {
+        "word": "obsess",
+        "score": 956
+    },
+    {
+        "word": "ballet",
+        "score": 954
+    },
+    {
+        "word": "adjure",
+        "score": 952
+    },
+    {
+        "word": "amoeba",
+        "score": 952
+    },
+    {
+        "word": "upbeat",
+        "score": 952
+    },
+    {
+        "word": "barber",
+        "score": 950
+    },
+    {
+        "word": "befall",
+        "score": 949
+    },
+    {
+        "word": "bought",
+        "score": 947
+    },
+    {
+        "word": "outlie",
+        "score": 947
+    },
+    {
+        "word": "outbid",
+        "score": 946
+    },
+    {
+        "word": "addled",
+        "score": 945
+    },
+    {
+        "word": "anoint",
+        "score": 945
+    },
+    {
+        "word": "areola",
+        "score": 940
+    },
+    {
+        "word": "bazaar",
+        "score": 940
+    },
+    {
+        "word": "amulet",
+        "score": 938
+    },
+    {
+        "word": "apache",
+        "score": 937
+    },
+    {
+        "word": "bender",
+        "score": 936
+    },
+    {
+        "word": "orphan",
+        "score": 932
+    },
+    {
+        "word": "belong",
+        "score": 928
+    },
+    {
+        "word": "almost",
+        "score": 927
+    },
+    {
+        "word": "bunker",
+        "score": 919
+    },
+    {
+        "word": "occupy",
+        "score": 919
+    },
+    {
+        "word": "arcade",
+        "score": 908
+    },
+    {
+        "word": "anthem",
+        "score": 906
+    },
+    {
+        "word": "albedo",
+        "score": 905
+    },
+    {
+        "word": "arctic",
+        "score": 905
+    },
+    {
+        "word": "ataxia",
+        "score": 902
+    },
+    {
+        "word": "angina",
+        "score": 901
+    },
+    {
+        "word": "arable",
+        "score": 901
+    },
+    {
+        "word": "advert",
+        "score": 899
+    },
+    {
+        "word": "addict",
+        "score": 897
+    },
+    {
+        "word": "asleep",
+        "score": 894
+    },
+    {
+        "word": "breast",
+        "score": 894
+    },
+    {
+        "word": "belove",
+        "score": 893
+    },
+    {
+        "word": "asthma",
+        "score": 890
+    },
+    {
+        "word": "oblate",
+        "score": 890
+    },
+    {
+        "word": "anneal",
+        "score": 889
+    },
+    {
+        "word": "anyway",
+        "score": 889
+    },
+    {
+        "word": "ascend",
+        "score": 880
+    },
+    {
+        "word": "bearer",
+        "score": 880
+    },
+    {
+        "word": "bugger",
+        "score": 877
+    },
+    {
+        "word": "ornate",
+        "score": 876
+    },
+    {
+        "word": "ashlar",
+        "score": 866
+    },
+    {
+        "word": "behave",
+        "score": 866
+    },
+    {
+        "word": "butler",
+        "score": 865
+    },
+    {
+        "word": "ashram",
+        "score": 862
+    },
+    {
+        "word": "urchin",
+        "score": 857
+    },
+    {
+        "word": "banish",
+        "score": 855
+    },
+    {
+        "word": "outage",
+        "score": 852
+    },
+    {
+        "word": "anomie",
+        "score": 839
+    },
+    {
+        "word": "avenge",
+        "score": 837
+    },
+    {
+        "word": "abated",
+        "score": 834
+    },
+    {
+        "word": "bakery",
+        "score": 831
+    },
+    {
+        "word": "ballad",
+        "score": 831
+    },
+    {
+        "word": "ardour",
+        "score": 830
+    },
+    {
+        "word": "upshot",
+        "score": 829
+    },
+    {
+        "word": "oxygen",
+        "score": 827
+    },
+    {
+        "word": "unruly",
+        "score": 827
+    },
+    {
+        "word": "biopsy",
+        "score": 826
+    },
+    {
+        "word": "annals",
+        "score": 825
+    },
+    {
+        "word": "arcana",
+        "score": 820
+    },
+    {
+        "word": "adonis",
+        "score": 818
+    },
+    {
+        "word": "bleach",
+        "score": 811
+    },
+    {
+        "word": "brooch",
+        "score": 811
+    },
+    {
+        "word": "boreal",
+        "score": 810
+    },
+    {
+        "word": "bishop",
+        "score": 809
+    },
+    {
+        "word": "armour",
+        "score": 808
+    },
+    {
+        "word": "alpaca",
+        "score": 804
+    },
+    {
+        "word": "abacus",
+        "score": 803
+    },
+    {
+        "word": "uptake",
+        "score": 803
+    },
+    {
+        "word": "armada",
+        "score": 802
+    },
+    {
+        "word": "opiate",
+        "score": 800
+    },
+    {
+        "word": "ohmage",
+        "score": 799
+    },
+    {
+        "word": "bloody",
+        "score": 796
+    },
+    {
+        "word": "bourne",
+        "score": 794
+    },
+    {
+        "word": "unbend",
+        "score": 793
+    },
+    {
+        "word": "akimbo",
+        "score": 792
+    },
+    {
+        "word": "ossify",
+        "score": 790
+    },
+    {
+        "word": "blanca",
+        "score": 789
+    },
+    {
+        "word": "agnate",
+        "score": 786
+    },
+    {
+        "word": "afloat",
+        "score": 784
+    },
+    {
+        "word": "ocular",
+        "score": 783
+    },
+    {
+        "word": "orgasm",
+        "score": 783
+    },
+    {
+        "word": "bicker",
+        "score": 780
+    },
+    {
+        "word": "bomber",
+        "score": 775
+    },
+    {
+        "word": "ageing",
+        "score": 773
+    },
+    {
+        "word": "oblong",
+        "score": 771
+    },
+    {
+        "word": "binder",
+        "score": 768
+    },
+    {
+        "word": "overdo",
+        "score": 768
+    },
+    {
+        "word": "unfold",
+        "score": 767
+    },
+    {
+        "word": "uplift",
+        "score": 767
+    },
+    {
+        "word": "anemic",
+        "score": 766
+    },
+    {
+        "word": "bemoan",
+        "score": 763
+    },
+    {
+        "word": "blanch",
+        "score": 763
+    },
+    {
+        "word": "unless",
+        "score": 762
+    },
+    {
+        "word": "bionic",
+        "score": 760
+    },
+    {
+        "word": "adrift",
+        "score": 758
+    },
+    {
+        "word": "airbag",
+        "score": 758
+    },
+    {
+        "word": "betake",
+        "score": 758
+    },
+    {
+        "word": "barley",
+        "score": 757
+    },
+    {
+        "word": "astral",
+        "score": 754
+    },
+    {
+        "word": "united",
+        "score": 754
+    },
+    {
+        "word": "orator",
+        "score": 753
+    },
+    {
+        "word": "auteur",
+        "score": 752
+    },
+    {
+        "word": "unduly",
+        "score": 751
+    },
+    {
+        "word": "burger",
+        "score": 749
+    },
+    {
+        "word": "brazil",
+        "score": 748
+    },
+    {
+        "word": "uproar",
+        "score": 747
+    },
+    {
+        "word": "bauble",
+        "score": 745
+    },
+    {
+        "word": "agouti",
+        "score": 744
+    },
+    {
+        "word": "awning",
+        "score": 738
+    },
+    {
+        "word": "orison",
+        "score": 738
+    },
+    {
+        "word": "unhold",
+        "score": 738
+    },
+    {
+        "word": "outrun",
+        "score": 735
+    },
+    {
+        "word": "onward",
+        "score": 734
+    },
+    {
+        "word": "usance",
+        "score": 734
+    },
+    {
+        "word": "allies",
+        "score": 732
+    },
+    {
+        "word": "ormolu",
+        "score": 732
+    },
+    {
+        "word": "blouse",
+        "score": 731
+    },
+    {
+        "word": "batten",
+        "score": 728
+    },
+    {
+        "word": "boiler",
+        "score": 728
+    },
+    {
+        "word": "ablate",
+        "score": 727
+    },
+    {
+        "word": "bushel",
+        "score": 727
+    },
+    {
+        "word": "anonym",
+        "score": 724
+    },
+    {
+        "word": "anorak",
+        "score": 722
+    },
+    {
+        "word": "upside",
+        "score": 721
+    },
+    {
+        "word": "blough",
+        "score": 719
+    },
+    {
+        "word": "beggar",
+        "score": 717
+    },
+    {
+        "word": "byword",
+        "score": 717
+    },
+    {
+        "word": "arthur",
+        "score": 716
+    },
+    {
+        "word": "balsam",
+        "score": 716
+    },
+    {
+        "word": "boomer",
+        "score": 713
+    },
+    {
+        "word": "bummer",
+        "score": 713
+    },
+    {
+        "word": "alkali",
+        "score": 712
+    },
+    {
+        "word": "alpine",
+        "score": 712
+    },
+    {
+        "word": "upload",
+        "score": 711
+    },
+    {
+        "word": "argyle",
+        "score": 710
+    },
+    {
+        "word": "arroyo",
+        "score": 710
+    },
+    {
+        "word": "unhide",
+        "score": 707
+    },
+    {
+        "word": "apercu",
+        "score": 705
+    },
+    {
+        "word": "aboard",
+        "score": 701
+    },
+    {
+        "word": "bumper",
+        "score": 700
+    },
+    {
+        "word": "uptick",
+        "score": 691
+    },
+    {
+        "word": "attune",
+        "score": 690
+    },
+    {
+        "word": "brandy",
+        "score": 690
+    },
+    {
+        "word": "bistro",
+        "score": 687
+    },
+    {
+        "word": "aporia",
+        "score": 686
+    },
+    {
+        "word": "blower",
+        "score": 686
+    },
+    {
+        "word": "bathos",
+        "score": 685
+    },
+    {
+        "word": "apiece",
+        "score": 684
+    },
+    {
+        "word": "bailey",
+        "score": 684
+    },
+    {
+        "word": "offing",
+        "score": 681
+    },
+    {
+        "word": "brogue",
+        "score": 680
+    },
+    {
+        "word": "buried",
+        "score": 679
+    },
+    {
+        "word": "osprey",
+        "score": 678
+    },
+    {
+        "word": "avalon",
+        "score": 676
+    },
+    {
+        "word": "augury",
+        "score": 675
+    },
+    {
+        "word": "ullage",
+        "score": 675
+    },
+    {
+        "word": "albert",
+        "score": 674
+    },
+    {
+        "word": "biopic",
+        "score": 673
+    },
+    {
+        "word": "barred",
+        "score": 670
+    },
+    {
+        "word": "adjoin",
+        "score": 668
+    },
+    {
+        "word": "omelet",
+        "score": 667
+    },
+    {
+        "word": "appall",
+        "score": 666
+    },
+    {
+        "word": "boggle",
+        "score": 665
+    },
+    {
+        "word": "unlike",
+        "score": 664
+    },
+    {
+        "word": "outlay",
+        "score": 661
+    },
+    {
+        "word": "acting",
+        "score": 657
+    },
+    {
+        "word": "uneasy",
+        "score": 655
+    },
+    {
+        "word": "aubade",
+        "score": 654
+    },
+    {
+        "word": "uterus",
+        "score": 652
+    },
+    {
+        "word": "bemuse",
+        "score": 648
+    },
+    {
+        "word": "bolero",
+        "score": 648
+    },
+    {
+        "word": "abduct",
+        "score": 647
+    },
+    {
+        "word": "apiary",
+        "score": 647
+    },
+    {
+        "word": "upkeep",
+        "score": 644
+    },
+    {
+        "word": "banker",
+        "score": 640
+    },
+    {
+        "word": "unveil",
+        "score": 640
+    },
+    {
+        "word": "appose",
+        "score": 635
+    },
+    {
+        "word": "outing",
+        "score": 634
+    },
+    {
+        "word": "awaken",
+        "score": 631
+    },
+    {
+        "word": "braise",
+        "score": 630
+    },
+    {
+        "word": "arnold",
+        "score": 629
+    },
+    {
+        "word": "blurry",
+        "score": 627
+    },
+    {
+        "word": "bubbly",
+        "score": 627
+    },
+    {
+        "word": "beware",
+        "score": 626
+    },
+    {
+        "word": "athena",
+        "score": 624
+    },
+    {
+        "word": "arisen",
+        "score": 623
+    },
+    {
+        "word": "anyone",
+        "score": 622
+    },
+    {
+        "word": "baller",
+        "score": 620
+    },
+    {
+        "word": "unrest",
+        "score": 620
+    },
+    {
+        "word": "bisque",
+        "score": 618
+    },
+    {
+        "word": "acedia",
+        "score": 617
+    },
+    {
+        "word": "arabic",
+        "score": 617
+    },
+    {
+        "word": "buford",
+        "score": 615
+    },
+    {
+        "word": "axilla",
+        "score": 612
+    },
+    {
+        "word": "abseil",
+        "score": 611
+    },
+    {
+        "word": "allele",
+        "score": 611
+    },
+    {
+        "word": "avocet",
+        "score": 611
+    },
+    {
+        "word": "belies",
+        "score": 611
+    },
+    {
+        "word": "ocelot",
+        "score": 611
+    },
+    {
+        "word": "artful",
+        "score": 610
+    },
+    {
+        "word": "burial",
+        "score": 610
+    },
+    {
+        "word": "beaten",
+        "score": 609
+    },
+    {
+        "word": "amused",
+        "score": 606
+    },
+    {
+        "word": "argent",
+        "score": 604
+    },
+    {
+        "word": "umlaut",
+        "score": 603
+    },
+    {
+        "word": "barney",
+        "score": 601
+    },
+    {
+        "word": "oculus",
+        "score": 601
+    },
+    {
+        "word": "byline",
+        "score": 593
+    },
+    {
+        "word": "bonded",
+        "score": 592
+    },
+    {
+        "word": "upheld",
+        "score": 592
+    },
+    {
+        "word": "agreed",
+        "score": 590
+    },
+    {
+        "word": "barrio",
+        "score": 589
+    },
+    {
+        "word": "unfair",
+        "score": 588
+    },
+    {
+        "word": "brunch",
+        "score": 587
+    },
+    {
+        "word": "oppugn",
+        "score": 586
+    },
+    {
+        "word": "outsit",
+        "score": 586
+    },
+    {
+        "word": "bungle",
+        "score": 585
+    },
+    {
+        "word": "apical",
+        "score": 584
+    },
+    {
+        "word": "outcry",
+        "score": 584
+    },
+    {
+        "word": "abbess",
+        "score": 582
+    },
+    {
+        "word": "boffin",
+        "score": 582
+    },
+    {
+        "word": "bonsai",
+        "score": 579
+    },
+    {
+        "word": "beanie",
+        "score": 578
+    },
+    {
+        "word": "bikini",
+        "score": 578
+    },
+    {
+        "word": "buy-in",
+        "score": 578
+    },
+    {
+        "word": "amends",
+        "score": 577
+    },
+    {
+        "word": "bolick",
+        "score": 577
+    },
+    {
+        "word": "bygone",
+        "score": 576
+    },
+    {
+        "word": "antrum",
+        "score": 575
+    },
+    {
+        "word": "bewail",
+        "score": 574
+    },
+    {
+        "word": "amanda",
+        "score": 573
+    },
+    {
+        "word": "auburn",
+        "score": 572
+    },
+    {
+        "word": "bangle",
+        "score": 572
+    },
+    {
+        "word": "banked",
+        "score": 572
+    },
+    {
+        "word": "umpire",
+        "score": 572
+    },
+    {
+        "word": "aureus",
+        "score": 570
+    },
+    {
+        "word": "bobcat",
+        "score": 570
+    },
+    {
+        "word": "botany",
+        "score": 570
+    },
+    {
+        "word": "odessa",
+        "score": 570
+    },
+    {
+        "word": "opener",
+        "score": 570
+    },
+    {
+        "word": "banyan",
+        "score": 569
+    },
+    {
+        "word": "blazon",
+        "score": 569
+    },
+    {
+        "word": "usable",
+        "score": 568
+    },
+    {
+        "word": "amazed",
+        "score": 567
+    },
+    {
+        "word": "oregon",
+        "score": 566
+    },
+    {
+        "word": "affray",
+        "score": 565
+    },
+    {
+        "word": "aegean",
+        "score": 563
+    },
+    {
+        "word": "azalea",
+        "score": 563
+    },
+    {
+        "word": "biceps",
+        "score": 562
+    },
+    {
+        "word": "outfly",
+        "score": 561
+    },
+    {
+        "word": "ampere",
+        "score": 558
+    },
+    {
+        "word": "overly",
+        "score": 558
+    },
+    {
+        "word": "orrery",
+        "score": 556
+    },
+    {
+        "word": "bisect",
+        "score": 555
+    },
+    {
+        "word": "baobab",
+        "score": 554
+    },
+    {
+        "word": "basics",
+        "score": 553
+    },
+    {
+        "word": "blazer",
+        "score": 553
+    },
+    {
+        "word": "allied",
+        "score": 550
+    },
+    {
+        "word": "angora",
+        "score": 550
+    },
+    {
+        "word": "ashley",
+        "score": 550
+    },
+    {
+        "word": "bumble",
+        "score": 550
+    },
+    {
+        "word": "awsome",
+        "score": 549
+    },
+    {
+        "word": "basalt",
+        "score": 549
+    },
+    {
+        "word": "blotch",
+        "score": 549
+    },
+    {
+        "word": "acidic",
+        "score": 547
+    },
+    {
+        "word": "beadle",
+        "score": 547
+    },
+    {
+        "word": "boxing",
+        "score": 545
+    },
+    {
+        "word": "busted",
+        "score": 545
+    },
+    {
+        "word": "atomic",
+        "score": 543
+    },
+    {
+        "word": "afghan",
+        "score": 542
+    },
+    {
+        "word": "others",
+        "score": 542
+    },
+    {
+        "word": "acadia",
+        "score": 537
+    },
+    {
+        "word": "blousy",
+        "score": 537
+    },
+    {
+        "word": "on site",
+        "score": 537
+    },
+    {
+        "word": "oddity",
+        "score": 536
+    },
+    {
+        "word": "arnica",
+        "score": 535
+    },
+    {
+        "word": "begone",
+        "score": 535
+    },
+    {
+        "word": "octavo",
+        "score": 535
+    },
+    {
+        "word": "amelia",
+        "score": 534
+    },
+    {
+        "word": "back up",
+        "score": 534
+    },
+    {
+        "word": "osmium",
+        "score": 534
+    },
+    {
+        "word": "ad-hoc",
+        "score": 533
+    },
+    {
+        "word": "aether",
+        "score": 533
+    },
+    {
+        "word": "ailing",
+        "score": 533
+    },
+    {
+        "word": "basque",
+        "score": 533
+    },
+    {
+        "word": "archer",
+        "score": 532
+    },
+    {
+        "word": "bougie",
+        "score": 530
+    },
+    {
+        "word": "brevet",
+        "score": 530
+    },
+    {
+        "word": "ursine",
+        "score": 530
+    },
+    {
+        "word": "bantam",
+        "score": 529
+    },
+    {
+        "word": "afield",
+        "score": 527
+    },
+    {
+        "word": "albino",
+        "score": 526
+    },
+    {
+        "word": "bleary",
+        "score": 524
+    },
+    {
+        "word": "breaux",
+        "score": 524
+    },
+    {
+        "word": "boogie",
+        "score": 523
+    },
+    {
+        "word": "ottawa",
+        "score": 523
+    },
+    {
+        "word": "agents",
+        "score": 522
+    },
+    {
+        "word": "alaska",
+        "score": 521
+    },
+    {
+        "word": "at hand",
+        "score": 520
+    },
+    {
+        "word": "uppity",
+        "score": 520
+    },
+    {
+        "word": "belfry",
+        "score": 518
+    },
+    {
+        "word": "arioso",
+        "score": 514
+    },
+    {
+        "word": "applet",
+        "score": 513
+    },
+    {
+        "word": "unknit",
+        "score": 512
+    },
+    {
+        "word": "bogart",
+        "score": 511
+    },
+    {
+        "word": "ablaze",
+        "score": 510
+    },
+    {
+        "word": "agaric",
+        "score": 510
+    },
+    {
+        "word": "belied",
+        "score": 510
+    },
+    {
+        "word": "breezy",
+        "score": 509
+    },
+    {
+        "word": "omerta",
+        "score": 509
+    },
+    {
+        "word": "acetic",
+        "score": 508
+    },
+    {
+        "word": "aerate",
+        "score": 508
+    },
+    {
+        "word": "arrear",
+        "score": 507
+    },
+    {
+        "word": "bonito",
+        "score": 507
+    },
+    {
+        "word": "berlin",
+        "score": 505
+    },
+    {
+        "word": "bounds",
+        "score": 505
+    },
+    {
+        "word": "unjust",
+        "score": 505
+    },
+    {
+        "word": "aikido",
+        "score": 504
+    },
+    {
+        "word": "adonai",
+        "score": 503
+    },
+    {
+        "word": "andrew",
+        "score": 503
+    },
+    {
+        "word": "borage",
+        "score": 503
+    },
+    {
+        "word": "bowser",
+        "score": 502
+    },
+    {
+        "word": "butkus",
+        "score": 501
+    },
+    {
+        "word": "uranus",
+        "score": 500
+    },
+    {
+        "word": "brassy",
+        "score": 498
+    },
+    {
+        "word": "undone",
+        "score": 498
+    },
+    {
+        "word": "bourse",
+        "score": 497
+    },
+    {
+        "word": "upward",
+        "score": 497
+    },
+    {
+        "word": "busker",
+        "score": 496
+    },
+    {
+        "word": "unbind",
+        "score": 496
+    },
+    {
+        "word": "affine",
+        "score": 494
+    },
+    {
+        "word": "bodkin",
+        "score": 494
+    },
+    {
+        "word": "booger",
+        "score": 493
+    },
+    {
+        "word": "alumna",
+        "score": 492
+    },
+    {
+        "word": "orache",
+        "score": 489
+    },
+    {
+        "word": "avowed",
+        "score": 488
+    },
+    {
+        "word": "batman",
+        "score": 488
+    },
+    {
+        "word": "blimey",
+        "score": 488
+    },
+    {
+        "word": "betide",
+        "score": 486
+    },
+    {
+        "word": "borzoi",
+        "score": 486
+    },
+    {
+        "word": "ashore",
+        "score": 483
+    },
+    {
+        "word": "behove",
+        "score": 483
+    },
+    {
+        "word": "aviary",
+        "score": 482
+    },
+    {
+        "word": "arabia",
+        "score": 481
+    },
+    {
+        "word": "antler",
+        "score": 480
+    },
+    {
+        "word": "beagle",
+        "score": 480
+    },
+    {
+        "word": "beater",
+        "score": 479
+    },
+    {
+        "word": "befell",
+        "score": 479
+    },
+    {
+        "word": "alexia",
+        "score": 478
+    },
+    {
+        "word": "armpit",
+        "score": 478
+    },
+    {
+        "word": "berber",
+        "score": 477
+    },
+    {
+        "word": "oliver",
+        "score": 477
+    },
+    {
+        "word": "osiris",
+        "score": 477
+    },
+    {
+        "word": "uptown",
+        "score": 477
+    },
+    {
+        "word": "orcein",
+        "score": 476
+    },
+    {
+        "word": "aurist",
+        "score": 474
+    },
+    {
+        "word": "uneven",
+        "score": 474
+    },
+    {
+        "word": "uphill",
+        "score": 474
+    },
+    {
+        "word": "bireme",
+        "score": 472
+    },
+    {
+        "word": "angels",
+        "score": 471
+    },
+    {
+        "word": "avesta",
+        "score": 471
+    },
+    {
+        "word": "bonnie",
+        "score": 470
+    },
+    {
+        "word": "burlap",
+        "score": 470
+    },
+    {
+        "word": "abcess",
+        "score": 469
+    },
+    {
+        "word": "anther",
+        "score": 469
+    },
+    {
+        "word": "ordure",
+        "score": 468
+    },
+    {
+        "word": "unable",
+        "score": 468
+    },
+    {
+        "word": "ararat",
+        "score": 467
+    },
+    {
+        "word": "biotic",
+        "score": 467
+    },
+    {
+        "word": "birdie",
+        "score": 466
+    },
+    {
+        "word": "oolong",
+        "score": 464
+    },
+    {
+        "word": "aeneas",
+        "score": 463
+    },
+    {
+        "word": "banger",
+        "score": 463
+    },
+    {
+        "word": "barque",
+        "score": 462
+    },
+    {
+        "word": "bodice",
+        "score": 460
+    },
+    {
+        "word": "arcing",
+        "score": 459
+    },
+    {
+        "word": "beldam",
+        "score": 458
+    },
+    {
+        "word": "unlock",
+        "score": 458
+    },
+    {
+        "word": "usured",
+        "score": 458
+    },
+    {
+        "word": "astern",
+        "score": 457
+    },
+    {
+        "word": "athens",
+        "score": 457
+    },
+    {
+        "word": "ageism",
+        "score": 456
+    },
+    {
+        "word": "anyhow",
+        "score": 455
+    },
+    {
+        "word": "antifa",
+        "score": 454
+    },
+    {
+        "word": "atonal",
+        "score": 454
+    },
+    {
+        "word": "auriga",
+        "score": 454
+    },
+    {
+        "word": "beluga",
+        "score": 454
+    },
+    {
+        "word": "onesie",
+        "score": 454
+    },
+    {
+        "word": "auntie",
+        "score": 453
+    },
+    {
+        "word": "orders",
+        "score": 453
+    },
+    {
+        "word": "aeolus",
+        "score": 452
+    },
+    {
+        "word": "baboon",
+        "score": 451
+    },
+    {
+        "word": "baring",
+        "score": 450
+    },
+    {
+        "word": "baltic",
+        "score": 449
+    },
+    {
+        "word": "bobbin",
+        "score": 449
+    },
+    {
+        "word": "bunion",
+        "score": 449
+    },
+    {
+        "word": "ulster",
+        "score": 449
+    },
+    {
+        "word": "busier",
+        "score": 448
+    },
+    {
+        "word": "amicus",
+        "score": 447
+    },
+    {
+        "word": "angles",
+        "score": 447
+    },
+    {
+        "word": "buddha",
+        "score": 446
+    },
+    {
+        "word": "abatis",
+        "score": 445
+    },
+    {
+        "word": "adsorb",
+        "score": 445
+    },
+    {
+        "word": "buyout",
+        "score": 445
+    },
+    {
+        "word": "octant",
+        "score": 445
+    },
+    {
+        "word": "bobble",
+        "score": 444
+    },
+    {
+        "word": "aquila",
+        "score": 443
+    },
+    {
+        "word": "borneo",
+        "score": 443
+    },
+    {
+        "word": "bonobo",
+        "score": 442
+    },
+    {
+        "word": "bursar",
+        "score": 442
+    },
+    {
+        "word": "biting",
+        "score": 441
+    },
+    {
+        "word": "bodies",
+        "score": 441
+    },
+    {
+        "word": "angler",
+        "score": 440
+    },
+    {
+        "word": "opined",
+        "score": 440
+    },
+    {
+        "word": "upsell",
+        "score": 440
+    },
+    {
+        "word": "bitten",
+        "score": 439
+    },
+    {
+        "word": "blowsy",
+        "score": 439
+    },
+    {
+        "word": "albion",
+        "score": 438
+    },
+    {
+        "word": "bunyan",
+        "score": 438
+    },
+    {
+        "word": "afresh",
+        "score": 437
+    },
+    {
+        "word": "attone",
+        "score": 436
+    },
+    {
+        "word": "baking",
+        "score": 436
+    },
+    {
+        "word": "boeing",
+        "score": 435
+    },
+    {
+        "word": "baleen",
+        "score": 434
+    },
+    {
+        "word": "banned",
+        "score": 432
+    },
+    {
+        "word": "assize",
+        "score": 431
+    },
+    {
+        "word": "aussie",
+        "score": 430
+    },
+    {
+        "word": "beaker",
+        "score": 428
+    },
+    {
+        "word": "unreal",
+        "score": 428
+    },
+    {
+        "word": "acopic",
+        "score": 427
+    },
+    {
+        "word": "arrack",
+        "score": 427
+    },
+    {
+        "word": "brawny",
+        "score": 427
+    },
+    {
+        "word": "austin",
+        "score": 426
+    },
+    {
+        "word": "avowal",
+        "score": 426
+    },
+    {
+        "word": "octane",
+        "score": 426
+    },
+    {
+        "word": "alexis",
+        "score": 425
+    },
+    {
+        "word": "ostler",
+        "score": 424
+    },
+    {
+        "word": "armory",
+        "score": 423
+    },
+    {
+        "word": "at all",
+        "score": 422
+    },
+    {
+        "word": "arking",
+        "score": 421
+    },
+    {
+        "word": "outwit",
+        "score": 421
+    },
+    {
+        "word": "unspin",
+        "score": 421
+    },
+    {
+        "word": "uproot",
+        "score": 421
+    },
+    {
+        "word": "as such",
+        "score": 419
+    },
+    {
+        "word": "boston",
+        "score": 418
+    },
+    {
+        "word": "basset",
+        "score": 416
+    },
+    {
+        "word": "obelus",
+        "score": 416
+    },
+    {
+        "word": "oedema",
+        "score": 416
+    },
+    {
+        "word": "annexe",
+        "score": 415
+    },
+    {
+        "word": "baster",
+        "score": 412
+    },
+    {
+        "word": "unkind",
+        "score": 412
+    },
+    {
+        "word": "aragon",
+        "score": 411
+    },
+    {
+        "word": "as well",
+        "score": 411
+    },
+    {
+        "word": "burble",
+        "score": 411
+    },
+    {
+        "word": "breton",
+        "score": 410
+    },
+    {
+        "word": "argued",
+        "score": 408
+    },
+    {
+        "word": "oodles",
+        "score": 407
+    },
+    {
+        "word": "banzai",
+        "score": 406
+    },
+    {
+        "word": "add-on",
+        "score": 405
+    },
+    {
+        "word": "bowels",
+        "score": 405
+    },
+    {
+        "word": "aching",
+        "score": 404
+    },
+    {
+        "word": "brogan",
+        "score": 403
+    },
+    {
+        "word": "broody",
+        "score": 403
+    },
+    {
+        "word": "apples",
+        "score": 402
+    },
+    {
+        "word": "behead",
+        "score": 402
+    },
+    {
+        "word": "abraid",
+        "score": 401
+    },
+    {
+        "word": "arista",
+        "score": 401
+    },
+    {
+        "word": "avaunt",
+        "score": 401
+    },
+    {
+        "word": "undine",
+        "score": 400
+    },
+    {
+        "word": "busses",
+        "score": 399
+    },
+    {
+        "word": "argosy",
+        "score": 398
+    },
+    {
+        "word": "oberon",
+        "score": 398
+    },
+    {
+        "word": "osteal",
+        "score": 398
+    },
+    {
+        "word": "untold",
+        "score": 398
+    },
+    {
+        "word": "bidden",
+        "score": 397
+    },
+    {
+        "word": "biggie",
+        "score": 397
+    },
+    {
+        "word": "amadon",
+        "score": 395
+    },
+    {
+        "word": "arbour",
+        "score": 395
+    },
+    {
+        "word": "burton",
+        "score": 395
+    },
+    {
+        "word": "buccal",
+        "score": 394
+    },
+    {
+        "word": "addend",
+        "score": 391
+    },
+    {
+        "word": "becket",
+        "score": 391
+    },
+    {
+        "word": "ariose",
+        "score": 390
+    },
+    {
+        "word": "bedeck",
+        "score": 390
+    },
+    {
+        "word": "buzzer",
+        "score": 390
+    },
+    {
+        "word": "unload",
+        "score": 390
+    },
+    {
+        "word": "angola",
+        "score": 387
+    },
+    {
+        "word": "octroi",
+        "score": 387
+    },
+    {
+        "word": "unesco",
+        "score": 387
+    },
+    {
+        "word": "out of",
+        "score": 386
+    },
+    {
+        "word": "armlet",
+        "score": 385
+    },
+    {
+        "word": "bonbon",
+        "score": 385
+    },
+    {
+        "word": "brumal",
+        "score": 384
+    },
+    {
+        "word": "airway",
+        "score": 383
+    },
+    {
+        "word": "ostomy",
+        "score": 382
+    },
+    {
+        "word": "unhang",
+        "score": 382
+    },
+    {
+        "word": "otitis",
+        "score": 380
+    },
+    {
+        "word": "anomal",
+        "score": 379
+    },
+    {
+        "word": "barrie",
+        "score": 379
+    },
+    {
+        "word": "befoul",
+        "score": 379
+    },
+    {
+        "word": "briton",
+        "score": 379
+    },
+    {
+        "word": "unease",
+        "score": 378
+    },
+    {
+        "word": "usurer",
+        "score": 378
+    },
+    {
+        "word": "aeneid",
+        "score": 377
+    },
+    {
+        "word": "assort",
+        "score": 377
+    },
+    {
+        "word": "auklet",
+        "score": 377
+    },
+    {
+        "word": "bigwig",
+        "score": 377
+    },
+    {
+        "word": "blocks",
+        "score": 377
+    },
+    {
+        "word": "buying",
+        "score": 377
+    },
+    {
+        "word": "bunter",
+        "score": 376
+    },
+    {
+        "word": "burned",
+        "score": 376
+    },
+    {
+        "word": "unsung",
+        "score": 376
+    },
+    {
+        "word": "begets",
+        "score": 375
+    },
+    {
+        "word": "upturn",
+        "score": 375
+    },
+    {
+        "word": "altair",
+        "score": 374
+    },
+    {
+        "word": "ascian",
+        "score": 374
+    },
+    {
+        "word": "blooth",
+        "score": 374
+    },
+    {
+        "word": "adnexa",
+        "score": 373
+    },
+    {
+        "word": "archon",
+        "score": 373
+    },
+    {
+        "word": "argali",
+        "score": 372
+    },
+    {
+        "word": "atopic",
+        "score": 372
+    },
+    {
+        "word": "olivia",
+        "score": 372
+    },
+    {
+        "word": "bengal",
+        "score": 370
+    },
+    {
+        "word": "brahma",
+        "score": 370
+    },
+    {
+        "word": "blotto",
+        "score": 369
+    },
+    {
+        "word": "unplug",
+        "score": 368
+    },
+    {
+        "word": "at once",
+        "score": 367
+    },
+    {
+        "word": "brazer",
+        "score": 367
+    },
+    {
+        "word": "untidy",
+        "score": 367
+    },
+    {
+        "word": "beeper",
+        "score": 365
+    },
+    {
+        "word": "ultima",
+        "score": 365
+    },
+    {
+        "word": "at bay",
+        "score": 364
+    },
+    {
+        "word": "buoyed",
+        "score": 364
+    },
+    {
+        "word": "athame",
+        "score": 363
+    },
+    {
+        "word": "bloomy",
+        "score": 363
+    },
+    {
+        "word": "bolted",
+        "score": 363
+    },
+    {
+        "word": "ultimo",
+        "score": 363
+    },
+    {
+        "word": "azores",
+        "score": 362
+    },
+    {
+        "word": "betook",
+        "score": 362
+    },
+    {
+        "word": "blow up",
+        "score": 362
+    },
+    {
+        "word": "used to",
+        "score": 362
+    },
+    {
+        "word": "anoxia",
+        "score": 361
+    },
+    {
+        "word": "unlook",
+        "score": 361
+    },
+    {
+        "word": "balzac",
+        "score": 360
+    },
+    {
+        "word": "unfurl",
+        "score": 360
+    },
+    {
+        "word": "became",
+        "score": 359
+    },
+    {
+        "word": "buffon",
+        "score": 359
+    },
+    {
+        "word": "amnion",
+        "score": 358
+    },
+    {
+        "word": "ankara",
+        "score": 358
+    },
+    {
+        "word": "unpack",
+        "score": 358
+    },
+    {
+        "word": "barker",
+        "score": 357
+    },
+    {
+        "word": "belter",
+        "score": 357
+    },
+    {
+        "word": "binion",
+        "score": 357
+    },
+    {
+        "word": "braces",
+        "score": 357
+    },
+    {
+        "word": "bungee",
+        "score": 357
+    },
+    {
+        "word": "abbacy",
+        "score": 356
+    },
+    {
+        "word": "barium",
+        "score": 356
+    },
+    {
+        "word": "bezoar",
+        "score": 355
+    },
+    {
+        "word": "bodily",
+        "score": 355
+    },
+    {
+        "word": "afeard",
+        "score": 354
+    },
+    {
+        "word": "andrea",
+        "score": 354
+    },
+    {
+        "word": "unkept",
+        "score": 354
+    },
+    {
+        "word": "unsure",
+        "score": 354
+    },
+    {
+        "word": "bouche",
+        "score": 353
+    },
+    {
+        "word": "bowery",
+        "score": 353
+    },
+    {
+        "word": "oillet",
+        "score": 353
+    },
+    {
+        "word": "au pair",
+        "score": 352
+    },
+    {
+        "word": "auster",
+        "score": 352
+    },
+    {
+        "word": "babies",
+        "score": 352
+    },
+    {
+        "word": "burgoo",
+        "score": 352
+    },
+    {
+        "word": "orchis",
+        "score": 352
+    },
+    {
+        "word": "attica",
+        "score": 351
+    },
+    {
+        "word": "bagger",
+        "score": 351
+    },
+    {
+        "word": "uptime",
+        "score": 350
+    },
+    {
+        "word": "adages",
+        "score": 349
+    },
+    {
+        "word": "aedile",
+        "score": 349
+    },
+    {
+        "word": "bollix",
+        "score": 349
+    },
+    {
+        "word": "brunei",
+        "score": 348
+    },
+    {
+        "word": "outfox",
+        "score": 348
+    },
+    {
+        "word": "airing",
+        "score": 347
+    },
+    {
+        "word": "apnoea",
+        "score": 347
+    },
+    {
+        "word": "aroint",
+        "score": 347
+    },
+    {
+        "word": "budgie",
+        "score": 347
+    },
+    {
+        "word": "adrian",
+        "score": 346
+    },
+    {
+        "word": "biases",
+        "score": 346
+    },
+    {
+        "word": "alford",
+        "score": 345
+    },
+    {
+        "word": "backed",
+        "score": 345
+    },
+    {
+        "word": "ureter",
+        "score": 345
+    },
+    {
+        "word": "bridal",
+        "score": 344
+    },
+    {
+        "word": "brooke",
+        "score": 344
+    },
+    {
+        "word": "ouster",
+        "score": 343
+    },
+    {
+        "word": "balled",
+        "score": 342
+    },
+    {
+        "word": "abulia",
+        "score": 341
+    },
+    {
+        "word": "blench",
+        "score": 341
+    },
+    {
+        "word": "bronco",
+        "score": 339
+    },
+    {
+        "word": "bummed",
+        "score": 337
+    },
+    {
+        "word": "assoil",
+        "score": 336
+    },
+    {
+        "word": "atonic",
+        "score": 336
+    },
+    {
+        "word": "becked",
+        "score": 336
+    },
+    {
+        "word": "blythe",
+        "score": 336
+    },
+    {
+        "word": "bunkum",
+        "score": 336
+    },
+    {
+        "word": "aslant",
+        "score": 335
+    },
+    {
+        "word": "barbel",
+        "score": 335
+    },
+    {
+        "word": "bigamy",
+        "score": 335
+    },
+    {
+        "word": "abbott",
+        "score": 334
+    },
+    {
+        "word": "athene",
+        "score": 334
+    },
+    {
+        "word": "avouch",
+        "score": 334
+    },
+    {
+        "word": "aweigh",
+        "score": 334
+    },
+    {
+        "word": "archie",
+        "score": 333
+    },
+    {
+        "word": "belize",
+        "score": 333
+    },
+    {
+        "word": "blenny",
+        "score": 332
+    },
+    {
+        "word": "bonner",
+        "score": 332
+    },
+    {
+        "word": "bussed",
+        "score": 332
+    },
+    {
+        "word": "baudry",
+        "score": 331
+    },
+    {
+        "word": "buffle",
+        "score": 331
+    },
+    {
+        "word": "bylaws",
+        "score": 331
+    },
+    {
+        "word": "unseat",
+        "score": 331
+    },
+    {
+        "word": "aflame",
+        "score": 330
+    },
+    {
+        "word": "agouta",
+        "score": 330
+    },
+    {
+        "word": "unguis",
+        "score": 330
+    },
+    {
+        "word": "ahimsa",
+        "score": 329
+    },
+    {
+        "word": "aleppo",
+        "score": 329
+    },
+    {
+        "word": "blowup",
+        "score": 329
+    },
+    {
+        "word": "bouncy",
+        "score": 329
+    },
+    {
+        "word": "bedbug",
+        "score": 328
+    },
+    {
+        "word": "boodle",
+        "score": 328
+    },
+    {
+        "word": "uraeus",
+        "score": 328
+    },
+    {
+        "word": "bluish",
+        "score": 327
+    },
+    {
+        "word": "unseen",
+        "score": 327
+    },
+    {
+        "word": "amerce",
+        "score": 326
+    },
+    {
+        "word": "anomic",
+        "score": 326
+    },
+    {
+        "word": "arches",
+        "score": 326
+    },
+    {
+        "word": "avanti",
+        "score": 325
+    },
+    {
+        "word": "blague",
+        "score": 325
+    },
+    {
+        "word": "boyish",
+        "score": 325
+    },
+    {
+        "word": "orphic",
+        "score": 325
+    },
+    {
+        "word": "aboral",
+        "score": 324
+    },
+    {
+        "word": "anadem",
+        "score": 324
+    },
+    {
+        "word": "areole",
+        "score": 324
+    },
+    {
+        "word": "bowler",
+        "score": 324
+    },
+    {
+        "word": "balboa",
+        "score": 323
+    },
+    {
+        "word": "abased",
+        "score": 322
+    },
+    {
+        "word": "biosis",
+        "score": 322
+    },
+    {
+        "word": "brewer",
+        "score": 322
+    },
+    {
+        "word": "ananas",
+        "score": 319
+    },
+    {
+        "word": "uncial",
+        "score": 319
+    },
+    {
+        "word": "ad-lib",
+        "score": 318
+    },
+    {
+        "word": "adduct",
+        "score": 318
+    },
+    {
+        "word": "untrue",
+        "score": 318
+    },
+    {
+        "word": "ampule",
+        "score": 317
+    },
+    {
+        "word": "blamed",
+        "score": 317
+    },
+    {
+        "word": "bonita",
+        "score": 317
+    },
+    {
+        "word": "on hand",
+        "score": 317
+    },
+    {
+        "word": "abelia",
+        "score": 316
+    },
+    {
+        "word": "barton",
+        "score": 316
+    },
+    {
+        "word": "allium",
+        "score": 315
+    },
+    {
+        "word": "bidder",
+        "score": 315
+    },
+    {
+        "word": "bowtie",
+        "score": 315
+    },
+    {
+        "word": "bushee",
+        "score": 315
+    },
+    {
+        "word": "unbear",
+        "score": 315
+    },
+    {
+        "word": "adored",
+        "score": 314
+    },
+    {
+        "word": "bethel",
+        "score": 314
+    },
+    {
+        "word": "bolled",
+        "score": 314
+    },
+    {
+        "word": "oozing",
+        "score": 314
+    },
+    {
+        "word": "orrell",
+        "score": 314
+    },
+    {
+        "word": "u-turn",
+        "score": 314
+    },
+    {
+        "word": "backer",
+        "score": 313
+    },
+    {
+        "word": "baxter",
+        "score": 313
+    },
+    {
+        "word": "belial",
+        "score": 313
+    },
+    {
+        "word": "brenda",
+        "score": 313
+    },
+    {
+        "word": "anomia",
+        "score": 312
+    },
+    {
+        "word": "ballsy",
+        "score": 311
+    },
+    {
+        "word": "uptalk",
+        "score": 311
+    },
+    {
+        "word": "bigger",
+        "score": 310
+    },
+    {
+        "word": "busing",
+        "score": 310
+    },
+    {
+        "word": "barbie",
+        "score": 309
+    },
+    {
+        "word": "ogling",
+        "score": 309
+    },
+    {
+        "word": "opened",
+        "score": 308
+    },
+    {
+        "word": "aliyah",
+        "score": 307
+    },
+    {
+        "word": "oblast",
+        "score": 307
+    },
+    {
+        "word": "oscine",
+        "score": 307
+    },
+    {
+        "word": "barite",
+        "score": 306
+    },
+    {
+        "word": "biomes",
+        "score": 306
+    },
+    {
+        "word": "onsite",
+        "score": 306
+    },
+    {
+        "word": "abides",
+        "score": 305
+    },
+    {
+        "word": "anselm",
+        "score": 305
+    },
+    {
+        "word": "awoken",
+        "score": 305
+    },
+    {
+        "word": "balata",
+        "score": 305
+    },
+    {
+        "word": "alevin",
+        "score": 304
+    },
+    {
+        "word": "bracer",
+        "score": 304
+    },
+    {
+        "word": "unholy",
+        "score": 304
+    },
+    {
+        "word": "bezant",
+        "score": 303
+    },
+    {
+        "word": "busboy",
+        "score": 303
+    },
+    {
+        "word": "admass",
+        "score": 302
+    },
+    {
+        "word": "alsace",
+        "score": 302
+    },
+    {
+        "word": "amelie",
+        "score": 302
+    },
+    {
+        "word": "aristo",
+        "score": 302
+    },
+    {
+        "word": "alfred",
+        "score": 301
+    },
+    {
+        "word": "bronto",
+        "score": 301
+    },
+    {
+        "word": "oocyte",
+        "score": 301
+    },
+    {
+        "word": "austen",
+        "score": 300
+    },
+    {
+        "word": "banded",
+        "score": 300
+    },
+    {
+        "word": "orgies",
+        "score": 300
+    },
+    {
+        "word": "abused",
+        "score": 299
+    },
+    {
+        "word": "attila",
+        "score": 299
+    },
+    {
+        "word": "bluing",
+        "score": 299
+    },
+    {
+        "word": "as per",
+        "score": 298
+    },
+    {
+        "word": "baiter",
+        "score": 298
+    },
+    {
+        "word": "bootee",
+        "score": 298
+    },
+    {
+        "word": "on call",
+        "score": 298
+    },
+    {
+        "word": "ousted",
+        "score": 297
+    },
+    {
+        "word": "unisex",
+        "score": 297
+    },
+    {
+        "word": "amrita",
+        "score": 296
+    },
+    {
+        "word": "bolter",
+        "score": 296
+    },
+    {
+        "word": "optima",
+        "score": 296
+    },
+    {
+        "word": "ostium",
+        "score": 296
+    },
+    {
+        "word": "bestir",
+        "score": 295
+    },
+    {
+        "word": "omnium",
+        "score": 295
+    },
+    {
+        "word": "acetal",
+        "score": 294
+    },
+    {
+        "word": "barnet",
+        "score": 294
+    },
+    {
+        "word": "bellum",
+        "score": 294
+    },
+    {
+        "word": "bovril",
+        "score": 294
+    },
+    {
+        "word": "brains",
+        "score": 294
+    },
+    {
+        "word": "brainy",
+        "score": 294
+    },
+    {
+        "word": "brolly",
+        "score": 294
+    },
+    {
+        "word": "anuran",
+        "score": 293
+    },
+    {
+        "word": "boreas",
+        "score": 292
+    },
+    {
+        "word": "brough",
+        "score": 292
+    },
+    {
+        "word": "arcate",
+        "score": 291
+    },
+    {
+        "word": "boards",
+        "score": 291
+    },
+    {
+        "word": "boater",
+        "score": 291
+    },
+    {
+        "word": "abloom",
+        "score": 290
+    },
+    {
+        "word": "atrial",
+        "score": 290
+    },
+    {
+        "word": "advect",
+        "score": 289
+    },
+    {
+        "word": "adytum",
+        "score": 289
+    },
+    {
+        "word": "barbet",
+        "score": 289
+    },
+    {
+        "word": "berime",
+        "score": 289
+    }
+]

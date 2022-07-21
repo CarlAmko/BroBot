@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 import discord
-from discord import Guild, VoiceChannel, Member
+from discord import Guild, Member
 
 import env
-from modules import bot, dice, game_price, reddit, randomizer, poll, scheduler, audio
+from modules import bot, dice, game_price, reddit, randomizer, poll, scheduler, audio, wordle
 from modules.core import get_guild, get_members_channel
 
 
 async def adjust_member_count():
 	guild: Guild = get_guild()
 	if guild is not None:
-		channel: VoiceChannel = get_members_channel(guild)
+		channel = get_members_channel()
 		if channel is not None:
 			await channel.edit(name=f'Members: {guild.member_count}')
 
