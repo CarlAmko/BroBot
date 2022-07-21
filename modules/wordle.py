@@ -27,7 +27,7 @@ WORD_DATA_PATH = os.path.join(os.path.dirname(__file__), 'data/words.json')
 # noinspection PyTypeChecker
 @bot.command()
 async def wordle(ctx: Context):
-    global word_to_guess, num_guesses_used, prev_guess_stack, chars_remaining
+    global word_to_guess, num_guesses_used, prev_guess_stack
 
     wordle_channel: TextChannel = get_channel_by_id(WORDLE_CHANNEL_ID)
     if ctx.channel.id != WORDLE_CHANNEL_ID:
@@ -41,9 +41,6 @@ async def wordle(ctx: Context):
                 candidate = random.choice(words)
                 if candidate['score'] >= 1000 and ' ' not in candidate['word']:
                     word_to_guess = candidate['word']
-            chars_remaining = {c: set() for c in word_to_guess}
-            for i, c in enumerate(word_to_guess):
-                chars_remaining[c].add(i)
             num_guesses_used = 0
             prev_guess_stack = []
             await ctx.send('Wordle game started! Type !gw to guess a word or !clearwordle to stop a game in progress.')
@@ -51,7 +48,7 @@ async def wordle(ctx: Context):
 
 @bot.command()
 async def gw(ctx: Context):
-    global word_to_guess, num_guesses_used
+    global word_to_guess, num_guesses_used, chars_remaining
 
     if not word_to_guess:
         await ctx.send("World game has not started. Type !wordle to start one.")
@@ -64,6 +61,10 @@ async def gw(ctx: Context):
             await ctx.send(f"{ctx.author.mention} Guesses must contain only alphabetic characters")
         else:
             result = []
+            chars_remaining = {c: set() for c in word_to_guess}
+            for i, c in enumerate(word_to_guess):
+                chars_remaining[c].add(i)
+
             for i, ch in enumerate(guess):
                 if ch == word_to_guess[i]:
                     result.append(correct_guess)
