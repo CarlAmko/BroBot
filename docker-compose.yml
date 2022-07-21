@@ -19,7 +19,6 @@ services:
     image: redis:7-alpine
     ports:
       - "6379:6379"
-    network_mode: host
     environment:
       - REDIS_REPLICATION_MODE=master
     volumes:
