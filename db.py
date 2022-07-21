@@ -2,4 +2,5 @@ import redis
 
 import env
 
-db = redis.Redis(host=env.REDIS_ENDPOINT)
+db = redis.Redis(host=env.REDIS_ENDPOINT, port=6379, db=1)
+print(f"Keys: {db.keys()}")

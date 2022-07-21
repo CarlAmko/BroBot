@@ -12,14 +12,22 @@ services:
       - REDDIT_API_CLIENT_SECRET=$REDDIT_API_CLIENT_SECRET
       - GAME_API_ENDPOINT=$GAME_API_ENDPOINT
       - REDIS_ENDPOINT=redis
-  db:
+    depends_on:
+      redis:
+        condition: service_healthy
+  redis:
     image: redis:7-alpine
     ports:
       - "6379:6379"
+    network_mode: host
     environment:
       - REDIS_REPLICATION_MODE=master
     volumes:
       - redis_data:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      interval: 3s
+      retries: 5
     deploy:
       resources:
         limits:

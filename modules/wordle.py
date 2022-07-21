@@ -3,12 +3,13 @@ import os.path
 import random
 
 import emoji
-from discord import TextChannel
+from discord import TextChannel, Member
 from discord.ext.commands import Context
 
 from env import WORDLE_CHANNEL_ID
 from modules import bot
 from modules.core import get_channel_by_id
+from db import db
 
 MAX_GUESSES = 6
 
@@ -55,10 +56,11 @@ async def gw(ctx: Context):
     else:
         guess: str = ctx.message.content.split(" ", 1)[1].lower()
         # Validate guesses
+        author: Member = ctx.author
         if len(guess) != 6:
-            await ctx.send(f"{ctx.author.mention} Guesses must be 6 characters")
+            await ctx.send(f"{author.mention} Guesses must be 6 characters")
         elif not guess.isalpha():
-            await ctx.send(f"{ctx.author.mention} Guesses must contain only alphabetic characters")
+            await ctx.send(f"{author.mention} Guesses must contain only alphabetic characters")
         else:
             result = []
             chars_remaining = {c: set() for c in word_to_guess}
@@ -81,11 +83,14 @@ async def gw(ctx: Context):
             guess_str = f'\n{emoji_guess}\n{"".join(result)}'
             prev_guess_stack.append(guess_str)
             await ctx.send(
-                f'{ctx.author.mention}{"".join(prev_guess_stack)}\n**{MAX_GUESSES - num_guesses_used} guesses remaining**'
+                f'{author.mention}{"".join(prev_guess_stack)}\n**{MAX_GUESSES - num_guesses_used} guesses remaining**'
             )
 
             if guess == word_to_guess:
-                await ctx.send(f'{ctx.author.mention} guessed correctly!')
+                key = author.id
+                current_score = int(db.get(key)) or 0
+                db.set(key, current_score + 1)
+                await ctx.send(f'{author.mention} guessed correctly! You now have {current_score + 1} points.')
                 word_to_guess = None
             elif num_guesses_used == MAX_GUESSES:
                 await ctx.send(f"Better luck next time! The word was '{word_to_guess}'")
