@@ -37,6 +37,7 @@ async def wordle(ctx: Context):
                 candidate = random.choice(words)
                 if candidate['score'] >= 1000 and ' ' not in candidate['word']:
                     word_to_guess = candidate['word']
+                    # word_to_guess = 'brobot'
             num_guesses_used = 0
             prev_guess_stack = []
             await ctx.send('Wordle game started! Type !gw to guess a word or !clearwordle to stop a game in progress.')
@@ -87,6 +88,7 @@ async def gw(ctx: Context):
                 db.set(key, current_score + 1)
                 await ctx.send(f'{author.mention} guessed correctly! You now have {current_score + 1} points.')
                 word_to_guess = None
+                print(f'{author.id} now has {current_score + 1 } wordle points.')
             elif num_guesses_used == MAX_GUESSES:
                 await ctx.send(f"Better luck next time! The word was '{word_to_guess}'")
                 word_to_guess = None
@@ -95,5 +97,8 @@ async def gw(ctx: Context):
 @bot.command()
 async def clearwordle(ctx: Context):
     global word_to_guess
-    word_to_guess = None
-    await ctx.send("Wordle game canceled.")
+    if word_to_guess is not None:
+        word_to_guess = None
+        await ctx.send("Wordle game canceled.")
+    else:
+        await ctx.send("Wordle game is not in progress.")
