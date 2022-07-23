@@ -3,13 +3,11 @@ import os.path
 import random
 
 import emoji
-from discord import TextChannel, Member
+from discord import Member
 from discord.ext.commands import Context
 
-from env import WORDLE_CHANNEL_ID
-from modules import bot
-from modules.core import get_channel_by_id
 from db import db
+from modules import bot
 
 MAX_GUESSES = 6
 
@@ -30,10 +28,7 @@ WORD_DATA_PATH = os.path.join(os.path.dirname(__file__), 'data/words.json')
 async def wordle(ctx: Context):
     global word_to_guess, num_guesses_used, prev_guess_stack
 
-    wordle_channel: TextChannel = get_channel_by_id(WORDLE_CHANNEL_ID)
-    if ctx.channel.id != WORDLE_CHANNEL_ID:
-        await ctx.send(f"{ctx.author.mention} I can only play in the #{wordle_channel} channel.")
-    elif word_to_guess is not None:
+    if word_to_guess is not None:
         await ctx.send(f"{ctx.author.mention} Game is already started.")
     else:
         with open(WORD_DATA_PATH, 'r') as data_file:
@@ -42,6 +37,7 @@ async def wordle(ctx: Context):
                 candidate = random.choice(words)
                 if candidate['score'] >= 1000 and ' ' not in candidate['word']:
                     word_to_guess = candidate['word']
+                    # word_to_guess = 'brobot'
             num_guesses_used = 0
             prev_guess_stack = []
             await ctx.send('Wordle game started! Type !gw to guess a word or !clearwordle to stop a game in progress.')
@@ -92,6 +88,7 @@ async def gw(ctx: Context):
                 db.set(key, current_score + 1)
                 await ctx.send(f'{author.mention} guessed correctly! You now have {current_score + 1} points.')
                 word_to_guess = None
+                print(f'{author.id} now has {current_score + 1 } wordle points.')
             elif num_guesses_used == MAX_GUESSES:
                 await ctx.send(f"Better luck next time! The word was '{word_to_guess}'")
                 word_to_guess = None
@@ -100,5 +97,8 @@ async def gw(ctx: Context):
 @bot.command()
 async def clearwordle(ctx: Context):
     global word_to_guess
-    word_to_guess = None
-    await ctx.send("Wordle game canceled.")
+    if word_to_guess is not None:
+        word_to_guess = None
+        await ctx.send("Wordle game canceled.")
+    else:
+        await ctx.send("Wordle game is not in progress.")
