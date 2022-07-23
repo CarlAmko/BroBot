@@ -3,13 +3,11 @@ import os.path
 import random
 
 import emoji
-from discord import TextChannel, Member
+from discord import Member
 from discord.ext.commands import Context
 
-from env import WORDLE_CHANNEL_ID
-from modules import bot
-from modules.core import get_channel_by_id
 from db import db
+from modules import bot
 
 MAX_GUESSES = 6
 
@@ -30,10 +28,7 @@ WORD_DATA_PATH = os.path.join(os.path.dirname(__file__), 'data/words.json')
 async def wordle(ctx: Context):
     global word_to_guess, num_guesses_used, prev_guess_stack
 
-    wordle_channel: TextChannel = get_channel_by_id(WORDLE_CHANNEL_ID)
-    if ctx.channel.id != WORDLE_CHANNEL_ID:
-        await ctx.send(f"{ctx.author.mention} I can only play in the #{wordle_channel} channel.")
-    elif word_to_guess is not None:
+    if word_to_guess is not None:
         await ctx.send(f"{ctx.author.mention} Game is already started.")
     else:
         with open(WORD_DATA_PATH, 'r') as data_file:
