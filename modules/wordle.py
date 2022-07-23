@@ -58,21 +58,27 @@ async def gw(ctx: Context):
         elif not guess.isalpha():
             await ctx.send(f"{author.mention} Guesses must contain only alphabetic characters")
         else:
-            result = []
+            # Create a result list, defaulting to wrong guesses.
+            result = [wrong_guess for _ in range(len(guess))]
+            # Create a mapping of char -> set of indices
             chars_remaining = {c: set() for c in word_to_guess}
             for i, c in enumerate(word_to_guess):
                 chars_remaining[c].add(i)
 
+            # First pass: Find all chars in guess that are exactly correct and update result.
             for i, ch in enumerate(guess):
                 if ch == word_to_guess[i]:
-                    result.append(correct_guess)
+                    result[i] = correct_guess
                     # Remove this index from remaining chars
-                    if i in chars_remaining[ch]:
-                        chars_remaining[ch].remove(i)
-                elif ch in chars_remaining and len(chars_remaining[ch]) > 0:
-                    result.append(missed_guess)
-                else:
-                    result.append(wrong_guess)
+                    chars_remaining[ch].remove(i)
+                    if len(chars_remaining[ch]) == 0:
+                        del chars_remaining[ch]
+
+            # Second pass: Find all chars in guess that were missed and still exist in the word to guess.
+            for i, ch in enumerate(guess):
+                if result[i] != correct_guess and ch in chars_remaining:
+                    result[i] = missed_guess
+
             num_guesses_used += 1
 
             emoji_guess = ''.join((f":regional_indicator_{c}:" for c in guess))
@@ -84,7 +90,7 @@ async def gw(ctx: Context):
 
             if guess == word_to_guess:
                 key = author.id
-                current_score = int(db.get(key)) or 0
+                current_score = int(db.get(key)) if db.exists(key) else 0
                 db.set(key, current_score + 1)
                 await ctx.send(f'{author.mention} guessed correctly! You now have {current_score + 1} points.')
                 word_to_guess = None
