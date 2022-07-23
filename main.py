@@ -3,7 +3,7 @@ import discord
 from discord import Guild, Member
 
 import env
-from modules import bot, dice, game_price, reddit, randomizer, poll, scheduler, audio, wordle
+from modules import bot, scheduler, audio
 from modules.core import get_guild, get_members_channel
 
 
