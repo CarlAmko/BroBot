@@ -112,6 +112,7 @@ async def gw(ctx: Context):
 						letter_mappings[wrong_guess].add(ch)
 
 			guesses_used[key] += 1
+			remaining_guesses = MAX_GUESSES - guesses_used[key]
 
 			guess_str = f'\n{_create_emoji_string(guess)}\n{"".join(result)}'
 			prev_guesses[key].append(guess_str)
@@ -120,16 +121,16 @@ async def gw(ctx: Context):
 				# f'{correct_guess}: {_create_emoji_string(letter_mappings[correct_guess])}\n'
 				# f'{missed_guess}: {_create_emoji_string(letter_mappings[missed_guess])}\n'
 				f'{wrong_guess}: {_create_emoji_string(letter_mappings[wrong_guess])}\n'
-				f'**{MAX_GUESSES - guesses_used[key]} guesses remaining**'
+				f'**{remaining_guesses} guesses remaining**'
 			)
 
 			if guess == word_to_guess:
 				current_score = int(db.get(key)) if db.exists(key) else 0
-				new_score = current_score + 1
+				new_score = current_score + (10 * (remaining_guesses + 1))
 				db.set(key, new_score)
 				await ctx.send(f'{author.mention} guessed correctly! You now have {new_score} points.')
 				del words[key]
-			elif guesses_used[key] == MAX_GUESSES:
+			elif remaining_guesses == 0:
 				await ctx.send(f"Better luck next time! The word was '{word_to_guess}'")
 				del words[key]
 
