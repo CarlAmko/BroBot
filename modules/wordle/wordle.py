@@ -22,7 +22,7 @@ wrong_guess = emoji.emojize(':black_large_square:')
 correct_guess = emoji.emojize(':green_square:')
 missed_guess = emoji.emojize(':yellow_square:')
 
-WORD_DATA_PATH = os.path.join(os.path.dirname(__file__), 'data/words.json')
+WORD_DATA_PATH = os.path.join(os.path.dirname(__file__), '../fishing/data/words.json')
 
 
 def _lookup_word(word: str) -> Dict:
