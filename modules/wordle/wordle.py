@@ -126,9 +126,9 @@ async def gw(ctx: Context):
 
 			if guess == word_to_guess:
 				current_score = int(db.get(key)) if db.exists(key) else 0
-				new_score = current_score + (10 * (remaining_guesses + 1))
-				db.set(key, new_score)
-				await ctx.send(f'{author.mention} guessed correctly! You now have {new_score} points.')
+				earned_score = (10 * (remaining_guesses + 1))
+				db.set(key, current_score + earned_score)
+				await ctx.send(f'{author.mention} guessed correctly! You earned {earned_score} diggities.')
 				del words[key]
 			elif remaining_guesses == 0:
 				await ctx.send(f"Better luck next time! The word was '{word_to_guess}'")
