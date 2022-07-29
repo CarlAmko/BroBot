@@ -7,7 +7,7 @@ import emoji
 from discord.ext.commands import Context
 
 from modules import bot
-from modules.fishing.data import fishing_location_data, item_data
+from data import fishing_location_data, item_data
 
 MAX_TABLE_ROLL = 100
 MIN_BITE_TIME = 3.0
