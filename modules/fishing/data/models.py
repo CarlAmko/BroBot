@@ -1,6 +1,8 @@
 import random
 from typing import List
 
+MAX_BASE_ROLL = 100
+
 
 class Item:
 	def __init__(self, id: int, name: str, emoji: str, value: int, base_weight: float):
@@ -11,25 +13,30 @@ class Item:
 		self.base_weight = base_weight
 
 
-class ItemProbability:
-	def __init__(self, item_id: int, probability: int):
-		self.item_id = item_id
-		self.probability = probability
+class ItemThreshold:
+	def __init__(self, threshold: int, item_ids: List[int]):
+		self.threshold = threshold
+		self.item_ids = item_ids
 
 
 class FishingLocation:
-	def __init__(self, id: int, name: str, fishing_probabilities: List[dict]):
+	def __init__(self, id: int, name: str, fishing_thresholds: List[dict]):
 		self.id = id
 		self.name = name
-		self.fishing_probabilities = [ItemProbability(**weight) for weight in fishing_probabilities]
-
-		self._total_probability = sum(probability.probability for probability in self.fishing_probabilities)
+		self.fishing_thresholds = [ItemThreshold(**threshold) for threshold in fishing_thresholds]
 
 	def catch_fish(self) -> int:
-		# returned list is size of 1, so fine to use [0]
-		choice = random.choices(self.fishing_probabilities,
-		                        weights=[prob.probability for prob in self.fishing_probabilities])[0]
-		return choice.item_id
+		# TODO: Implement fishing rods/power
+		fishing_power_from_rod = 0
+		roll = random.randint(1, MAX_BASE_ROLL) + fishing_power_from_rod
 
-	def _roll(self) -> int:
-		return random.randint(1, self._total_probability)
+		# Find max threshold <= roll
+		max_threshold = None
+		for threshold in self.fishing_thresholds:
+			if roll >= threshold.threshold:
+				max_threshold = threshold
+			else:
+				break
+
+		# Second roll for item in bucket
+		return random.choice(max_threshold.item_ids)

@@ -2,30 +2,30 @@
     {
         "id": 1,
         "name": "The Gentle Pond",
-        "fishing_probabilities": [
+        "fishing_thresholds": [
             {
-                "item_id": 1,
-                "probability": 10
+                "threshold": 0,
+                "item_ids": [1]
             },
             {
-                "item_id": 2,
-                "probability": 10
+                "threshold": 10,
+                "item_ids": [5]
             },
             {
-                "item_id": 3,
-                "probability": 10
+                "threshold": 25,
+                "item_ids": [2]
             },
             {
-                "item_id": 4,
-                "probability": 10
+                "threshold": 75,
+                "item_ids": [6]
             },
             {
-                "item_id": 5,
-                "probability": 10
+                "threshold": 95,
+                "item_ids": [3]
             },
             {
-                "item_id": 6,
-                "probability": 10
+                "threshold": 105,
+                "item_ids": [4]
             }
         ]
     }
