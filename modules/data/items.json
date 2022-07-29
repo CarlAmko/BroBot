@@ -159,5 +159,19 @@
         "id": 23,
         "emoji_name": ":shark:",
         "base_weight": 100
+    },
+    {
+        "name": "Fishing Rod",
+        "value": 25,
+        "id": 24,
+        "emoji_name": ":fishing_pole_and_fish:",
+        "base_weight": 1
+    },
+    {
+        "name": "Bait",
+        "value": 3,
+        "id": 25,
+        "emoji_name": ":worm:",
+        "base_weight": 0.1
     }
 ]
