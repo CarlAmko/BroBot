@@ -1,3 +1,4 @@
+import os
 import random
 import asyncio
 from enum import Enum
@@ -10,18 +11,13 @@ from discord.ext.commands import Context
 from db import db
 from modules import bot
 
+from data import fish_json
+
 MAX_TABLE_ROLL = 100
 MIN_BITE_TIME = 3.0
 MAX_BITE_TIME = 60.0
 FISHING_COST = 1
 TIME_TO_HOOK = 10.0
-
-boot = emoji.emojize(':boot:')  # 1 - 10 0d
-common_fish = emoji.emojize(':fish:')  # 11 - 55 2d
-shrimp = emoji.emojize(':shrimp:')  # 56 - 77 1d
-blow_fish = emoji.emojize(':blowfish:')  # 78 - 88 5d
-tropical_fish = emoji.emojize(':tropical_fish:')  # 89 - 97 10d
-shark = emoji.emojize(':shark:')  # 98 - 100 100d
 
 
 class FishingState(Enum):
