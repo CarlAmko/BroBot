@@ -7,7 +7,7 @@ import emoji
 from discord.ext.commands import Context
 
 from modules import bot
-from data import fishing_location_data, item_data
+from modules.fishing.data import fishing_location_data, item_data
 
 MAX_TABLE_ROLL = 100
 MIN_BITE_TIME = 3.0
@@ -29,7 +29,7 @@ async def _bite_timer(ctx: Context, fisher: int):
 	time_to_bite = random.uniform(MIN_BITE_TIME, MAX_BITE_TIME)
 	await asyncio.sleep(time_to_bite)
 
-	if sessions[fisher] == FishingState.WAITING_FOR_BITE:
+	if fisher in sessions and sessions[fisher] == FishingState.WAITING_FOR_BITE:
 		sessions[fisher] = FishingState.FISH_BITING
 		await ctx.send(f"**BITE!** {ctx.author.mention} has a fish on their line! Send **!hook** to catch.")
 		await _hook_timer(ctx, fisher)
@@ -41,7 +41,7 @@ async def _bite_timer(ctx: Context, fisher: int):
 async def _hook_timer(ctx: Context, fisher: int):
 	await asyncio.sleep(TIME_TO_HOOK)
 
-	if sessions[fisher] == FishingState.FISH_BITING:
+	if fisher in sessions and sessions[fisher] == FishingState.FISH_BITING:
 		await ctx.send(f"{ctx.author.mention} Oh no. Seems it got away. Send **!fish** to recast.")
 		del sessions[fisher]
 	else:
@@ -51,7 +51,7 @@ async def _hook_timer(ctx: Context, fisher: int):
 
 async def _catch_fish(ctx):
 	# TODO: Update this fishing location as appropriate
-	fishing_location = fishing_location_data[0]
+	fishing_location = fishing_location_data[1]
 
 	caught_fish_id = fishing_location.catch_fish()
 	caught_fish = item_data[caught_fish_id]

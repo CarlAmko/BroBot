@@ -3,12 +3,12 @@ from typing import List
 
 
 class Item:
-	def __init__(self, id: int, name: str, emoji: str, value: int, weight: float):
+	def __init__(self, id: int, name: str, emoji: str, value: int, base_weight: float):
 		self.id = id
 		self.name = name
 		self.emoji = emoji
 		self.value = value
-		self.weight = weight
+		self.base_weight = base_weight
 
 
 class ItemProbability:

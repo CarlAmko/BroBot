@@ -2,7 +2,7 @@ import json
 import os
 from typing import Dict
 
-from models import Item, FishingLocation
+from modules.fishing.data.models import Item, FishingLocation
 
 ITEM_DATA_PATH = os.path.join(os.path.dirname(__file__), 'items.json')
 FISHING_LOCATION_DATA_PATH = os.path.join(os.path.dirname(__file__), 'fishing_locations.json')
