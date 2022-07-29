@@ -3,175 +3,175 @@
         "name": "Boot",
         "value": 0,
         "id": 1,
-        "emoji_name": ":boot:",
+        "emoji": ":boot:",
         "base_weight": 1
     },
     {
         "name": "Goldfish",
         "value": 2,
         "id": 2,
-        "emoji_name": ":fish:",
+        "emoji": ":fish:",
         "base_weight": 0.3
     },
     {
         "name": "Bass",
         "value": 5,
         "id": 3,
-        "emoji_name": ":fish:",
+        "emoji": ":fish:",
         "base_weight": 8
     },
     {
         "name": "Koi",
         "value": 25,
         "id": 4,
-        "emoji_name": ":fish:",
+        "emoji": ":fish:",
         "base_weight": 20
     },
     {
         "name": "Guppy",
         "value": 1,
         "id": 5,
-        "emoji_name": ":fish:",
+        "emoji": ":fish:",
         "base_weight": 0.01
     },
     {
         "name": "Carp",
         "value": 3,
         "id": 6,
-        "emoji_name": ":fish:",
+        "emoji": ":fish:",
         "base_weight": 15
     },
     {
         "name": "Shrimp",
         "value": 1,
         "id": 7,
-        "emoji_name": ":shrimp:",
+        "emoji": ":shrimp:",
         "base_weight": 0.1
     },
     {
         "name": "Crab",
         "value": 3,
         "id": 8,
-        "emoji_name": ":crab:",
+        "emoji": ":crab:",
         "base_weight": 0.3
     },
     {
         "name": "Lobster",
         "value": 15,
         "id": 9,
-        "emoji_name": ":lobster:",
+        "emoji": ":lobster:",
         "base_weight": 1.25
     },
     {
         "name": "Red Pacu",
         "value": 25,
         "id": 10,
-        "emoji_name": ":tropical_fish:",
+        "emoji": ":tropical_fish:",
         "base_weight": 15
     },
     {
         "name": "Freshwater Barracuda",
         "value": 22,
         "id": 11,
-        "emoji_name": ":tropical_fish:",
+        "emoji": ":tropical_fish:",
         "base_weight": 10
     },
     {
         "name": "Piranha",
         "value": 20,
         "id": 12,
-        "emoji_name": ":tropical_fish:",
+        "emoji": ":tropical_fish:",
         "base_weight": 4
     },
     {
         "name": "Catfish",
         "value": 15,
         "id": 13,
-        "emoji_name": ":tropical_fish:",
+        "emoji": ":tropical_fish:",
         "base_weight": 30
     },
     {
         "name": "Gourami",
         "value": 18,
         "id": 14,
-        "emoji_name": ":tropical_fish:",
+        "emoji": ":tropical_fish:",
         "base_weight": 10
     },
     {
         "name": "Green Terror Cichlid",
         "value": 12,
         "id": 15,
-        "emoji_name": ":tropical_fish:",
+        "emoji": ":tropical_fish:",
         "base_weight": 0.2
     },
     {
         "name": "Firemouth Cichlid",
         "value": 8,
         "id": 16,
-        "emoji_name": ":tropical_fish:",
+        "emoji": ":tropical_fish:",
         "base_weight": 0.1
     },
     {
         "name": "Angel Fish",
         "value": 30,
         "id": 17,
-        "emoji_name": ":tropical_fish:",
+        "emoji": ":tropical_fish:",
         "base_weight": 1
     },
     {
         "name": "Oscar",
         "value": 16,
         "id": 18,
-        "emoji_name": ":tropical_fish:",
+        "emoji": ":tropical_fish:",
         "base_weight": 4
     },
     {
         "name": "Humphead Wrasse",
         "value": 50,
         "id": 19,
-        "emoji_name": ":tropical_fish:",
+        "emoji": ":tropical_fish:",
         "base_weight": 100
     },
     {
         "name": "Blowfish",
         "value": 20,
         "id": 20,
-        "emoji_name": ":blowfish:",
+        "emoji": ":blowfish:",
         "base_weight": 15
     },
     {
         "name": "Whale Shark",
         "value": 500,
         "id": 21,
-        "emoji_name": ":shark:",
+        "emoji": ":shark:",
         "base_weight": 20000
     },
     {
         "name": "Great White Shark",
         "value": 250,
         "id": 22,
-        "emoji_name": ":shark:",
+        "emoji": ":shark:",
         "base_weight": 2500
     },
     {
         "name": "Hammerhead Shark",
         "value": 100,
         "id": 23,
-        "emoji_name": ":shark:",
+        "emoji": ":shark:",
         "base_weight": 100
     },
     {
         "name": "Fishing Rod",
         "value": 25,
         "id": 24,
-        "emoji_name": ":fishing_pole_and_fish:",
+        "emoji": ":fishing_pole_and_fish:",
         "base_weight": 1
     },
     {
         "name": "Bait",
         "value": 3,
         "id": 25,
-        "emoji_name": ":worm:",
+        "emoji": ":worm:",
         "base_weight": 0.1
     }
 ]

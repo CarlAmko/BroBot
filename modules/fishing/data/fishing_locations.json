@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "The Gentle Pond",
+        "fishing_probabilities": [
+            {
+                "item_id": 1,
+                "probability": 10
+            },
+            {
+                "item_id": 2,
+                "probability": 10
+            },
+            {
+                "item_id": 3,
+                "probability": 10
+            },
+            {
+                "item_id": 4,
+                "probability": 10
+            },
+            {
+                "item_id": 5,
+                "probability": 10
+            },
+            {
+                "item_id": 6,
+                "probability": 10
+            }
+        ]
+    }
+]
