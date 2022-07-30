@@ -8,7 +8,8 @@ from discord.ext.commands import Context
 
 from database.db import update_current_currency
 from modules import bot
-from modules.fishing.data import fishing_location_data, item_data
+from modules.fishing.data import item_data
+from modules.fishing.data.db_fishing import get_fishing_location
 
 MAX_TABLE_ROLL = 100
 MIN_BITE_TIME = 3.0
@@ -50,9 +51,9 @@ async def _hook_timer(ctx: Context, fisher: int):
 		pass
 
 
-async def _catch_fish(ctx):
-	# TODO: Update this fishing location as appropriate
-	fishing_location = fishing_location_data[1]
+async def _catch_fish(ctx: Context):
+	user_id = ctx.author.id
+	fishing_location = get_fishing_location(user_id)
 
 	caught_fish_id = fishing_location.catch_fish()
 	caught_fish = item_data[caught_fish_id]
@@ -66,9 +67,10 @@ async def _catch_fish(ctx):
 @bot.command()
 async def fish(ctx: Context):
 	fisher = ctx.author.id
+	fishing_location = get_fishing_location(fisher)
 	if fisher not in sessions:
 		sessions[fisher] = FishingState.WAITING_FOR_BITE
-		await ctx.send(f"{ctx.author.mention} You cast your line...")
+		await ctx.send(f"{ctx.author.mention} casts their line at **{fishing_location.name}**...")
 		await _bite_timer(ctx, fisher)
 	else:
 		await ctx.send(f"{ctx.author.mention} You are already fishing.")
