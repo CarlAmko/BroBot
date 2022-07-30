@@ -8,7 +8,7 @@ from discord.ext.commands import Context
 
 from database.db import update_current_currency
 from modules import bot
-from modules.fishing.data import item_data
+from modules.fishing.data import item_data, FishingEquipment
 from modules.fishing.data.db_fishing import get_fishing_location, get_fishing_rod
 from modules.fishing.shop import get_items_on_sale
 
@@ -62,7 +62,8 @@ async def _catch_fish(ctx: Context):
 	await ctx.send(f"{emoji.emojize(caught_fish.emoji)}")
 
 	money_text = 'diggity' if caught_fish.value == 1 else 'diggities'
-	await ctx.send(f"{ctx.author.mention} caught a {caught_fish.name}... Sold for **{caught_fish.value} {money_text}**.")
+	await ctx.send(
+		f"{ctx.author.mention} caught a {caught_fish.name}... Sold for **{caught_fish.value} {money_text}**.")
 	update_current_currency(ctx.author.id, caught_fish.value)
 
 
@@ -75,7 +76,8 @@ async def fish(ctx: Context):
 	if fisher not in sessions:
 		sessions[fisher] = FishingState.WAITING_FOR_BITE
 		rod_emoji = emoji.emojize(fishing_rod.emoji)
-		await ctx.send(f"{rod_emoji} {ctx.author.mention} casts their **{fishing_rod.name}** at *{fishing_location.name}*...")
+		await ctx.send(
+			f"{rod_emoji} {ctx.author.mention} casts their **{fishing_rod.name}** at *{fishing_location.name}*...")
 		await _bite_timer(ctx, fisher)
 	else:
 		await ctx.send(f"{ctx.author.mention} You are already fishing.")
@@ -104,8 +106,12 @@ async def fishingshop(ctx: Context):
 	def quantity_text(item) -> str:
 		return f' x{item.quantity}' if item.quantity > 1 else ''
 
+	def fishing_power_text(item) -> str:
+		return f'+{item.fishing_power} FP' if isinstance(item, FishingEquipment) else ''
+
 	sale_msg = ''.join([
-		f'\n{emoji.emojize(item.emoji)} **{item.name}**{quantity_text(item)} : {item.value} diggities' for item in sale_items
+		f'\n{emoji.emojize(item.emoji)} **{item.name}** ({fishing_power_text(item)}){quantity_text(item)} : {item.value} diggities'
+		for item in sale_items
 	])
 	moneybag = emoji.emojize(':moneybag:')
 	await ctx.send(f"{author.mention}\n{moneybag}Today's sales{moneybag}\n{sale_msg}")
