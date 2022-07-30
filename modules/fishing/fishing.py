@@ -9,7 +9,7 @@ from discord.ext.commands import Context
 from database.db import update_current_currency
 from modules import bot
 from modules.fishing.data import item_data
-from modules.fishing.data.db_fishing import get_fishing_location
+from modules.fishing.data.db_fishing import get_fishing_location, get_fishing_rod
 from modules.fishing.shop import get_items_on_sale
 
 MAX_TABLE_ROLL = 100
@@ -55,8 +55,9 @@ async def _hook_timer(ctx: Context, fisher: int):
 async def _catch_fish(ctx: Context):
 	user_id = ctx.author.id
 	fishing_location = get_fishing_location(user_id)
+	fishing_rod = get_fishing_rod(user_id)
 
-	caught_fish_id = fishing_location.catch_fish()
+	caught_fish_id = fishing_location.catch_fish(fishing_rod.fishing_power)
 	caught_fish = item_data[caught_fish_id]
 	await ctx.send(f"{emoji.emojize(caught_fish.emoji)}")
 
@@ -69,9 +70,12 @@ async def _catch_fish(ctx: Context):
 async def fish(ctx: Context):
 	fisher = ctx.author.id
 	fishing_location = get_fishing_location(fisher)
+	fishing_rod = get_fishing_rod(fisher)
+
 	if fisher not in sessions:
 		sessions[fisher] = FishingState.WAITING_FOR_BITE
-		await ctx.send(f"{ctx.author.mention} casts their line at **{fishing_location.name}**...")
+		rod_emoji = emoji.emojize(fishing_rod.emoji)
+		await ctx.send(f"{rod_emoji} {ctx.author.mention} casts their **{fishing_rod.name}** at *{fishing_location.name}*...")
 		await _bite_timer(ctx, fisher)
 	else:
 		await ctx.send(f"{ctx.author.mention} You are already fishing.")
