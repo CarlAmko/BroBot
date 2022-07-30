@@ -56,11 +56,9 @@ async def _catch_fish(ctx):
 	caught_fish_id = fishing_location.catch_fish()
 	caught_fish = item_data[caught_fish_id]
 	await ctx.send(f"{emoji.emojize(caught_fish.emoji)}")
-	if not caught_fish.value == 1:
-		await ctx.send(f"{ctx.author.mention} caught a {caught_fish.name}... Sold for **{caught_fish.value} diggities**.")
-	else:
-		await ctx.send(f"{ctx.author.mention} caught a {caught_fish.name}... Sold for **{caught_fish.value} diggity**.")
 
+	money_text = 'diggity' if caught_fish.value == 1 else 'diggities'
+	await ctx.send(f"{ctx.author.mention} caught a {caught_fish.name}... Sold for **{caught_fish.value} {money_text}**.")
 
 
 @bot.command()
