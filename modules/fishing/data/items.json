@@ -1,0 +1,177 @@
+[
+    {
+        "name": "Boot",
+        "value": 0,
+        "id": 1,
+        "emoji": ":boot:",
+        "base_weight": 1
+    },
+    {
+        "name": "Goldfish",
+        "value": 3,
+        "id": 2,
+        "emoji": ":fish:",
+        "base_weight": 0.3
+    },
+    {
+        "name": "Bass",
+        "value": 10,
+        "id": 3,
+        "emoji": ":fish:",
+        "base_weight": 8
+    },
+    {
+        "name": "Koi",
+        "value": 25,
+        "id": 4,
+        "emoji": ":fish:",
+        "base_weight": 20
+    },
+    {
+        "name": "Guppy",
+        "value": 1,
+        "id": 5,
+        "emoji": ":fish:",
+        "base_weight": 0.01
+    },
+    {
+        "name": "Carp",
+        "value": 5,
+        "id": 6,
+        "emoji": ":fish:",
+        "base_weight": 15
+    },
+    {
+        "name": "Shrimp",
+        "value": 1,
+        "id": 7,
+        "emoji": ":shrimp:",
+        "base_weight": 0.1
+    },
+    {
+        "name": "Crab",
+        "value": 3,
+        "id": 8,
+        "emoji": ":crab:",
+        "base_weight": 0.3
+    },
+    {
+        "name": "Lobster",
+        "value": 15,
+        "id": 9,
+        "emoji": ":lobster:",
+        "base_weight": 1.25
+    },
+    {
+        "name": "Red Pacu",
+        "value": 25,
+        "id": 10,
+        "emoji": ":tropical_fish:",
+        "base_weight": 15
+    },
+    {
+        "name": "Freshwater Barracuda",
+        "value": 22,
+        "id": 11,
+        "emoji": ":tropical_fish:",
+        "base_weight": 10
+    },
+    {
+        "name": "Piranha",
+        "value": 20,
+        "id": 12,
+        "emoji": ":tropical_fish:",
+        "base_weight": 4
+    },
+    {
+        "name": "Catfish",
+        "value": 15,
+        "id": 13,
+        "emoji": ":tropical_fish:",
+        "base_weight": 30
+    },
+    {
+        "name": "Gourami",
+        "value": 18,
+        "id": 14,
+        "emoji": ":tropical_fish:",
+        "base_weight": 10
+    },
+    {
+        "name": "Green Terror Cichlid",
+        "value": 12,
+        "id": 15,
+        "emoji": ":tropical_fish:",
+        "base_weight": 0.2
+    },
+    {
+        "name": "Firemouth Cichlid",
+        "value": 8,
+        "id": 16,
+        "emoji": ":tropical_fish:",
+        "base_weight": 0.1
+    },
+    {
+        "name": "Angel Fish",
+        "value": 30,
+        "id": 17,
+        "emoji": ":tropical_fish:",
+        "base_weight": 1
+    },
+    {
+        "name": "Oscar",
+        "value": 16,
+        "id": 18,
+        "emoji": ":tropical_fish:",
+        "base_weight": 4
+    },
+    {
+        "name": "Humphead Wrasse",
+        "value": 50,
+        "id": 19,
+        "emoji": ":tropical_fish:",
+        "base_weight": 100
+    },
+    {
+        "name": "Blowfish",
+        "value": 20,
+        "id": 20,
+        "emoji": ":blowfish:",
+        "base_weight": 15
+    },
+    {
+        "name": "Whale Shark",
+        "value": 500,
+        "id": 21,
+        "emoji": ":shark:",
+        "base_weight": 20000
+    },
+    {
+        "name": "Great White Shark",
+        "value": 250,
+        "id": 22,
+        "emoji": ":shark:",
+        "base_weight": 2500
+    },
+    {
+        "name": "Hammerhead Shark",
+        "value": 100,
+        "id": 23,
+        "emoji": ":shark:",
+        "base_weight": 100
+    },
+    {
+        "name": "Fishing Rod",
+        "value": 25,
+        "id": 24,
+        "emoji": ":fishing_pole_and_fish:",
+        "base_weight": 1
+    },
+    {
+        "name": "Bait",
+        "value": 3,
+        "id": 25,
+        "emoji": ":worm:",
+        "base_weight": 0.1
+    }
+]
