@@ -8,7 +8,7 @@ import requests
 from discord import Member
 from discord.ext.commands import Context
 
-from database.db import get_currency, update_currency
+from database.db import update_current_currency
 from modules import bot
 
 MAX_GUESSES = 6
@@ -125,9 +125,8 @@ async def gw(ctx: Context):
 			)
 
 			if guess == word_to_guess:
-				current_balance = get_currency(key)
 				earned_score = (2 * (remaining_guesses + 1))
-				update_currency(key, current_balance + earned_score)
+				update_current_currency(key, earned_score)
 				await ctx.send(f'{author.mention} guessed correctly! You earned {earned_score} diggities.')
 				del words[key]
 			elif remaining_guesses == 0:

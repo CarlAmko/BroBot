@@ -6,6 +6,7 @@ from typing import Dict
 import emoji
 from discord.ext.commands import Context
 
+from database.db import update_current_currency
 from modules import bot
 from modules.fishing.data import fishing_location_data, item_data
 
@@ -59,6 +60,7 @@ async def _catch_fish(ctx):
 
 	money_text = 'diggity' if caught_fish.value == 1 else 'diggities'
 	await ctx.send(f"{ctx.author.mention} caught a {caught_fish.name}... Sold for **{caught_fish.value} {money_text}**.")
+	update_current_currency(ctx.author.id, caught_fish.value)
 
 
 @bot.command()
