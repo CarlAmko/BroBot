@@ -10,7 +10,7 @@ from discord import Member
 from discord.ext.commands import Context
 from pytz import BaseTzInfo, UnknownTimeZoneError
 
-from db import db
+from database.db import _db
 from modules import bot
 
 
@@ -82,7 +82,7 @@ def _get_timezone_key(user: Member) -> str:
 def _get_timezone(user: Member) -> Optional[BaseTzInfo]:
 	key = _get_timezone_key(user)
 	try:
-		return pytz.timezone(db.get(name=key))
+		return pytz.timezone(_db.get(name=key))
 	except Exception:
 		return None
 
@@ -99,7 +99,7 @@ async def timezone(ctx: Context):
 	try:
 		zone = pytz.timezone(zone_text)
 		key = _get_timezone_key(ctx.author)
-		db.set(name=key, value=str(zone))
+		_db.set(name=key, value=str(zone))
 		await ctx.send(f'{msg.author.mention} Successfully set timezone to {zone}.')
 	except UnknownTimeZoneError:
 		await ctx.send(f'{msg.author.mention} unknown timezone \'{zone_text}\'. Please try again.')
