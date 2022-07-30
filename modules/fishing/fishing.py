@@ -56,7 +56,11 @@ async def _catch_fish(ctx):
 	caught_fish_id = fishing_location.catch_fish()
 	caught_fish = item_data[caught_fish_id]
 	await ctx.send(f"{emoji.emojize(caught_fish.emoji)}")
-	await ctx.send(f"{ctx.author.mention} caught a {caught_fish.name}... Sold for **{caught_fish.value} diggities**.")
+	if not caught_fish.value == 1:
+		await ctx.send(f"{ctx.author.mention} caught a {caught_fish.name}... Sold for **{caught_fish.value} diggities**.")
+	else:
+		await ctx.send(f"{ctx.author.mention} caught a {caught_fish.name}... Sold for **{caught_fish.value} diggity**.")
+
 
 
 @bot.command()
@@ -64,7 +68,7 @@ async def fish(ctx: Context):
 	fisher = ctx.author.id
 	if fisher not in sessions:
 		sessions[fisher] = FishingState.WAITING_FOR_BITE
-		await ctx.send(f"{ctx.author.mention} You casts your line...")
+		await ctx.send(f"{ctx.author.mention} You cast your line...")
 		await _bite_timer(ctx, fisher)
 	else:
 		await ctx.send(f"{ctx.author.mention} You are already fishing.")
