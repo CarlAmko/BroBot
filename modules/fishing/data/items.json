@@ -161,17 +161,18 @@
         "base_weight": 100
     },
     {
-        "name": "Fishing Rod",
-        "value": 25,
+        "name": "Sturdy Fishing Rod",
+        "value": 100,
         "id": 24,
         "emoji": ":fishing_pole_and_fish:",
         "base_weight": 1
     },
     {
         "name": "Bait",
-        "value": 3,
+        "value": 15,
         "id": 25,
         "emoji": ":worm:",
-        "base_weight": 0.1
+        "base_weight": 0.1,
+        "quantity" : 3
     }
 ]

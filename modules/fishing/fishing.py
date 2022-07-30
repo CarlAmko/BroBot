@@ -10,6 +10,7 @@ from database.db import update_current_currency
 from modules import bot
 from modules.fishing.data import item_data
 from modules.fishing.data.db_fishing import get_fishing_location
+from modules.fishing.shop import get_items_on_sale
 
 MAX_TABLE_ROLL = 100
 MIN_BITE_TIME = 3.0
@@ -89,3 +90,18 @@ async def hook(ctx: Context):
 		elif state == FishingState.FISH_BITING:
 			await _catch_fish(ctx)
 			del sessions[fisher]
+
+
+@bot.command()
+async def fishingshop(ctx: Context):
+	author = ctx.author
+	sale_items = get_items_on_sale()
+
+	def quantity_text(item) -> str:
+		return f' x{item.quantity}' if item.quantity > 1 else ''
+
+	sale_msg = ''.join([
+		f'\n{emoji.emojize(item.emoji)} **{item.name}**{quantity_text(item)} : {item.value} diggities' for item in sale_items
+	])
+	moneybag = emoji.emojize(':moneybag:')
+	await ctx.send(f"{author.mention}\n{moneybag}Today's sales{moneybag}\n{sale_msg}")

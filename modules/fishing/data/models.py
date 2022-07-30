@@ -5,12 +5,13 @@ MAX_BASE_ROLL = 100
 
 
 class Item:
-	def __init__(self, id: int, name: str, emoji: str, value: int, base_weight: float):
+	def __init__(self, id: int, name: str, emoji: str, value: int, base_weight: float, quantity: int = 1):
 		self.id = id
 		self.name = name
 		self.emoji = emoji
 		self.value = value
 		self.base_weight = base_weight
+		self.quantity = quantity
 
 
 class ItemThreshold:
