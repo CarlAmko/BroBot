@@ -76,8 +76,9 @@ async def fish(ctx: Context):
 	if fisher not in sessions:
 		sessions[fisher] = FishingState.WAITING_FOR_BITE
 		rod_emoji = emoji.emojize(fishing_rod.emoji)
+		fishing_location_emoji = emoji.emojize(fishing_location.emoji)
 		await ctx.send(
-			f"{rod_emoji} {ctx.author.mention} casts their **{fishing_rod.name}** at *{fishing_location.name}*...")
+			f"{rod_emoji} {ctx.author.mention} casts their **{fishing_rod.name}** at {fishing_location_emoji}*{fishing_location.name}*...")
 		await _bite_timer(ctx, fisher)
 	else:
 		await ctx.send(f"{ctx.author.mention} You are already fishing.")

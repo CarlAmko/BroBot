@@ -28,9 +28,10 @@ class ItemThreshold:
 
 
 class FishingLocation:
-	def __init__(self, id: int, name: str, fishing_thresholds: List[dict]):
+	def __init__(self, id: int, name: str, emoji: str, fishing_thresholds: List[dict]):
 		self.id = id
 		self.name = name
+		self.emoji = emoji
 		self.fishing_thresholds = [ItemThreshold(**threshold) for threshold in fishing_thresholds]
 
 	def catch_fish(self, fishing_power: int) -> int:

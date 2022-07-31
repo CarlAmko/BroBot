@@ -2,6 +2,7 @@
     {
         "id": 1,
         "name": "The Gentle Pond",
+        "emoji": ":sunrise:",
         "fishing_thresholds": [
             {
                 "threshold": 0,
