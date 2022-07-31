@@ -1,6 +1,7 @@
+import operator
 import random
 from typing import List
-
+from functools import reduce
 MAX_BASE_ROLL = 100
 
 
@@ -33,6 +34,10 @@ class FishingLocation:
 		self.name = name
 		self.emoji = emoji
 		self.fishing_thresholds = [ItemThreshold(**threshold) for threshold in fishing_thresholds]
+
+	@property
+	def fish_ids(self) -> List[int]:
+		return reduce(operator.concat, [x.item_ids for x in self.fishing_thresholds])
 
 	def catch_fish(self, fishing_power: int) -> int:
 		roll = random.randint(1, MAX_BASE_ROLL) + fishing_power

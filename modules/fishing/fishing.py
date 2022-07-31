@@ -63,7 +63,7 @@ async def _catch_fish(ctx: Context):
 
 	money_text = 'diggity' if caught_fish.value == 1 else 'diggities'
 	await ctx.send(
-		f"{ctx.author.mention} caught a {caught_fish.name}... Sold for **{caught_fish.value} {money_text}**.")
+		f"{ctx.author.mention} caught a **{caught_fish.name}**... Sold for `{caught_fish.value}` {money_text}.")
 	update_current_currency(ctx.author.id, caught_fish.value)
 
 
@@ -97,6 +97,21 @@ async def hook(ctx: Context):
 		elif state == FishingState.FISH_BITING:
 			await _catch_fish(ctx)
 			del sessions[fisher]
+
+
+@bot.command()
+async def ledger(ctx: Context):
+	user_id = ctx.author.id
+	fishing_location = get_fishing_location(user_id)
+
+	fishing_location_msg = f'{emoji.emojize(fishing_location.emoji)} **{fishing_location.name}**:'
+	msg = []
+	for fish_id in fishing_location.fish_ids:
+		item = item_data[fish_id]
+		msg.append(f'{emoji.emojize(item.emoji)} {item.name}')
+	msg = ', '.join(msg)
+
+	await ctx.send(f'{ctx.author.mention}\n{fishing_location_msg} {msg}')
 
 
 @bot.command()
