@@ -10,7 +10,7 @@
         "name": "Goldfish",
         "value": 3,
         "id": 2,
-        "emoji": ":fish:",
+        "emoji": "<:Hmm:1002666286968487977>",
         "base_weight": 0.3
     },
     {
@@ -24,21 +24,21 @@
         "name": "Koi",
         "value": 25,
         "id": 4,
-        "emoji": ":fish:",
+        "emoji": "<:koi:1003335616852934756>",
         "base_weight": 20
     },
     {
         "name": "Guppy",
         "value": 1,
         "id": 5,
-        "emoji": ":fish:",
+        "emoji": "<:guppy:1003336461002743890>",
         "base_weight": 0.01
     },
     {
         "name": "Carp",
         "value": 5,
         "id": 6,
-        "emoji": ":fish:",
+        "emoji": "<:carp:1003336463112470598>",
         "base_weight": 15
     },
     {
@@ -161,17 +161,22 @@
         "base_weight": 100
     },
     {
-        "name": "Fishing Rod",
-        "value": 25,
+        "name": "Sturdy Fishing Rod",
+        "value": 50,
         "id": 24,
         "emoji": ":fishing_pole_and_fish:",
-        "base_weight": 1
+        "base_weight": 1,
+        "fishing_power": 25,
+        "description": "An improved fishing rod with better fishing capability. 50 uses before breaking."
     },
     {
         "name": "Bait",
-        "value": 3,
+        "value": 1,
         "id": 25,
         "emoji": ":worm:",
-        "base_weight": 0.1
+        "base_weight": 0.1,
+        "quantity" : 3,
+        "fishing_power": 25,
+        "description": "Increases fishing power when used. One-time use."
     }
 ]

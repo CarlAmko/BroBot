@@ -1,16 +1,26 @@
+import operator
 import random
 from typing import List
-
+from functools import reduce
 MAX_BASE_ROLL = 100
 
 
 class Item:
-	def __init__(self, id: int, name: str, emoji: str, value: int, base_weight: float):
+	def __init__(self, id: int, name: str, emoji: str, value: int, base_weight: float, quantity: int = 1):
 		self.id = id
 		self.name = name
 		self.emoji = emoji
 		self.value = value
 		self.base_weight = base_weight
+		self.quantity = quantity
+
+
+class FishingEquipment(Item):
+	def __init__(self, id: int, name: str, emoji: str, value: int,
+	             base_weight: float, fishing_power: int, description: str, quantity: int = 1):
+		super().__init__(id, name, emoji, value, base_weight, quantity)
+		self.fishing_power = fishing_power
+		self.description = description
 
 
 class ItemThreshold:
@@ -20,15 +30,18 @@ class ItemThreshold:
 
 
 class FishingLocation:
-	def __init__(self, id: int, name: str, fishing_thresholds: List[dict]):
+	def __init__(self, id: int, name: str, emoji: str, fishing_thresholds: List[dict]):
 		self.id = id
 		self.name = name
+		self.emoji = emoji
 		self.fishing_thresholds = [ItemThreshold(**threshold) for threshold in fishing_thresholds]
 
-	def catch_fish(self) -> int:
-		# TODO: Implement fishing rods/power
-		fishing_power_from_rod = 0
-		roll = random.randint(1, MAX_BASE_ROLL) + fishing_power_from_rod
+	@property
+	def fish_ids(self) -> List[int]:
+		return reduce(operator.concat, [x.item_ids for x in self.fishing_thresholds])
+
+	def catch_fish(self, fishing_power: int) -> int:
+		roll = random.randint(1, MAX_BASE_ROLL) + fishing_power
 
 		# Find max threshold <= roll
 		max_threshold = None
