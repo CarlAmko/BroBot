@@ -161,28 +161,22 @@
         "base_weight": 100
     },
     {
-        "name": "Basic Fishing Rod",
-        "value": 0,
+        "name": "Sturdy Fishing Rod",
+        "value": 50,
         "id": 24,
         "emoji": ":fishing_pole_and_fish:",
         "base_weight": 1,
-        "fishing_power": 0
-    },
-    {
-        "name": "Sturdy Fishing Rod",
-        "value": 100,
-        "id": 25,
-        "emoji": ":fishing_pole_and_fish:",
-        "base_weight": 1,
-        "fishing_power": 25
+        "fishing_power": 25,
+        "description": "An improved fishing rod with better fishing capability. 50 uses before breaking."
     },
     {
         "name": "Bait",
-        "value": 15,
-        "id": 26,
+        "value": 1,
+        "id": 25,
         "emoji": ":worm:",
         "base_weight": 0.1,
         "quantity" : 3,
-        "fishing_power": 25
+        "fishing_power": 25,
+        "description": "Increases fishing power when used. One-time use."
     }
 ]

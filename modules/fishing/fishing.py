@@ -6,10 +6,12 @@ from typing import Dict
 import emoji
 from discord.ext.commands import Context
 
-from database.db import update_current_currency
+from database.db import update_current_currency, get_currency
 from modules import bot
-from modules.fishing.data import item_data, FishingEquipment
-from modules.fishing.data.db_fishing import get_fishing_location, get_fishing_rod
+from modules.fishing.data import item_data
+from modules.fishing.data.db_fishing import get_fishing_location, get_fishing_inventory, add_to_fishing_inventory, \
+	decrement_from_fishing_inventory
+from modules.fishing.formating import format_fishing_power, format_quantity, format_description, format_durability
 from modules.fishing.shop import get_items_on_sale
 
 MAX_TABLE_ROLL = 100
@@ -55,30 +57,34 @@ async def _hook_timer(ctx: Context, fisher: int):
 async def _catch_fish(ctx: Context):
 	user_id = ctx.author.id
 	fishing_location = get_fishing_location(user_id)
-	fishing_rod = get_fishing_rod(user_id)
+	fishing_inventory = get_fishing_inventory(user_id).values()
+	total_fishing_power = sum(item.fishing_power for item in fishing_inventory)
 
-	caught_fish_id = fishing_location.catch_fish(fishing_rod.fishing_power)
+	caught_fish_id = fishing_location.catch_fish(total_fishing_power)
 	caught_fish = item_data[caught_fish_id]
 	await ctx.send(f"{emoji.emojize(caught_fish.emoji)}")
 
 	money_text = 'diggity' if caught_fish.value == 1 else 'diggities'
 	await ctx.send(
 		f"{ctx.author.mention} caught a **{caught_fish.name}**... Sold for `{caught_fish.value}` {money_text}.")
+
+	# Add money, remove from charges inventory
 	update_current_currency(ctx.author.id, caught_fish.value)
+	for item in fishing_inventory:
+		decrement_from_fishing_inventory(user_id, item)
 
 
 @bot.command()
 async def fish(ctx: Context):
 	fisher = ctx.author.id
 	fishing_location = get_fishing_location(fisher)
-	fishing_rod = get_fishing_rod(fisher)
 
 	if fisher not in sessions:
 		sessions[fisher] = FishingState.WAITING_FOR_BITE
-		rod_emoji = emoji.emojize(fishing_rod.emoji)
+		rod_emoji = emoji.emojize(':fishing_pole_and_fish:')
 		fishing_location_emoji = emoji.emojize(fishing_location.emoji)
 		await ctx.send(
-			f"{rod_emoji} {ctx.author.mention} casts their **{fishing_rod.name}** at {fishing_location_emoji}*{fishing_location.name}*...")
+			f"{rod_emoji} {ctx.author.mention} casts their line at {fishing_location_emoji} **{fishing_location.name}**...")
 		await _bite_timer(ctx, fisher)
 	else:
 		await ctx.send(f"{ctx.author.mention} You are already fishing.")
@@ -119,15 +125,60 @@ async def fishingshop(ctx: Context):
 	author = ctx.author
 	sale_items = get_items_on_sale()
 
-	def quantity_text(item) -> str:
-		return f' x{item.quantity}' if item.quantity > 1 else ''
-
-	def fishing_power_text(item) -> str:
-		return f'+{item.fishing_power} FP' if isinstance(item, FishingEquipment) else ''
-
 	sale_msg = ''.join([
-		f'\n{emoji.emojize(item.emoji)} **{item.name}** ({fishing_power_text(item)}){quantity_text(item)} : {item.value} diggities'
-		for item in sale_items
+		f'\n{i + 1}. {emoji.emojize(item.emoji)} **{item.name}** ({format_fishing_power(item)}){format_quantity(item)}: {item.value} diggities\n{format_description(item)}'
+		for i, item in enumerate(sale_items)
 	])
 	moneybag = emoji.emojize(':moneybag:')
 	await ctx.send(f"{author.mention}\n{moneybag}Today's sales{moneybag}\n{sale_msg}")
+
+
+@bot.command()
+async def buy(ctx: Context):
+	author = ctx.author
+	user_id = author.id
+
+	async def invalid():
+		await ctx.send(f'{author.mention} Invalid usage of !buy; Send !buy N, where N is the shop item number.')
+
+	buy_index = ctx.message.content.split(' ')
+	if len(buy_index) < 2:
+		await invalid()
+		return
+	try:
+		buy_index = int(buy_index[1])
+		store_items = get_items_on_sale()
+		# Check that the buy index requested is valid.
+		if buy_index > len(store_items):
+			raise Exception()
+
+		requested_item = store_items[buy_index - 1]
+		currency_avail = get_currency(user_id)
+		# Check if user can afford item.
+		if currency_avail < requested_item.value:
+			await ctx.send(f'{author.mention} You do not have enough diggities to purchase **{requested_item.name}**.')
+			return
+		# Charge the user for the item.
+		update_current_currency(user_id, -requested_item.value)
+		add_to_fishing_inventory(user_id, requested_item)
+		await ctx.send(
+			f'{author.mention} Successfully purchased {emoji.emojize(requested_item.emoji)}**{requested_item.name}**! Have a nice day {emoji.emojize(":smile:")}'
+		)
+	except Exception:
+		await invalid()
+
+
+@bot.command()
+async def inventory(ctx: Context):
+	author = ctx.author
+	user_id = ctx.author.id
+
+	inventory = get_fishing_inventory(user_id)
+	if inventory:
+		msg = ''.join([
+			f'\n{emoji.emojize(item.emoji)} **{item.name}** ({format_fishing_power(item)}) {format_durability(item)}\n{format_description(item)}'
+			for item in inventory.values()
+		])
+		await ctx.send(f'{author.mention}{msg}')
+	else:
+		await ctx.send(f'{author.mention} Your fishing inventory is empty.')

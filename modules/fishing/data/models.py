@@ -17,9 +17,10 @@ class Item:
 
 class FishingEquipment(Item):
 	def __init__(self, id: int, name: str, emoji: str, value: int,
-	             base_weight: float, fishing_power: int, quantity: int = 1):
+	             base_weight: float, fishing_power: int, description: str, quantity: int = 1):
 		super().__init__(id, name, emoji, value, base_weight, quantity)
 		self.fishing_power = fishing_power
+		self.description = description
 
 
 class ItemThreshold:
