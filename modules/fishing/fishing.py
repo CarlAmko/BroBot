@@ -190,11 +190,13 @@ async def fishhelp(ctx: Context):
 	msg = f'''Welcome to the waters!
 	- To begin fishing, type **!fish**. This will send out your fishing line to attempt to catch a fish!
 	- When prompted, send **!hook** to attempt to catch the fish on the line.
-	
-	- You can spend you hard-earned diggities at the shop. Check it out with **!fishingshop**.
 	- If you are curious about which fish are at your current location, try out **!ledger**. 
-	- Purchases are placed into your fishing inventory. To check your fishing inventory, type **!inventory**.
+
+	- You can spend you hard-earned diggities on fishing equipment at the shop. Check it out with **!fishingshop**.
+	- Fishing equipment may grant **Fishing Power (FP)**. FP both increases your odds of catching more valuable fish and decreases the odds of catching less valuable fish.
+	- Note: Some fish may not be acquirable without enough **FP**! 
 	
+	- Purchases are placed into your fishing inventory. To check your fishing inventory, type **!inventory**.
 	- Purchased fishing equipment is always "active", so choose wisely when you wish to make purchases.
 	- A **!hook** attempt will remove 1 use from all applicable fishing equipment.
 	
