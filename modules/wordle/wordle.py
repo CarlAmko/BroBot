@@ -125,7 +125,7 @@ async def gw(ctx: Context):
 			)
 
 			if guess == word_to_guess:
-				earned_score = (2 * (remaining_guesses + 1))
+				earned_score = (3 * (remaining_guesses + 1))
 				update_currency(key, earned_score)
 				await ctx.send(f'{author.mention} guessed correctly! You earned {earned_score} diggities.')
 				del words[key]
