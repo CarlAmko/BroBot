@@ -1,0 +1,33 @@
+[
+    {
+        "id": 1,
+        "name": "The Gentle Pond",
+        "emoji": ":sunrise:",
+        "fishing_thresholds": [
+            {
+                "threshold": 0,
+                "item_ids": [1]
+            },
+            {
+                "threshold": 10,
+                "item_ids": [5]
+            },
+            {
+                "threshold": 25,
+                "item_ids": [2]
+            },
+            {
+                "threshold": 75,
+                "item_ids": [6]
+            },
+            {
+                "threshold": 95,
+                "item_ids": [3]
+            },
+            {
+                "threshold": 105,
+                "item_ids": [4]
+            }
+        ]
+    }
+]

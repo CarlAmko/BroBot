@@ -8,7 +8,7 @@ import requests
 from discord import Member
 from discord.ext.commands import Context
 
-from db import db
+from database.db import update_currency
 from modules import bot
 
 MAX_GUESSES = 6
@@ -22,7 +22,7 @@ wrong_guess = emoji.emojize(':black_large_square:')
 correct_guess = emoji.emojize(':green_square:')
 missed_guess = emoji.emojize(':yellow_square:')
 
-WORD_DATA_PATH = os.path.join(os.path.dirname(__file__), 'data/words.json')
+WORD_DATA_PATH = os.path.join(os.path.dirname(__file__), '../fishing/data/words.json')
 
 
 def _lookup_word(word: str) -> Dict:
@@ -125,10 +125,9 @@ async def gw(ctx: Context):
 			)
 
 			if guess == word_to_guess:
-				current_score = int(db.get(key)) if db.exists(key) else 0
-				new_score = current_score + (10 * (remaining_guesses + 1))
-				db.set(key, new_score)
-				await ctx.send(f'{author.mention} guessed correctly! You now have {new_score} points.')
+				earned_score = (2 * (remaining_guesses + 1))
+				update_currency(key, earned_score)
+				await ctx.send(f'{author.mention} guessed correctly! You earned {earned_score} diggities.')
 				del words[key]
 			elif remaining_guesses == 0:
 				await ctx.send(f"Better luck next time! The word was '{word_to_guess}'")
