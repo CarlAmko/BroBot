@@ -182,3 +182,21 @@ async def inventory(ctx: Context):
 		await ctx.send(f'{author.mention}{msg}')
 	else:
 		await ctx.send(f'{author.mention} Your fishing inventory is empty.')
+
+
+@bot.command()
+async def fishhelp(ctx: Context):
+	msg = f'''Welcome to the waters!
+	- To begin fishing, type **!fish**. This will send out your fishing line to attempt to catch a fish!
+	- When prompted, send **!hook** to attempt to catch the fish on the line.
+	
+	- You can spend you hard-earned diggities at the shop. Check it out with **!fishingshop**.
+	- If you are curious about which fish are at your current location, try out **!ledger**. 
+	- Purchases are placed into your fishing inventory. To check your fishing inventory, type **!inventory**.
+	
+	- Purchased fishing equipment is always "active", so choose wisely when you wish to make purchases.
+	- A **!hook** attempt will remove 1 use from all applicable fishing equipment.
+	
+	That's it! Have fun and happy fishing! {emoji.emojize(":fishing_pole_and_fish:")} 
+	'''
+	await ctx.send(f'{ctx.author.mention}\n{msg}')
