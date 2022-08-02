@@ -130,7 +130,8 @@ async def fishingshop(ctx: Context):
 		for i, item in enumerate(sale_items)
 	])
 	moneybag = emoji.emojize(':moneybag:')
-	await ctx.send(f"{author.mention}\n{moneybag}Today's sales{moneybag}\n{sale_msg}")
+	instructions = 'To buy an item, send **!buy N**, where N = the line number.'
+	await ctx.send(f"{author.mention}\n{moneybag}Today's sales{moneybag}\n{sale_msg}\n\n{instructions}")
 
 
 @bot.command()
