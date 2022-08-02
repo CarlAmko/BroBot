@@ -1,7 +1,8 @@
 import operator
 import random
-from typing import List
 from functools import reduce
+from typing import List
+
 MAX_BASE_ROLL = 100
 
 
@@ -14,13 +15,20 @@ class Item:
 		self.base_weight = base_weight
 		self.quantity = quantity
 
+	@property
+	def cost(self):
+		return self.value * self.quantity
+
 
 class FishingEquipment(Item):
-	def __init__(self, id: int, name: str, emoji: str, value: int,
-	             base_weight: float, fishing_power: int, description: str, quantity: int = 1):
+	def __init__(self, id: int, name: str, emoji: str, value: int, base_weight: float, fishing_power: int,
+	             description: str, base_durability: int, quantity: int = 1):
 		super().__init__(id, name, emoji, value, base_weight, quantity)
 		self.fishing_power = fishing_power
 		self.description = description
+		self.base_durability = base_durability
+		# Current durability defaults to base_durability
+		self.durability = base_durability
 
 
 class ItemThreshold:

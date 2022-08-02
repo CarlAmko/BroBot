@@ -2,7 +2,12 @@ from modules.fishing.data import FishingEquipment
 
 
 def format_durability(item) -> str:
-	return f'{item.value} uses remaining' if item.value > 0 else ''
+	return f'{item.durability} uses remaining' if isinstance(item, FishingEquipment) else ''
+
+
+def format_cost(item) -> str:
+	cost = item.value * item.quantity
+	return f"{cost} diggit{'y' if cost == 1 else 'ies'}"
 
 
 def format_quantity(item) -> str:

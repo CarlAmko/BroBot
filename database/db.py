@@ -10,10 +10,6 @@ def get_currency(user_id: int) -> int:
 	return int(db.get(key)) if db.exists(key) else 0
 
 
-def set_currency(user_id: int, new_value: int):
+def update_currency(user_id: int, adjustment: int):
 	key = f'{user_id}:currency'
-	db.set(key, new_value)
-
-
-def update_current_currency(user_id: int, adjustment: int):
-	set_currency(user_id, get_currency(user_id) + adjustment)
+	db.incr(key, amount=adjustment)

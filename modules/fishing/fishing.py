@@ -6,12 +6,13 @@ from typing import Dict
 import emoji
 from discord.ext.commands import Context
 
-from database.db import update_current_currency, get_currency
+from database.db import update_currency, get_currency
 from modules import bot
 from modules.fishing.data import item_data
 from modules.fishing.data.db_fishing import get_fishing_location, get_fishing_inventory, add_to_fishing_inventory, \
 	decrement_from_fishing_inventory
-from modules.fishing.formating import format_fishing_power, format_quantity, format_description, format_durability
+from modules.fishing.formating import format_fishing_power, format_quantity, format_description, format_durability, \
+	format_cost
 from modules.fishing.shop import get_items_on_sale
 
 MAX_TABLE_ROLL = 100
@@ -63,13 +64,11 @@ async def _catch_fish(ctx: Context):
 	caught_fish_id = fishing_location.catch_fish(total_fishing_power)
 	caught_fish = item_data[caught_fish_id]
 	await ctx.send(f"{emoji.emojize(caught_fish.emoji)}")
-
-	money_text = 'diggity' if caught_fish.value == 1 else 'diggities'
 	await ctx.send(
-		f"{ctx.author.mention} caught a **{caught_fish.name}**... Sold for `{caught_fish.value}` {money_text}.")
+		f"{ctx.author.mention} caught a **{caught_fish.name}**... Sold for {format_cost(caught_fish)}.")
 
 	# Add money, remove from charges inventory
-	update_current_currency(ctx.author.id, caught_fish.value)
+	update_currency(ctx.author.id, caught_fish.cost)
 	for item in fishing_inventory:
 		decrement_from_fishing_inventory(user_id, item)
 
@@ -126,7 +125,8 @@ async def fishingshop(ctx: Context):
 	sale_items = get_items_on_sale()
 
 	sale_msg = ''.join([
-		f'\n{i + 1}. {emoji.emojize(item.emoji)} **{item.name}** ({format_fishing_power(item)}){format_quantity(item)}: {item.value} diggities\n{format_description(item)}'
+		f'\n{i + 1}. {emoji.emojize(item.emoji)} **{item.name}** ({format_fishing_power(item)}){format_quantity(item)}:'
+		f' {format_cost(item)}\n{format_description(item)}'
 		for i, item in enumerate(sale_items)
 	])
 	moneybag = emoji.emojize(':moneybag:')
@@ -155,11 +155,11 @@ async def buy(ctx: Context):
 		requested_item = store_items[buy_index - 1]
 		currency_avail = get_currency(user_id)
 		# Check if user can afford item.
-		if currency_avail < requested_item.value:
+		if currency_avail < requested_item.cost:
 			await ctx.send(f'{author.mention} You do not have enough diggities to purchase **{requested_item.name}**.')
 			return
 		# Charge the user for the item.
-		update_current_currency(user_id, -requested_item.value)
+		update_currency(user_id, -requested_item.cost)
 		add_to_fishing_inventory(user_id, requested_item)
 		await ctx.send(
 			f'{author.mention} Successfully purchased {emoji.emojize(requested_item.emoji)}**{requested_item.name}**! Have a nice day {emoji.emojize(":smile:")}'

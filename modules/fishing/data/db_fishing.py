@@ -22,10 +22,12 @@ def get_fishing_inventory(user_id: int) -> Dict[int, FishingEquipment]:
 	equipment = {}
 	namespace = f'{user_id}:fishing:inventory'
 	for item_id in db.hkeys(namespace):
-		quantity = db.hget(namespace, key=item_id)
+		uses_remaining = db.hget(namespace, key=item_id)
 		item = item_data[int(item_id)]
 		if isinstance(item, FishingEquipment):
-			item.value = int(quantity)
+			# TODO: This is very bad implemented this way. We need to not adjust the in-memory copy of the item, as this
+			# TODO:  copy is shared between all users. Likely want to move mutable per-user properties to a new db table.
+			item.durability = int(uses_remaining)
 			equipment[item.id] = item
 		else:
 			raise RuntimeError(f'Somehow got non-FishingEquipment item_id of {int(item_id)}')
@@ -36,16 +38,16 @@ def get_fishing_inventory(user_id: int) -> Dict[int, FishingEquipment]:
 def add_to_fishing_inventory(user_id: int, equipment: FishingEquipment):
 	namespace = f'{user_id}:fishing:inventory'
 	key = equipment.id
-	db.hincrby(name=namespace, key=key, amount=equipment.quantity)
+	db.hincrby(name=namespace, key=key, amount=equipment.quantity * equipment.base_durability)
 
 
 def decrement_from_fishing_inventory(user_id: int, equipment: FishingEquipment, adjustment: int = -1):
 	namespace = f'{user_id}:fishing:inventory'
 	key = equipment.id
 	if db.hexists(namespace, key=key):
-		quantity = int(db.hget(namespace, key=key))
+		uses_remaining = int(db.hget(namespace, key=key))
 		# Just remove the key if there are `adjustment` left
-		if quantity == -adjustment:
+		if uses_remaining == -adjustment:
 			db.hdel(namespace, key)
 		else:
 			# Otherwise decrement by `adjustment`.
