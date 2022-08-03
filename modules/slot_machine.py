@@ -9,9 +9,9 @@ from modules import bot
 
 
 MAX_ROLL = 100
-PROB_BASE = 75
+PROB_BASE = 80
 PROB_REDUCTION = 20
-PROB_REDUCTION_OFFSET = 0.66
+PROB_REDUCTION_OFFSET = 0.6
 TIME_BETWEEN_ROLLS_MIN = 1.5
 TIME_BETWEEN_ROLLS_MAX = 2
 AWARD_POWER = 3
@@ -150,3 +150,14 @@ async def slotawards(ctx):
         index += 1
 
     await ctx.send(msg)
+
+
+@bot.command()
+async def slothelp(ctx):
+    msg = "**SLOTS INFO**\n - !slot small - cost 1 diggity\n - !slot medium - cost 5 diggities\n " \
+          "- !slot large - cost 25 diggities\n - !slotawards - shows awards from slots\n " \
+          "- !grant - grants 3 diggities if you have 0\n - !takemydiggities - **WARNING** this will " \
+          "set your diggity balance for the beta to 0\n - !diggitiesbeta - sends your diggity balance " \
+          "for the beta"
+
+    await ctx.send(f"{ctx.author.mention}\n{msg}")
