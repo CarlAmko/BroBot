@@ -5,6 +5,8 @@ from modules import bot
 
 MAX_SHOWN_DICE = 10
 MAX_SHOWN_VALUE = 20
+MAX_DIE_SIZE = 1000000
+MAX_NUM_DICE = 100
 
 
 @bot.command()
@@ -13,7 +15,7 @@ async def r(ctx):
 	text = msg.content
 
 	async def invalid():
-		await ctx.send("Invalid usage. Use as '!r NdX'. (N = number of nice, X = size of die)")
+		await ctx.send("Invalid usage. Use as '!r NdX'. (N = number of dice (100 max), X = size of die (1000000 max))")
 
 	# Check if input matches expected dice pattern
 	# matches = re.findall(r"([\s0-9])d(\d{1,2})", text) or None
@@ -29,6 +31,10 @@ async def r(ctx):
 	num_dice, sides = dice_str[0], int(dice_str[1])
 	# Cast string to int.
 	num_dice = int(num_dice) if num_dice.strip() else 1
+
+	if num_dice > MAX_NUM_DICE or sides > MAX_DIE_SIZE:
+		await invalid()
+		return
 
 	print(f"Rolling {num_dice} d{sides}...")
 	# Assemble roll result.
@@ -57,6 +63,7 @@ def print_all_dice(num_dice, sides):
 		total += val
 		msg += f"d{sides}: **{val}**\n"
 
+	total = "{:,}".format(total)
 	msg += f"Total: **{total}**"
 	return msg
 
@@ -72,13 +79,15 @@ def print_each_value(num_dice, sides):
 		total += val
 
 	for i in range(sides):
-		msg += f"**{i + 1}:** rolled "
+		if not values[i] == 0:
+			msg += f"**{i + 1}:** rolled "
 
-		if values[i] == 1:
-			msg += f"**1** time.\n"
-		else:
-			msg += f"**{values[i]}** times.\n"
+			if values[i] == 1:
+				msg += f"**1** time.\n"
+			else:
+				msg += f"**{values[i]}** times.\n"
 
+	total = "{:,}".format(total)
 	msg += f"Total: **{total}**"
 	return msg
 
@@ -91,5 +100,6 @@ def print_total_only(num_dice, sides):
 		val = roll_die(sides)
 		total += val
 
+	total = "{:,}".format(total)
 	msg += f"Rolled **{num_dice} d{sides}** for a total of **{total}**"
 	return msg
