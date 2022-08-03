@@ -110,6 +110,7 @@ async def slot(ctx):
 
 def get_first_roll(roll):
     first_selection = None
+    print(f"First selection: {roll}")
 
     for threshold in Thresholds:
         if roll >= threshold.selection:
@@ -120,21 +121,21 @@ def get_first_roll(roll):
     return first_selection
 
 
-def get_next_roll(first_roll):
+def get_next_roll(previous_roll):
     roll = random.uniform(1, MAX_ROLL)
-    print(roll)
+    print(f"Roll for match: {roll}")
 
     tracker = 1
     result = PROB_BASE
-    while tracker <= first_roll:
+    while tracker <= previous_roll:
         result -= (PROB_REDUCTION * (1 / (tracker ** PROB_REDUCTION_OFFSET)))
         tracker += 1
 
-    print(MAX_ROLL - result)
+    print(f"Reach to match: {MAX_ROLL - result}")
     if roll >= MAX_ROLL - result:
-        next_selection = first_roll
+        next_selection = previous_roll
     else:
-        next_selection = random.choice([i for i in range(0, 9) if not i == first_roll])
+        next_selection = random.choice([i for i in range(0, 9) if not i == previous_roll])
 
     return next_selection
 
