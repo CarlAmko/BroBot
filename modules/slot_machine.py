@@ -10,9 +10,9 @@ from modules import bot
 
 
 MAX_ROLL = 100
-PROB_BASE = 80
+PROB_BASE = 75
 PROB_REDUCTION = 20
-PROB_REDUCTION_OFFSET = 0.6
+PROB_REDUCTION_OFFSET = 0.66
 TIME_BETWEEN_ROLLS_MIN = 1.5
 TIME_BETWEEN_ROLLS_MAX = 2
 AWARD_POWER = 3
@@ -77,6 +77,7 @@ async def slot(ctx):
         payout_multiplier = PayoutMultiplier.lrg.value
     else:
         await ctx.send("Invalid slot machine. !slot x (x can be small, medium, or large)")
+        is_playing[key] = False
         return
 
     current_balance = int(db.get(key)) if db.exists(key) else 0
@@ -85,6 +86,7 @@ async def slot(ctx):
         new_balance = current_balance - payout_multiplier
     else:
         await ctx.send(f"{broke_emj} Woah there {ctx.author.mention}! You best come back when you've got more diggities.")
+        is_playing[key] = False
         return
 
     await ctx.send(f"{ctx.author.mention} plays the **{payout_multiplier} diggity** slot:")
@@ -136,11 +138,9 @@ def get_next_roll(previous_roll):
     roll = random.uniform(1, MAX_ROLL)
     print(f"Roll for match: {roll}")
 
-    tracker = 1
     result = PROB_BASE
-    while tracker <= previous_roll:
-        result -= (PROB_REDUCTION * (1 / (tracker ** PROB_REDUCTION_OFFSET)))
-        tracker += 1
+    for i in range(1, previous_roll + 1):
+        result -= (PROB_REDUCTION * (1 / (i ** PROB_REDUCTION_OFFSET)))
 
     print(f"Reach to match: {MAX_ROLL - result}")
     if roll >= MAX_ROLL - result:
