@@ -10,7 +10,7 @@ from discord import Member
 from discord.ext.commands import Context
 from pytz import BaseTzInfo, UnknownTimeZoneError
 
-from db import db
+from database.db import db
 from modules import bot
 
 
