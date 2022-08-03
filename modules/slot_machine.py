@@ -1,6 +1,7 @@
 import asyncio
 import random
 from enum import Enum
+from typing import Dict
 
 import emoji
 
@@ -53,11 +54,20 @@ class Thresholds(Enum):
         return selections[self.value]
 
 
+is_playing: Dict[int, bool] = {}
+
+
 @bot.command()
 async def slot(ctx):
     selection = ctx.message.content.split(' ', 1)[1].strip().lower()
     key: int = ctx.author.id
     payout = 0
+
+    if key in is_playing and is_playing[key]:
+        await ctx.send(f"{ctx.author.mention}, you are already playing. Please wait for your current slot to finish.")
+        return
+    else:
+        is_playing[key] = True
 
     if selection == "small":
         payout_multiplier = PayoutMultiplier.sml.value
@@ -106,6 +116,7 @@ async def slot(ctx):
 
     print(f"Awarded: {payout}")
     db.set(key, new_balance + payout)
+    is_playing[key] = False
 
 
 def get_first_roll(roll):
