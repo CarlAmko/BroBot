@@ -6,6 +6,7 @@ import env
 from modules import audio, bot, core, dice, game_price, poll, randomizer, reddit, scheduler, wordle, diggity
 from modules.fishing import fishing
 from modules.wordle import wordle
+from modules.casino import slot_machine
 from modules.core import get_guild, get_members_channel
 
 
