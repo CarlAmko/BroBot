@@ -101,7 +101,7 @@ def teardown():
 async def bjhelp(ctx: Context):
 	msg = f'''Welcome to the blackjack tables.
 	- The round begins 15 seconds after the first player places a wager.
-	- To place a wager, type **!blackjack N**, where N is the amount you wish to bet.
+	- To place a wager, type **!bj N**, where N is the amount you wish to bet.
 	
 	- The rules are simple; get as close to **21** without going over.
 	- At the start of the round, all participating players will be dealt two cards face-up.
@@ -125,12 +125,12 @@ async def bjhelp(ctx: Context):
 
 
 @bot.command()
-async def blackjack(ctx: Context):
+async def bj(ctx: Context):
 	author = ctx.author
 
 	async def invalid():
 		await ctx.send(
-			f'{author.mention} Invalid wager. Send as **!blackjack N**, where N is the amount you wish to bet.')
+			f'{author.mention} Invalid wager. Send as **!bj N**, where N is the amount you wish to bet.')
 
 	# Add player to the game if they aren't already in.
 	if not house_hand:
@@ -228,6 +228,8 @@ async def play_house(ctx: Context):
 	# Filter out busted players.
 	non_busted = {player: hand for player, hand in players.items() if get_hand_total(hand) <= 21}
 
+	ties = []
+	winners = []
 	if len(non_busted) != 0:
 		# Per the rules of Blackjack, the dealer **must** hit if <= 16, and **must** stand if >= 17.
 		house_total = get_hand_total(house_hand)
@@ -236,8 +238,6 @@ async def play_house(ctx: Context):
 			house_total = get_hand_total(house_hand)
 		await display_table(ctx)
 
-		ties = []
-		winners = []
 		if house_total > 21:
 			await ctx.send('**BUST**!')
 			# Add all non-busted players to winners.
@@ -253,6 +253,8 @@ async def play_house(ctx: Context):
 
 		await reimburse_ties(ctx, ties)
 		await award_winners(ctx, winners)
+	else:
+		await ctx.send("The House wins!")
 
 	teardown()
 
@@ -268,7 +270,7 @@ async def award_winners(ctx: Context, winners: List[Member]):
 		msg = ' '.join([winner.mention for winner in winners])
 		await ctx.send(f'Winners: {msg}')
 	else:
-		await ctx.send('There are no winners.')
+		await ctx.send("The House wins!")
 
 
 async def reimburse_ties(ctx: Context, ties: List[Member]):
