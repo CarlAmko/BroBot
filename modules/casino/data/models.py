@@ -13,7 +13,7 @@ class Suit(Enum):
 	DIAMONDS = 3
 
 
-class Value(Enum):
+class Face(Enum):
 	TWO = 2
 	THREE = 3
 	FOUR = 4
@@ -32,17 +32,17 @@ class Value(Enum):
 @dataclasses.dataclass()
 class Card:
 	suit: Suit
-	value: Value
+	face: Face
 	visible: bool = True
 
 	def generate_msg(self) -> str:
 		if self.visible:
 			# Use number names for 1-10
-			emoji_name = self.value.name.lower()
+			emoji_name = self.face.name.lower()
 			# parse first letter for J-A
-			if self.value.value > 10:
+			if self.face.value > 10:
 				emoji_name = f'regional_indicator_{emoji_name[0]}'
-			elif self.value.value == 10:
+			elif self.face.value == 10:
 				emoji_name = f'keycap_ten'
 
 			value_emoji = emojize(f':{emoji_name}:')
@@ -64,6 +64,6 @@ class Hand:
 
 
 def generate_shuffled_deck() -> List[Card]:
-	deck = [Card(suit, value) for suit in Suit for value in Value]
+	deck = [Card(suit, face) for suit in Suit for face in Face]
 	random.shuffle(deck)
 	return deck

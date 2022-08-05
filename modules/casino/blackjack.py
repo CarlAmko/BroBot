@@ -9,7 +9,7 @@ from discord.ext.commands import Context
 
 from database.db import update_currency, get_currency
 from modules import bot
-from modules.casino.data.models import Hand, Card, generate_shuffled_deck, Value
+from modules.casino.data.models import Hand, Card, generate_shuffled_deck, Face
 
 game_msg: Optional[Message] = None
 
@@ -66,9 +66,9 @@ def get_hand_total(hand: Hand) -> int:
 	total = 0
 	ace_count = 0
 	for card in hand.cards:
-		if card.value.value <= 10:
-			total += card.value.value
-		elif card.value == Value.ACE:
+		if card.face.value <= 10:
+			total += card.face.value
+		elif card.face == Face.ACE:
 			# Assume greedy value of 11; correct later.
 			ace_count += 1
 			total += 11
