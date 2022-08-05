@@ -40,18 +40,20 @@ def deal_cards():
 async def display_table(ctx: Context):
 	global game_msg
 	msg = []
+
+	def bust_msg(hand: Hand) -> str:
+		return emoji.emojize(':x:') if get_hand_total(hand) > 21 else ''
+
 	for user, hand in players.items():
 		cards = []
 		for card in hand.cards:
 			cards.append(card.generate_msg())
 
 		card_msg = ' '.join(cards)
-		total = get_hand_total(hand)
-		bust_msg = emoji.emojize(':x:') if total > 21 else ''
-		msg.append(f'{user.mention}\n{card_msg} {bust_msg}')
+		msg.append(f'{user.mention}\n{card_msg} {bust_msg(hand)}')
 
 	cards = ''.join([card.generate_msg() for card in house_hand.cards])
-	msg.append(f'House\n{cards}')
+	msg.append(f'House\n{cards} {bust_msg(house_hand)}')
 
 	player = turn_order[-1].mention if turn_order else 'The House'
 	msg = '\n\n'.join(msg)
