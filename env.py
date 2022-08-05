@@ -1,3 +1,4 @@
+import json
 import os
 
 # import dotenv
@@ -13,3 +14,4 @@ REDDIT_CLIENT_SECRET = os.getenv("REDDIT_API_CLIENT_SECRET")
 REDIS_ENDPOINT = os.getenv("REDIS_ENDPOINT")
 
 MEMBER_CHANNEL_ID = int(os.getenv("MEMBER_CHANNEL_ID"))
+ADMIN_IDS = json.loads(os.getenv("ADMIN_IDS"))
