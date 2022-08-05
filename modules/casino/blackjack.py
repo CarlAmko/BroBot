@@ -52,7 +52,7 @@ async def display_table(ctx: Context):
 		card_msg = ' '.join(cards)
 		msg.append(f'{user.mention}\n{card_msg} {bust_msg(hand)}')
 
-	cards = ''.join([card.generate_msg() for card in house_hand.cards])
+	cards = ' '.join([card.generate_msg() for card in house_hand.cards])
 	msg.append(f'**House**\n{cards} {bust_msg(house_hand)}')
 
 	turn_msg = f'\nIt is {turn_order[-1].mention}\'s turn.' if turn_order else ''
