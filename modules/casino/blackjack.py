@@ -261,16 +261,24 @@ async def play_house(ctx: Context):
 	teardown()
 
 
+def is_blackjack(hand: Hand) -> bool:
+	return len(hand.cards) == 2 and get_hand_total(hand) == 21
+
+
+def calculate_earnings(winner: Member) -> int:
+	hand = players[winner]
+	multiplier = 2.5 if is_blackjack(hand) else 2.0
+	return math.ceil(wagers[winner] * multiplier)
+
+
 async def award_winners(ctx: Context, winners: List[Member]):
 	if winners:
+		msg = []
 		for winner in winners:
-			# TODO: More if BJ
-			# multiplier = 2.0 if winner
-			earnings = wagers[winner] * 2
+			earnings = calculate_earnings(winner)
 			update_currency(winner.id, earnings)
-
-		msg = ' '.join([winner.mention for winner in winners])
-		await ctx.send(f'Winners: {msg}')
+			msg.append(f'{winner.mention} {earnings} diggities')
+		await ctx.send(f'Winners: {", ".join(msg)}')
 	else:
 		await ctx.send("The House wins!")
 
