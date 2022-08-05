@@ -15,6 +15,7 @@ TIME_BETWEEN_ROLLS_MIN = 1.5
 TIME_BETWEEN_ROLLS_MAX = 2
 BONUS_LOAD_TIME = 3
 WHEEL_SIZE = 28
+BONUS_WHEEL_SIZE = 36
 
 first_slot_wheel = [4, 2, 1, 3, 2, 5, 1, 4, 3, 5, 1, 2, 4, 7, 1, 4, 3, 6, 2, 1, 3, 2, 1, 5, 6, 2, 3, 1]
 second_slot_wheel = [7, 1, 5, 2, 3, 1, 2, 6, 4, 1, 3, 2, 1, 5, 4, 3, 2, 1, 4, 3, 2, 1, 3, 4, 1, 2, 6, 5]
@@ -111,27 +112,27 @@ def calculate_winnings(slot_size: str, key: int) -> int:
         elif val == Symbols.booba.value:
             jackpot = get_slot_jackpot(slot_size)
 
-            update_slot_jackpot(slot_size, -(jackpot - (2000 * (1 if slot_size == "small" else
-                                                                (25 if slot_size == "medium" else 100)))))
+            update_slot_jackpot(slot_size, -(jackpot - (2000 * (1 if slot_size == "sm" else
+                                                                (25 if slot_size == "med" else 100)))))
             winnings += jackpot
 
     return winnings
 
 
 def spin_bonus_wheel() -> int:
-    roll = random.randint(1, WHEEL_SIZE)
+    roll = random.randint(1, BONUS_WHEEL_SIZE)
 
-    if roll <= 7:
+    if roll <= 12:
         return BonusSymbols.plus_five.value
-    elif roll <= 13:
-        return BonusSymbols.plus_ten.value
-    elif roll <= 18:
-        return BonusSymbols.plus_hundred.value
     elif roll <= 22:
-        return BonusSymbols.times_die.value
-    elif roll <= 25:
-        return BonusSymbols.times_two.value
+        return BonusSymbols.plus_ten.value
     elif roll <= 27:
+        return BonusSymbols.plus_hundred.value
+    elif roll <= 30:
+        return BonusSymbols.times_die.value
+    elif roll <= 33:
+        return BonusSymbols.times_two.value
+    elif roll <= 35:
         return BonusSymbols.times_five.value
     else:
         return BonusSymbols.times_ten.value
