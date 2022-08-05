@@ -20,6 +20,8 @@ wagers: Dict[Member, int] = {}
 deck: List[Card] = []
 house_hand: Optional[Hand] = None
 
+lock = asyncio.Lock()
+
 
 def deal_cards():
 	global house_hand
@@ -136,6 +138,7 @@ async def bj(ctx: Context):
 		await ctx.send(
 			f'{author.mention} Invalid wager. Send as **!bj N**, where N is the amount you wish to bet.')
 
+
 	# Add player to the game if they aren't already in.
 	if not house_hand:
 		if author not in players:
@@ -163,8 +166,10 @@ async def bj(ctx: Context):
 
 			players[author] = Hand()
 			turn_order.appendleft(author)
-			if deck:
-				await ctx.send(f'{author.mention} Wager of {wager} accepted. Good luck!')
+			# Capture the lock to avoid race conditions with deck assignment
+			async with lock:
+				if deck:
+					await ctx.send(f'{author.mention} Wager of {wager} accepted. Good luck!')
 		else:
 			await ctx.send(f'{author.mention} You are already playing this round.')
 	else:
@@ -172,12 +177,14 @@ async def bj(ctx: Context):
 		return
 
 	# If this is the first player to start a game, kick off start timer.
-	if not deck:
-		await ctx.send('Blackjack started! Game will begin in 15 seconds.')
-		setup_game()
-		await asyncio.sleep(15)
-		deal_cards()
-		await display_table(ctx)
+	# Capture the lock to avoid race conditions with deck assignment
+	async with lock:
+		if not deck:
+			await ctx.send('Blackjack started! Game will begin in 15 seconds.')
+			setup_game()
+			await asyncio.sleep(15)
+			deal_cards()
+			await display_table(ctx)
 
 
 @bot.command()
