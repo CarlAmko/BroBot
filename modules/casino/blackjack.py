@@ -225,7 +225,9 @@ async def play_house(ctx: Context):
 	for card in house_hand.cards:
 		card.visible = True
 
-	non_busted = {player: hand for player, hand in players.items() if get_hand_total(hand) < 21}
+	# Filter out busted players.
+	non_busted = {player: hand for player, hand in players.items() if get_hand_total(hand) <= 21}
+
 	if len(non_busted) != 0:
 		# Per the rules of Blackjack, the dealer **must** hit if <= 16, and **must** stand if >= 17.
 		house_total = get_hand_total(house_hand)
@@ -234,19 +236,22 @@ async def play_house(ctx: Context):
 			house_total = get_hand_total(house_hand)
 		await display_table(ctx)
 
+		ties = []
 		winners = []
 		if house_total > 21:
 			await ctx.send('**BUST**!')
 			# Add all non-busted players to winners.
 			winners.extend(non_busted)
-		elif house_total == 21:
-			# No winners.
-			await ctx.send('House wins! Better luck next time.')
 		else:
-			# Add all players with winning hands.
+			# Determine winners and ties.
 			for player, hand in non_busted.items():
-				if get_hand_total(hand) > house_total:
+				player_total = get_hand_total(hand)
+				if player_total > house_total:
 					winners.append(player)
+				elif player_total == house_total:
+					ties.append(player)
+
+		await reimburse_ties(ctx, ties)
 		await award_winners(ctx, winners)
 
 	teardown()
@@ -264,6 +269,14 @@ async def award_winners(ctx: Context, winners: List[Member]):
 		await ctx.send(f'Winners: {msg}')
 	else:
 		await ctx.send('There are no winners.')
+
+
+async def reimburse_ties(ctx: Context, ties: List[Member]):
+	if ties:
+		for tie in ties:
+			update_currency(tie.id, wagers[tie])
+		msg = ' '.join([tie.mention for tie in ties])
+		await ctx.send(f'Draws: {msg}')
 
 
 @bot.command()
