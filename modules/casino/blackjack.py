@@ -120,6 +120,7 @@ async def bjhelp(ctx: Context):
 	
 	- If the value of the dealer's hand exceeds **21**, all non-busted players will win automatically.
 	- If the value of the dealer's hand exceeds the value of your hand, you lose and forfeit your wager.
+	- If the value of the dealer's hand is the same as the value of your hand, it's a draw, and your wager will be returned.
 	- If the value of the dealer's hand is lower than the value of your hand, you win!
 	
 	That's it! Have fun and good luck! {emoji.emojize(":smile:")} 
