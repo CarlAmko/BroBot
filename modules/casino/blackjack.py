@@ -53,11 +53,12 @@ async def display_table(ctx: Context):
 		msg.append(f'{user.mention}\n{card_msg} {bust_msg(hand)}')
 
 	cards = ''.join([card.generate_msg() for card in house_hand.cards])
-	msg.append(f'House\n{cards} {bust_msg(house_hand)}')
+	msg.append(f'**House**\n{cards} {bust_msg(house_hand)}')
 
-	player = turn_order[-1].mention if turn_order else 'The House'
+	turn_msg = f'\nIt is {turn_order[-1].mention}\'s turn.' if turn_order else ''
 	msg = '\n\n'.join(msg)
-	to_send = f'{msg}\nIt is {player}\'s turn.'
+	to_send = f'{msg}{turn_msg}'
+
 	if not game_msg:
 		game_msg = await ctx.send(to_send)
 	else:
@@ -256,6 +257,7 @@ async def play_house(ctx: Context):
 		await reimburse_ties(ctx, ties)
 		await award_winners(ctx, winners)
 	else:
+		await display_table(ctx)
 		await ctx.send("The House wins!")
 
 	teardown()
