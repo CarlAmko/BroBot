@@ -9,13 +9,14 @@ from discord import message
 
 from modules.casino.data.db_casino import get_slot_jackpot, update_slot_jackpot
 from database.db import update_currency, get_currency
+from modules.casino.data.models import JACKPOT_BASE, SlotMachineSizes
 from modules import bot
 
 TIME_BETWEEN_ROLLS_MIN = 1.5
 TIME_BETWEEN_ROLLS_MAX = 2
 BONUS_LOAD_TIME = 3
 WHEEL_SIZE = 28
-BONUS_WHEEL_SIZE = 36
+BONUS_WHEEL_SIZE = 33
 
 first_slot_wheel = [4, 2, 1, 3, 2, 5, 1, 4, 3, 5, 1, 2, 4, 7, 1, 4, 3, 6, 2, 1, 3, 2, 1, 5, 6, 2, 3, 1]
 second_slot_wheel = [7, 1, 5, 2, 3, 1, 2, 6, 4, 1, 3, 2, 1, 5, 4, 3, 2, 1, 4, 3, 2, 1, 3, 4, 1, 2, 6, 5]
@@ -49,12 +50,6 @@ class SlotMachine:
     in_use: bool
     last_message = None
     pay_lines = []
-
-
-class SlotMachineSizes(Enum):
-    sml = 1
-    med = 25
-    lrg = 100
 
 
 class Symbols(Enum):
@@ -93,7 +88,7 @@ def check_diagonals(wheels, key: int):
         machines[key].pay_lines[4] = wheels[0][2]
 
 
-def calculate_winnings(slot_size: str, key: int) -> int:
+def calculate_winnings(slot_id: str, key: int) -> int:
     winnings = 0
 
     for val in machines[key].pay_lines:
@@ -110,10 +105,9 @@ def calculate_winnings(slot_size: str, key: int) -> int:
         elif val == Symbols.jif.value:
             winnings += 500
         elif val == Symbols.booba.value:
-            jackpot = get_slot_jackpot(slot_size)
-
-            update_slot_jackpot(slot_size, -(jackpot - (2000 * (1 if slot_size == "sm" else
-                                                                (25 if slot_size == "med" else 100)))))
+            jackpot = get_slot_jackpot(slot_id)
+            multiplier = int(slot_id.replace('7', ''))
+            update_slot_jackpot(slot_id, JACKPOT_BASE * multiplier)
             winnings += jackpot
 
     return winnings
@@ -124,15 +118,15 @@ def spin_bonus_wheel() -> int:
 
     if roll <= 12:
         return BonusSymbols.plus_five.value
-    elif roll <= 22:
+    elif roll <= 20:
         return BonusSymbols.plus_ten.value
-    elif roll <= 27:
+    elif roll <= 24:
         return BonusSymbols.plus_hundred.value
-    elif roll <= 30:
+    elif roll <= 27:
         return BonusSymbols.times_die.value
-    elif roll <= 33:
+    elif roll <= 30:
         return BonusSymbols.times_two.value
-    elif roll <= 35:
+    elif roll <= 32:
         return BonusSymbols.times_five.value
     else:
         return BonusSymbols.times_ten.value
@@ -225,10 +219,13 @@ async def slot(ctx):
         return
 
     if slot_size == "sm":
+        slot_id = SlotMachineSizes.sml.generate_key
         cost = SlotMachineSizes.sml.value
     elif slot_size == "med":
+        slot_id = SlotMachineSizes.med.generate_key
         cost = SlotMachineSizes.med.value
     elif slot_size == "lg":
+        slot_id = SlotMachineSizes.lrg.generate_key
         cost = SlotMachineSizes.lrg.value
     else:
         machines[key].in_use = False
@@ -240,7 +237,7 @@ async def slot(ctx):
     print(f"{ctx.author.name} plays the {slot_size} slot wagering {wager} with a starting balance of {current_balance}")
     if current_balance >= cost * wager:
         update_currency(key, -(cost * wager))
-        update_slot_jackpot(slot_size, cost * wager)
+        update_slot_jackpot(slot_id, cost * wager)
     else:
         machines[key].in_use = False
         await ctx.send(f"{broke_emj} Woah there {ctx.author.mention}! You best come back when you've got more "
@@ -301,7 +298,7 @@ async def slot(ctx):
     wheels = [first_wheel, second_wheel, third_wheel]
     check_rows(wheels, key)
     check_diagonals(wheels, key)
-    payout = calculate_winnings(slot_size, key)
+    payout = calculate_winnings(slot_id, key)
 
     if bonus_active and payout > 0:
         wheel_content = f"{first_wheel_emj[0]}{second_wheel_emj[0]}{third_wheel_emj[0]}\n" \
@@ -393,15 +390,20 @@ async def slotawards(ctx):
 @bot.command()
 async def slothelp(ctx):
     # await ctx.message.delete()
-    msg = "**SLOTS INFO**\n - wager minimum is 1 and maximum is 4\n         - wager 1 to play center horizontal" \
-          " payline only\n         - wager 2 unlocks the top and bottom horizontal paylines\n         - wager 3 " \
-          " unlocks both diagonal paylines\n         - wager 4 unlocks the bonus wheel (bonus wheel only occurs if " \
-          "there is a win on a payline)\n - !slot sm n - cost 1 diggity per wager\n - !slot med n - cost 25 " \
-          "diggities per wager\n - !slot lg n - cost 100 diggities per wager\n - !slotjackpot x - (x = sm, " \
-          "med, or lg) check the current jackpot\n - !slotawards - shows awards from " \
-          "slots\n - !grant - grants 10 diggities if you have 0\n - !takemydiggities - **WARNING** this will " \
-          "set your diggity balance for the beta to 0\n - !diggitiesbeta - sends your diggity balance " \
-          "for the beta"
+    msg = "**SLOTS INFO**\n" \
+          " - wager minimum is 1 and maximum is 4\n" \
+          "         - wager 1 to play center horizontal payline only\n" \
+          "         - wager 2 unlocks the top and bottom horizontal paylines\n" \
+          "         - wager 3 unlocks both diagonal paylines\n" \
+          "         - wager 4 unlocks the bonus wheel (bonus wheel only occurs if there is a win on a payline)\n" \
+          " - !slot sm n - cost 1 diggity per wager\n" \
+          " - !slot med n - cost 25 diggities per wager\n" \
+          " - !slot lg n - cost 100 diggities per wager\n" \
+          " - !slotjackpot x - (x = sm, med, or lg) check the current jackpot\n" \
+          " - !slotawards - shows awards from slots\n" \
+          " - !grant - grants 10 diggities if you have 0\n" \
+          " - !takemydiggities - **WARNING** this will set your diggity balance for the beta to 0\n" \
+          " - !diggitiesbeta - sends your diggity balance for the beta"
 
     await ctx.send(f"{ctx.author.mention}\n{msg}")
 
@@ -415,7 +417,11 @@ async def slotjackpot(ctx):
         await ctx.send(f"{ctx.author.mention} Invalid slot command. **!slotjackpot x** (x can be sm, med, or lg)")
         return
 
-    jackpot = get_slot_jackpot(slot_size)
+    slot_id = SlotMachineSizes.sml.generate_key \
+        if slot_size == "sm" else (SlotMachineSizes.med.generate_key
+                                   if slot_size == "med" else SlotMachineSizes.lrg.generate_key)
+
+    jackpot = get_slot_jackpot(slot_id)
 
     await ctx.send(f"The current jackpot for the {slot_size} slot is **{jackpot} diggities**!")
 
@@ -423,10 +429,16 @@ async def slotjackpot(ctx):
 @bot.command()
 async def resetjackpot(ctx):
     slot_size = ctx.message.content.split()[1].strip().lower()
-    # await ctx.message.delete()
+    await ctx.message.delete()
 
     if not (slot_size == "sm" or slot_size == "med" or slot_size == "lg"):
         return
 
-    current_jackpot = get_slot_jackpot(slot_size)
-    update_slot_jackpot(slot_size, -current_jackpot)
+    slot_id = SlotMachineSizes.sml.generate_key \
+        if slot_size == "sm" else (SlotMachineSizes.med.generate_key
+                                   if slot_size == "med" else SlotMachineSizes.lrg.generate_key)
+
+    current_jackpot = get_slot_jackpot(slot_id)
+    update_slot_jackpot(slot_id, -current_jackpot)
+    multiplier = int(slot_id.replace('7', ''))
+    update_slot_jackpot(slot_id, JACKPOT_BASE * multiplier)
