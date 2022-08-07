@@ -138,7 +138,6 @@ async def bj(ctx: Context):
 		await ctx.send(
 			f'{author.mention} Invalid wager. Send as **!bj N**, where N is the amount you wish to bet.')
 
-
 	# Add player to the game if they aren't already in.
 	if not house_hand:
 		if author not in players:
@@ -299,10 +298,3 @@ async def reimburse_ties(ctx: Context, ties: List[Member]):
 			update_currency(tie.id, wagers[tie])
 		msg = ' '.join([tie.mention for tie in ties])
 		await ctx.send(f'Draws: {msg}')
-
-
-@bot.command()
-async def grant(ctx: Context):
-	author = ctx.author
-	update_currency(author.id, 100)
-	await ctx.send(f'{author.mention} Granted 100 diggities.')
