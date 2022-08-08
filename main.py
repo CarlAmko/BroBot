@@ -3,11 +3,12 @@ import discord
 from discord import Guild, Member
 
 import env
-from modules import audio, bot, core, dice, game_price, poll, randomizer, reddit, scheduler, wordle, diggity, admin
-from modules.fishing import fishing
-from modules.casino import blackjack
-from modules.wordle import wordle
-from modules.casino import slot_machine
+# from modules import audio, bot, core, dice, game_price, poll, randomizer, reddit, scheduler, wordle, diggity, admin
+from modules import bot, core, diggity
+# from modules.fishing import fishing
+# from modules.casino import blackjack
+# from modules.wordle import wordle
+# from modules.casino import slot_machine
 from modules.core import get_guild, get_members_channel
 
 
@@ -46,6 +47,6 @@ async def on_message(message):
 client = discord.Client()
 
 if __name__ == '__main__':
-	bot.loop.create_task(scheduler.process_scheduled_tasks())
-	bot.loop.create_task(audio.check_if_alone())
+	# bot.loop.create_task(scheduler.process_scheduled_tasks())
+	# bot.loop.create_task(audio.check_if_alone())
 	bot.run(env.BOT_SECRET)
