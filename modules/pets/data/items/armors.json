@@ -1,0 +1,138 @@
+[
+    {
+        "_comment": "1 = light armor cores, 2 = medium armor cores, 3 = heavy armor cores",
+        "_comment0": "Restrictions: 0 = none, 1 = no jewels(except berserk), 2 = no jewels, no ranged"
+    },
+    {
+        "_comment": "---------------------JUNK TIER---------------------"
+    },
+    {
+        "id": 1,
+        "name": "Junk Light Armor Core",
+        "tier": 1,
+        "value": 10,
+        "armor_bonus": -6,
+        "min_level": 0,
+        "min_mgt": 0,
+        "restrictions": 0
+    },
+    {
+        "id": 2,
+        "name": "Junk Medium Armor Core",
+        "tier": 1,
+        "value": 50,
+        "armor_bonus": -6,
+        "min_level": 0,
+        "min_mgt": 3,
+        "restrictions": 1
+    },
+    {
+        "id": 3,
+        "name": "Junk Heavy Armor Core",
+        "tier": 1,
+        "value": 100,
+        "armor_bonus": -6,
+        "min_level": 0,
+        "min_mgt": 6,
+        "restrictions": 2
+    },
+    {
+        "_comment": "---------------------PRIMITIVE TIER---------------------"
+    },
+    {
+        "id": 4,
+        "name": "Primitive Light Armor Core",
+        "tier": 2,
+        "value": 25,
+        "armor_bonus": -3,
+        "min_level": 0,
+        "min_mgt": 0,
+        "restrictions": 0
+    },
+    {
+        "id": 5,
+        "name": "Primitive Medium Armor Core",
+        "tier": 2,
+        "value": 125,
+        "armor_bonus": -3,
+        "min_level": 0,
+        "min_mgt": 3,
+        "restrictions": 1
+    },
+    {
+        "id": 6,
+        "name": "Primitive Heavy Armor Core",
+        "tier": 2,
+        "value": 250,
+        "armor_bonus": -3,
+        "min_level": 0,
+        "min_mgt": 6,
+        "restrictions": 2
+    },
+    {
+        "_comment": "---------------------COMMON TIER---------------------"
+    },
+    {
+        "id": 7,
+        "name": "Common Light Armor Core",
+        "tier": 3,
+        "value": 50,
+        "armor_bonus": 0,
+        "min_level": 0,
+        "min_mgt": 0,
+        "restrictions": 0
+    },
+    {
+        "id": 8,
+        "name": "Common Medium Armor Core",
+        "tier": 3,
+        "value": 250,
+        "armor_bonus": 0,
+        "min_level": 0,
+        "min_mgt": 3,
+        "restrictions": 1
+    },
+    {
+        "id": 9,
+        "name": "Common Heavy Armor Core",
+        "tier": 3,
+        "value": 500,
+        "armor_bonus": 0,
+        "min_level": 0,
+        "min_mgt": 6,
+        "restrictions": 2
+    },
+    {
+        "_comment": "---------------------UNCOMMON TIER---------------------"
+    },
+    {
+        "id": 10,
+        "name": "Uncommon Light Armor Core",
+        "tier": 4,
+        "value": 200,
+        "armor_bonus": 3,
+        "min_level": 5,
+        "min_mgt": 0,
+        "restrictions": 0
+    },
+    {
+        "id": 11,
+        "name": "Uncommon Medium Armor Core",
+        "tier": 4,
+        "value": 1000,
+        "armor_bonus": 3,
+        "min_level": 5,
+        "min_mgt": 4,
+        "restrictions": 1
+    },
+    {
+        "id": 12,
+        "name": "Uncommon Heavy Armor Core",
+        "tier": 4,
+        "value": 2000,
+        "armor_bonus": 3,
+        "min_level": 5,
+        "min_mgt": 8,
+        "restrictions": 2
+    }
+]

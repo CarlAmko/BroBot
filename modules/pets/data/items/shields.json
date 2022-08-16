@@ -1,0 +1,39 @@
+[
+    {
+        "_comment": "light = 1, medium = 2, heavy = 3",
+        "_comment0": "Restrictions: 0 = none, 1 = no jewels(except berserk), 2 = no jewels, no ranged"
+    },
+    {
+        "id": 1,
+        "name": "Light Shield",
+        "type": 1,
+        "tier": 3,
+        "value": 25,
+        "durability": 5,
+        "min_level": 0,
+        "min_mgt": 0,
+        "restrictions": 0
+    },
+    {
+        "id": 2,
+        "name": "Medium Shield",
+        "type": 2,
+        "tier": 3,
+        "value": 100,
+        "durability": 10,
+        "min_level": 0,
+        "min_mgt": 3,
+        "restrictions": 1
+    },
+    {
+        "id": 3,
+        "name": "Heavy Shield",
+        "type": 3,
+        "tier": 3,
+        "value": 500,
+        "durability": 20,
+        "min_level": 0,
+        "min_mgt": 5,
+        "restrictions": 2
+    }
+]
