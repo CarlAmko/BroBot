@@ -21,6 +21,7 @@ class Stats(Enum):
     smt = 3
     ins = 4
 
+    # Not sure if this will be used, but I made it while being dumb.
     @property
     def get_stat_str(self) -> str:
         if self.value == Stats.mgt.value:
@@ -43,6 +44,7 @@ class Pet:
     pet_stats: List[int]
     max_hp: int
     current_hp: int
+    dodge_rate: int
     status_effects: List[StatusEffects]
     armor: int
     shield: int
@@ -60,13 +62,12 @@ class Pet:
         for _ in range(2):
             stat_bonuses[random.randint(0, 4)] += 1
 
-        i = 0
-        for stat in self.pet_stats:
-            stat = 1 + stat_bonuses[i]
-            i += 1
+        for i in range(5):
+            self.pet_stats[i] = 1 + stat_bonuses[i]
 
         self.max_hp = 5 + ((self.pet_stats[Stats.vit.value] - 1) * 3)
         self.current_hp = self.max_hp
+        self.dodge_rate = 10
 
     def stat_inc(self, stat_to_inc: str, amount=1):
         if stat_to_inc == "mgt":
