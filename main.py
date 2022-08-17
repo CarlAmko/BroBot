@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
-import discord
-from discord import Guild, Member
+from discord import Guild, Member, Client
 
 import env
-from modules import audio, bot, core, dice, game_price, poll, randomizer, reddit, scheduler, wordle, diggity, admin
-from modules.fishing import fishing
-from modules.casino import blackjack
-from modules.wordle import wordle
 from modules.core import get_guild, get_members_channel
+
+from modules import bot, core, admin
+if not env.BETA:
+	from modules import audio, dice, game_price, poll, randomizer, reddit, scheduler, diggity
+	from modules.fishing import fishing
+	from modules.casino import blackjack
+	from modules.casino import slot_machine
+	from modules.wordle import wordle
+else:
+	from modules.BETA import diggity
+	# Put new non-master modules here
+	pass
 
 
 async def adjust_member_count():
@@ -42,9 +49,10 @@ async def on_message(message):
 		await bot.process_commands(message)
 
 
-client = discord.Client()
+client = Client()
 
 if __name__ == '__main__':
-	bot.loop.create_task(scheduler.process_scheduled_tasks())
-	bot.loop.create_task(audio.check_if_alone())
+	if not env.BETA:
+		bot.loop.create_task(scheduler.process_scheduled_tasks())
+		bot.loop.create_task(audio.check_if_alone())
 	bot.run(env.BOT_SECRET)

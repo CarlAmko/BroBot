@@ -11,6 +11,7 @@ services:
       - REDDIT_API_CLIENT_ID=$REDDIT_API_CLIENT_ID
       - REDDIT_API_CLIENT_SECRET=$REDDIT_API_CLIENT_SECRET
       - GAME_API_ENDPOINT=$GAME_API_ENDPOINT
+      - BETA=$BETA
       - REDIS_ENDPOINT=redis
     depends_on:
       redis:
