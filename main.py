@@ -11,7 +11,7 @@ if not env.BETA:
 	from modules.casino import blackjack
 	from modules.wordle import wordle
 else:
-	from modules.beta import diggity
+	from modules.BETA import diggity
 	# Put new non-master modules here
 	from modules.casino import slot_machine
 	pass
