@@ -14,6 +14,7 @@ REDDIT_CLIENT_SECRET = os.getenv("REDDIT_API_CLIENT_SECRET")
 REDIS_ENDPOINT = os.getenv("REDIS_ENDPOINT")
 
 MEMBER_CHANNEL_ID = int(os.getenv("MEMBER_CHANNEL_ID")) if "MEMBER_CHANNEL_ID" in os.environ else None
-ADMIN_IDS = json.loads(os.getenv("ADMIN_IDS")) if "ADMIN_IDS" in os.environ else None
+# ADMIN_IDS = json.loads(os.getenv("ADMIN_IDS")) if "ADMIN_IDS" in os.environ else None
 
-BETA = os.getenv("BETA") == "True" if "BETA" in os.environ else False
+# beta = os.getenv("beta") == "True" if "beta" in os.environ else False
+BETA = True
