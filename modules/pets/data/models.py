@@ -21,7 +21,7 @@ class Stats(Enum):
     smt = 3
     ins = 4
 
-    # Not sure if this will be used, but I made it while being dumb.
+    # Not sure if this will be useful
     @property
     def get_stat_str(self) -> str:
         if self.value == Stats.mgt.value:
@@ -37,25 +37,22 @@ class Stats(Enum):
 
 
 class Pet:
-    emoji: str
+    name: str
     level: int
-    xp_to_level: int
-    current_xp: int
+    xp: int
     pet_stats: List[int]
     max_hp: int
     current_hp: int
-    dodge_rate: int
     status_effects: List[StatusEffects]
     armor: int
     shield: int
     weapon: int
     hat: int
 
-    def __init__(self, desired_emoji: str):
-        self.emoji = emojize(f":{desired_emoji}:")
+    def __init__(self, name: str):
+        self.name = name
         self.level = 1
-        self.xp_to_level = 10
-        self.current_xp = 0
+        self.xp = 0
 
         stat_bonuses = [0] * 5
         stat_bonuses[random.randint(0, 4)] += 2
@@ -67,19 +64,6 @@ class Pet:
 
         self.max_hp = 5 + ((self.pet_stats[Stats.vit.value] - 1) * 3)
         self.current_hp = self.max_hp
-        self.dodge_rate = 10
 
-    def stat_inc(self, stat_to_inc: str, amount=1):
-        if stat_to_inc == "mgt":
-            self.pet_stats[Stats.mgt.value] += amount
-        elif stat_to_inc == "swt":
-            self.pet_stats[Stats.swt.value] += amount
-        elif stat_to_inc == "vit":
-            self.pet_stats[Stats.vit.value] += amount
-        elif stat_to_inc == "smt":
-            self.pet_stats[Stats.smt.value] += amount
-        elif stat_to_inc == "ins":
-            self.pet_stats[Stats.ins.value] += amount
-        else:
-            print(f"Invalid Stat {stat_to_inc}")
-            # TODO Error for invalid stat
+    def stat_inc(self, stat_to_inc: int, amount=1):
+        self.pet_stats[stat_to_inc] += amount
