@@ -9,10 +9,8 @@ if not env.BETA:
 	from modules import audio, dice, game_price, poll, randomizer, reddit, scheduler, diggity, quotes
 	from modules.fishing import fishing
 	from modules.casino import blackjack
-	from modules.casino import slot_machine
 	from modules.wordle import wordle
 else:
-	from modules.BETA import diggity
 	# Put new non-master modules here
 	pass
 
@@ -52,7 +50,6 @@ async def on_message(message):
 client = Client()
 
 if __name__ == '__main__':
-	if not env.BETA:
-		bot.loop.create_task(scheduler.process_scheduled_tasks())
-		bot.loop.create_task(audio.check_if_alone())
+	bot.loop.create_task(scheduler.process_scheduled_tasks())
+	bot.loop.create_task(audio.check_if_alone())
 	bot.run(env.BOT_SECRET)

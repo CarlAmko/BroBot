@@ -13,4 +13,3 @@ def get_currency(user_id: int) -> int:
 def update_currency(user_id: int, adjustment: int):
 	key = f'{user_id}:currency'
 	db.incr(key, amount=adjustment)
-
