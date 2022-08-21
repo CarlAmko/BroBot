@@ -14,6 +14,7 @@ if not env.BETA:
 else:
 	from modules.BETA import diggity
 	# Put new non-master modules here
+	from modules.pets import pet_base
 	pass
 
 
