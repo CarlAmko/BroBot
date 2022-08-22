@@ -4,9 +4,9 @@ from discord import Guild, Member, Client
 import env
 from modules.core import get_guild, get_members_channel
 
-from modules import bot, core, admin
+from modules import bot, core, admin, expiring_message
 if not env.BETA:
-	from modules import audio, dice, game_price, poll, randomizer, reddit, scheduler, diggity, expiring_message
+	from modules import audio, dice, game_price, poll, randomizer, reddit, scheduler, diggity
 	from modules.fishing import fishing
 	from modules.casino import blackjack
 	from modules.wordle import wordle
