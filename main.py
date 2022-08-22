@@ -6,7 +6,7 @@ from modules.core import get_guild, get_members_channel
 
 from modules import bot, core, admin, lib
 if not env.BETA:
-	from modules import audio, dice, game_price, poll, randomizer, reddit, scheduler, diggity
+	from modules import audio, dice, game_price, poll, randomizer, reddit, scheduler, diggity, quotes
 	from modules.fishing import fishing
 	from modules.casino import blackjack
 	from modules.wordle import wordle
