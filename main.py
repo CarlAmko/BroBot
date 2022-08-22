@@ -9,12 +9,10 @@ if not env.BETA:
 	from modules import audio, dice, game_price, poll, randomizer, reddit, scheduler, diggity
 	from modules.fishing import fishing
 	from modules.casino import blackjack
-	from modules.casino import slot_machine
 	from modules.wordle import wordle
 else:
 	from modules.BETA import diggity
 	# Put new non-master modules here
-	from modules.pets import pet_base, pet_combat
 	pass
 
 
