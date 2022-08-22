@@ -43,28 +43,27 @@ class Pet:
     pet_emoji: str
     level: int
     xp: int
-    pet_stats = [1, 1, 1, 1, 1]
+    pet_stats = [int] * 5
     max_hp: int
     current_hp: int
-    status_effects: List[StatusEffects]
     armor: int
     shield: int
     weapon: int
     hat: int
 
     def __init__(self, name=None):
-        if name is not None:
-            self.name = name
-            self.pet_emoji = PLACEHOLDER_EMJ
-            self.level = 1
-            self.xp = 0
+        self.name = name
+        self.pet_emoji = PLACEHOLDER_EMJ
+        self.level = 1
+        self.xp = 0
 
-            self.pet_stats[random.randint(0, 4)] += 2
-            for _ in range(2):
-                self.pet_stats[random.randint(0, 4)] += 1
+        self.pet_stats = [1, 1, 1, 1, 1]
+        self.pet_stats[random.randint(0, 4)] += 2
+        for _ in range(2):
+            self.pet_stats[random.randint(0, 4)] += 1
 
-            self.max_hp = 5 + ((self.pet_stats[Stats.vit.value] - 1) * 3)
-            self.current_hp = self.max_hp
+        self.max_hp = 5 + ((self.pet_stats[Stats.vit.value] - 1) * 3)
+        self.current_hp = self.max_hp
 
     def stat_inc(self, stat_to_inc: int, amount=1):
         self.pet_stats[stat_to_inc] += amount

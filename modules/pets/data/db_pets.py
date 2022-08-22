@@ -5,7 +5,7 @@ from database.db import db
 from modules.pets.data.models import Pet
 
 
-def store_pet(user_id: int, pet: Pet):
+def store_pet(user_id: str, pet: Pet):
     namespace = f'{user_id}:pet'
     current_pet = {"name": pet.name,
                    "emoji": pet.pet_emoji,
@@ -18,7 +18,7 @@ def store_pet(user_id: int, pet: Pet):
     db.set(namespace, json_pet)
 
 
-def get_pet(user_id: int) -> Pet:
+def get_pet(user_id: str) -> Pet:
     namespace = f'{user_id}:pet'
     unpacked_pet = json.loads(db.get(namespace).decode('utf-8'))
     pet_data = unpacked_pet
@@ -35,11 +35,11 @@ def get_pet(user_id: int) -> Pet:
     return pet
 
 
-def check_pet(user_id: int) -> bool:
+def check_pet(user_id: str) -> bool:
     namespace = f'{user_id}:pet'
     return db.exists(namespace)
 
 
-def delete_pet(user_id: int):
+def delete_pet(user_id: str):
     namespace = f'{user_id}:pet'
     db.delete(namespace)

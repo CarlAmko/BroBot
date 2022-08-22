@@ -9,4 +9,3 @@ def get_slot_jackpot(slot_id) -> int:
 
 def update_slot_jackpot(slot_id, adjustment: int):
 	db.incr(slot_id, amount=adjustment)
-
