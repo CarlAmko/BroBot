@@ -5,7 +5,7 @@ from discord.ext.commands import Context
 import emoji
 from database.db import db
 
-QUOTES_ID = 871496158474821654
+QUOTES_CHANNEL_ID = 871496158474821654
 TIME_TO_DELETE = 86400
 loading_emj = emoji.emojize("<a:loading:734622445910360105>")
 
@@ -13,20 +13,15 @@ loading_emj = emoji.emojize("<a:loading:734622445910360105>")
 @bot.command()
 async def quote(ctx: Context):
     current_message = await ctx.send(f"Give me a sec to find something good. {loading_emj}")
-    ids_namespace = f'{QUOTES_ID}:quote:flag'
-
-    if not db.exists(ids_namespace) == 1:
-        quotes = await bot.get_channel(QUOTES_ID).history(limit=None).flatten()
-        quote_ids = []
+    key = 'quotes'
+    if not db.exists(key):
+        quotes = await bot.get_channel(QUOTES_CHANNEL_ID).history(limit=None).flatten()
+        content = []
         for current_quote in quotes:
-            quote_namespace = f'{current_quote.id}:quote'
-            db.setex(quote_namespace, TIME_TO_DELETE, str(current_quote.content))
-            quote_ids.append(current_quote.id)
-
-        db.setex(ids_namespace, TIME_TO_DELETE, str(quote_ids))
+            content.append(current_quote.content)
+        db.setex(key, TIME_TO_DELETE, '###'.join(content))
     else:
-        quote_ids = eval(db.get(ids_namespace))
+        content = str(db.get(key)).split('###')
 
-    random_quote = random.choice(quote_ids)
-    selected_quote = str(db.get(f'{random_quote}:quote'))[2:-1]
-    await current_message.edit(content=selected_quote)
+    random_quote = random.choice(content)
+    await current_message.edit(content=random_quote)
