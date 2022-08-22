@@ -200,12 +200,13 @@ async def duel(ctx: Context):
                                 host_responded = True
                                 cannot_join.append(reply.author.id)
                                 await request_msg.delete()
-                        await host_reply.delete()
+                        if reply.channel.id == DUELING:
+                            await host_reply.delete()
             elif reply.content.lower() == "start" and reply.author.id == author_id:
                 await duel_join_msg.edit(content=f"Duel is about to begin {loading_emj}")
                 break
-
-            await reply.delete()
+            if reply.channel.id == DUELING:
+                await reply.delete()
 
     await duel_join_msg.delete()
 
@@ -226,7 +227,8 @@ async def duel(ctx: Context):
                         duel_type = DuelType.ffa.value
                     elif reply.content.lower() == "team":
                         duel_type = DuelType.team.value
-                await reply.delete()
+                if reply.channel.id == DUELING:
+                    await reply.delete()
         await duel_type_msg.delete()
     else:
         duel_type = DuelType.ffa.value
@@ -256,7 +258,8 @@ async def duel(ctx: Context):
                         if not len(duelists) > 3:
                             continue
                         host_teammate = 3
-                await reply.delete()
+                if reply.channel.id == DUELING:
+                    await reply.delete()
 
         if not host_teammate == 1:
             pets_in_battle[1], pets_in_battle[host_teammate] = pets_in_battle[host_teammate], pets_in_battle[1]
@@ -269,8 +272,8 @@ async def duel(ctx: Context):
     await add_to_battlefield(ctx, battlefield_messages, pets_in_battle, duel_type)
 
     # TODO Remove this
-    final_msg = await ctx.send("Dueling is under construction. This channel will empty itself in 10 seconds.")
-    await asyncio.sleep(10)
+    final_msg = await ctx.send("Dueling is under construction. This channel will empty itself in 30 seconds.")
+    await asyncio.sleep(30)
     await final_msg.delete()
     for msg in battlefield_messages:
         await msg.delete()

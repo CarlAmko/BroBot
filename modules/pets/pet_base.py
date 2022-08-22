@@ -58,7 +58,8 @@ async def reroll_pet(ctx: Context, pet_name: str) -> Pet:
                     else:
                         await ctx.send(f"{ctx.author.mention} Sorry I didn't understand that response. "
                                        f"(Send \"**yes**\" or \"**no**\")")
-                    await reply.delete()
+                    if reply.channel.id == PET_GENERAL:
+                        await reply.delete()
         rolls -= 1
 
     await print_pet_info(ctx, current_pet)
