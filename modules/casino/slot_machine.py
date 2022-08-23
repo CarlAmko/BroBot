@@ -4,13 +4,11 @@ from enum import Enum
 from typing import Dict
 
 import emoji
-from discord import Member
-from discord import message
 
-from modules.casino.data.db_casino import get_slot_jackpot, update_slot_jackpot
 from database.db import update_currency, get_currency
-from modules.casino.data.models import JACKPOT_BASE, SlotMachineSizes
 from modules import bot
+from modules.casino.data.db_casino import get_slot_jackpot, update_slot_jackpot
+from modules.casino.data.models import JACKPOT_BASE, SlotMachineSizes
 
 TIME_BETWEEN_ROLLS_MIN = 1.5
 TIME_BETWEEN_ROLLS_MAX = 2
