@@ -103,7 +103,7 @@ async def update_battlefield(ctx: Context, messages: List[Message], pets: List[P
             for i in range (2, len(pets)):
                 header += f"{pets[i].owner.mention}  "
 
-        header += f"\n{nothing_emj}"
+        header += f"\n\n{nothing_emj}"
         for emj in letters_emjs:
             header += emj
         messages.append(await ctx.send(header))
@@ -207,12 +207,16 @@ async def duel(ctx: Context):
                             if host_reply.content.lower() == "accept":
                                 host_responded = True
                                 cannot_join.append(reply.author.id)
-                                duel_joined = True
                                 joiners_pet = db_pets.get_pet(reply.author.id)
                                 pets_in_battle.append(PetInBattle(joiners_pet, reply.author))
-                                new_msg_text = duel_setup_text + f"\n{reply.author.mention} has joined the duel."
-                                await duel_join_msg.edit(content=(new_msg_text + f"\nSend \"**start**\" to start the "
-                                                                                 f"duel now."))
+
+                                if not duel_joined:
+                                    duel_setup_text += "\n"
+
+                                duel_joined = True
+                                duel_setup_text += f"\n{reply.author.mention} has joined the duel."
+                                await duel_join_msg.edit(content=(duel_setup_text + f"\n\nSend \"**start**\" to start "
+                                                                                    f"the duel now."))
                                 await request_msg.delete()
                             elif host_reply.content.lower() == "decline":
                                 host_responded = True
