@@ -5,6 +5,8 @@ from typing import List, Optional
 
 from emoji import emojize
 
+JACKPOT_BASE = 1000
+
 
 class Suit(Enum):
 	SPADES = 0

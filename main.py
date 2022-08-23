@@ -8,11 +8,8 @@ from modules import bot, core, admin, lib
 if not env.BETA:
 	from modules import audio, dice, game_price, poll, randomizer, reddit, scheduler, diggity, quotes
 	from modules.fishing import fishing
-	from modules.casino import blackjack
+	from modules.casino import blackjack, slot_machine
 	from modules.wordle import wordle
-else:
-	# Put new non-master modules here
-	pass
 
 
 async def adjust_member_count():
