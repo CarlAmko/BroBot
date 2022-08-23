@@ -6,7 +6,7 @@ from modules.core import get_guild, get_members_channel
 
 from modules import bot, core, admin, lib
 if not env.BETA:
-	from modules import audio, dice, game_price, poll, randomizer, reddit, scheduler, diggity
+	from modules import audio, dice, game_price, poll, randomizer, reddit, scheduler, diggity, quotes
 	from modules.fishing import fishing
 	from modules.casino import blackjack, slot_machine
 	from modules.wordle import wordle
@@ -47,7 +47,6 @@ async def on_message(message):
 client = Client()
 
 if __name__ == '__main__':
-	if not env.BETA:
-		bot.loop.create_task(scheduler.process_scheduled_tasks())
-		bot.loop.create_task(audio.check_if_alone())
+	bot.loop.create_task(scheduler.process_scheduled_tasks())
+	bot.loop.create_task(audio.check_if_alone())
 	bot.run(env.BOT_SECRET)
