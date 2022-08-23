@@ -49,12 +49,6 @@ class DuelType(Enum):
     ffa = 1
     team = 2
 
-
-class Duel:
-    wager: int
-    turn: str
-
-
 class PetInBattle:
     pet: Pet
     owner: Member
@@ -65,13 +59,22 @@ class PetInBattle:
     def __init__(self, new_pet: Pet, current_owner: Member):
         self.pet = new_pet
         self.owner = current_owner
+        # TODO Handle initiative
+        self.initiative = 20
+
+
+class Duel:
+    wager: int
+    type: int
+    round: int
+    turn_order: List[PetInBattle]
 
 
 current_duel = Duel
 
 
-async def set_starting_positions(pets: List[PetInBattle], duel_type: int):
-    if duel_type == DuelType.ffa.value:
+async def set_starting_positions(pets: List[PetInBattle]):
+    if current_duel.type == DuelType.ffa.value:
         starting_coords = [[0, 0], [0, 9], [9, 0], [9, 9]]
         if len(pets) == 2:
             pets[0].coords = starting_coords[0]
@@ -85,10 +88,10 @@ async def set_starting_positions(pets: List[PetInBattle], duel_type: int):
             pets[i].coords = starting_coords[i]
 
 
-async def update_battlefield(ctx: Context, messages: List[Message], pets: List[PetInBattle], duel_type: int) -> List[Message]:
+async def update_battlefield(ctx: Context, messages: List[Message], pets: List[PetInBattle]) -> List[Message]:
     if len(messages) == 0:
         header = ""
-        if duel_type == DuelType.ffa.value:
+        if current_duel.type == DuelType.ffa.value:
             header += "Free-for-all duel with:  "
             for pet in pets:
                 header += f"{pet.owner.mention}  "
@@ -129,6 +132,10 @@ async def update_battlefield(ctx: Context, messages: List[Message], pets: List[P
             await messages[i + 1].edit(content=row_messages)
 
     return messages
+
+
+async def start_duel(ctx: Context, battlefield: List[Message], pets: List[PetInBattle]):
+    await update_battlefield(ctx, battlefield, pets)
 
 
 @bot.command()
@@ -222,10 +229,10 @@ async def duel(ctx: Context):
     await duel_join_msg.delete()
 
     if len(pets_in_battle) > 2:
-        duel_type = 0
+        current_duel.type = 0
         duel_type_msg = await ctx.send(f"{author.mention}\n"
                                        f"Send \"ffa\" for a free-for-all duel or \"team\" for a team duel.")
-        while duel_type == 0:
+        while current_duel.type == 0:
             try:
                 reply = await bot.wait_for('message', timeout=60.0)
             except asyncio.TimeoutError:
@@ -235,16 +242,16 @@ async def duel(ctx: Context):
             else:
                 if reply.author.id == author_id:
                     if reply.content.lower() == "ffa":
-                        duel_type = DuelType.ffa.value
+                        current_duel.type = DuelType.ffa.value
                     elif reply.content.lower() == "team":
-                        duel_type = DuelType.team.value
+                        current_duel.type = DuelType.team.value
                 if reply.channel.id == DUELING:
                     await reply.delete()
         await duel_type_msg.delete()
     else:
-        duel_type = DuelType.ffa.value
+        current_duel.type = DuelType.ffa.value
 
-    if duel_type == DuelType.team.value:
+    if current_duel.type == DuelType.team.value:
         team_select_text = f"{author.mention}, enter the number of user you want to team with or send \"random\"\n"
         for i in range(len(pets_in_battle) - 1):
             team_select_text += f"**{i + 1}:** {pets_in_battle[i + 1].owner.mention}\n"
@@ -282,8 +289,8 @@ async def duel(ctx: Context):
         await msg.delete()
 
     battlefield_msg = []
-    await set_starting_positions(pets_in_battle, duel_type)
-    battlefield_msg = await update_battlefield(ctx, battlefield_msg, pets_in_battle, duel_type)
+    await set_starting_positions(pets_in_battle)
+    battlefield_msg = await update_battlefield(ctx, battlefield_msg, pets_in_battle)
 
     # TODO Remove this
     final_msg = await ctx.send("Dueling is under construction. This channel will empty itself in 30 seconds.")
