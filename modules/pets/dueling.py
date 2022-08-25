@@ -159,6 +159,8 @@ async def start_duel():
 
     build_turn_order()
     while current_duel.is_active:
+        turn_index = 0
+
         for pet_turn in current_duel.turn_order:
             pet_turn.is_turn = True
             turn_order_msg = await current_duel.duel_context.send(f"{nothing_emj}\n"
@@ -214,10 +216,7 @@ async def start_duel():
                         # End of: if response == "move"
 
                         elif response == "surrender":
-                            for i in range(len(current_duel.turn_order)):
-                                if pet_turn.owner.id == current_duel.turn_order[i].owner.id:
-                                    del current_duel.turn_order[i]
-                                    break
+                            remove_from_duel(pet_turn, turn_index)
 
                         elif response == "end turn":
                             pet_turn.is_turn = False
@@ -230,6 +229,7 @@ async def start_duel():
 
             await turn_order_msg.delete()
             await turn_msg.delete()
+            turn_index += 1
 
         # End of: for pet_turn in current_duel.turn_order
 
@@ -253,6 +253,16 @@ def build_turn_order():
         current_duel.turn_order.append(current_duel.pets[i])
 
     current_duel.turn_order.sort(key=lambda x: x.initiative)
+
+
+def remove_from_duel(pet: PetInDuel, turn_index: int):
+    global current_duel
+
+    del current_duel.turn_order[turn_index]
+
+    for i in range(len(current_duel.pets)):
+        if pet.owner.id == current_duel.pets[i].owner.id:
+            del current_duel.pets[i]
 
 
 async def delete_reply(reply: Message):
