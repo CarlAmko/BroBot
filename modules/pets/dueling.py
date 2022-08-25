@@ -15,6 +15,7 @@ DUELING = 1011161175163142175
 BATTLEFIELD_SIZE = 10
 ROWS_PER_MESSAGE = 5
 COLUMN_LETTERS = 'abcdefghij'
+ROW_NUMBERS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 FFA_STARTING_COORDS = [[0, 0], [0, 9], [9, 0], [9, 9]]
 TEAM_STARTING_COORDS = [[0, 3], [0, 6], [9, 3], [9, 6]]
 
@@ -187,8 +188,8 @@ async def start_duel():
                         if response == "move":
                             is_moving = True
                             move_msg = await current_duel.duel_context.send("Where would you like to move? "
-                                                                            "(Format: \"**X N**\". X is the column "
-                                                                            "letter and N is the row number.)")
+                                                                            "(Format: \"**A 1**\". A is the column "
+                                                                            "letter and 1 is the row number.)")
                             while is_moving:
                                 try:
                                     move_reply = await bot.wait_for('message', timeout=60.0)
@@ -202,13 +203,11 @@ async def start_duel():
 
                                         # TODO input security
                                         move_to = move_response.split()
-                                        print(move_to)
-                                        print(len(move_to))
                                         if len(move_to) == 2:
-                                            pet_turn.coords[0] = COLUMN_LETTERS.find(move_to[0])
-                                            pet_turn.coords[1] = int(move_to[1])
-                                            print(f"{pet_turn.coords[0]}\n{pet_turn.coords[1]}")
-                                            is_moving = False
+                                            if move_to[0] in COLUMN_LETTERS and move_to[1] in ROW_NUMBERS:
+                                                pet_turn.coords[0] = int(move_to[1]) - 1
+                                                pet_turn.coords[1] = COLUMN_LETTERS.find(move_to[0])
+                                                is_moving = False
 
                                     await delete_reply(move_reply)
 
@@ -216,7 +215,8 @@ async def start_duel():
                         # End of: if response == "move"
 
                         elif response == "surrender":
-                            remove_from_duel(pet_turn, turn_index)
+                            remove_from_duel(int(pet_turn.owner.id), turn_index)
+                            break
 
                         elif response == "end turn":
                             pet_turn.is_turn = False
@@ -255,14 +255,14 @@ def build_turn_order():
     current_duel.turn_order.sort(key=lambda x: x.initiative)
 
 
-def remove_from_duel(pet: PetInDuel, turn_index: int):
+def remove_from_duel(pet: int, turn_index: int):
     global current_duel
 
-    del current_duel.turn_order[turn_index]
-
     for i in range(len(current_duel.pets)):
-        if pet.owner.id == current_duel.pets[i].owner.id:
+        if pet == int(current_duel.pets[i].owner.id):
             del current_duel.pets[i]
+
+    del current_duel.turn_order[turn_index]
 
 
 async def delete_reply(reply: Message):
@@ -351,7 +351,7 @@ async def duel(ctx: Context):
                     continue
 
                 # Informs the host that someone is attempting to join and prompts them to accept or decline
-                request_msg = await ctx.send(f"{author.mention}\n**{reply.author.nick}** would like to join the "
+                request_msg = await ctx.send(f"{author.mention}\n**{reply.author.mention}** would like to join the "
                                              f"duel.\nSend \"**accept**\" to accept them. "
                                              f"\"**decline**\" to decline them.")
                 # Flag for whether the host replies to join request
@@ -387,7 +387,7 @@ async def duel(ctx: Context):
 
                                 # Flag duel as joined and update message to show that the joiner is in the duel
                                 duel_joined = True
-                                duel_setup_text += f"\n**{reply.author.nick}** has joined the duel."
+                                duel_setup_text += f"\n**{reply.author.mention}** has joined the duel."
                                 await duel_join_msg.edit(content=(duel_setup_text + f"\n\nSend \"**start**\" to start "
                                                                                     f"the duel now."))
                                 await request_msg.delete()
