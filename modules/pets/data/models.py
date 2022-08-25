@@ -2,6 +2,7 @@ from typing import List, Dict
 from enum import Enum
 import random
 
+from discord import Member
 from emoji import emojize
 
 PLACEHOLDER_EMJ = ":grey_question:"
@@ -39,6 +40,7 @@ class Stats(Enum):
 
 
 class Pet:
+    owner_id: int
     name: str
     pet_emoji: str
     level: int
@@ -51,7 +53,8 @@ class Pet:
     weapon: int
     hat: int
 
-    def __init__(self, name=None):
+    def __init__(self, owner: int, name=None):
+        self.owner_id = owner
         self.name = name
         self.pet_emoji = PLACEHOLDER_EMJ
         self.level = 1

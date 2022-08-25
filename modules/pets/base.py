@@ -32,7 +32,7 @@ async def print_pet_info(ctx: Context, current_pet: Pet) -> Message:
 
 async def reroll_pet(ctx: Context, pet_name: str) -> Pet:
     rolls = PET_REROLLS
-    current_pet = Pet(pet_name)
+    current_pet = Pet(int(ctx.author.id), pet_name)
     while rolls > 0:
         pet_data_msg = await print_pet_info(ctx, current_pet)
         reroll_msg = await ctx.send(f"{ctx.author.mention} would your like to reroll? (Send \"**yes**\" or \"**no**\")\n"
@@ -48,7 +48,7 @@ async def reroll_pet(ctx: Context, pet_name: str) -> Pet:
             else:
                 if reply.author.id == ctx.author.id:
                     if reply.content.lower() == 'yes' or reply.content.lower() == 'y':
-                        current_pet = Pet(pet_name)
+                        current_pet = Pet(int(ctx.author.id), pet_name)
                         replied = True
                         await pet_data_msg.delete()
                         await reroll_msg.delete()

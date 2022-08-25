@@ -23,7 +23,7 @@ def get_pet(user_id: str) -> Pet:
     unpacked_pet = json.loads(db.get(namespace).decode('utf-8'))
     pet_data = unpacked_pet
 
-    pet = Pet()
+    pet = Pet(int(user_id))
     pet.name = pet_data["name"]
     pet.pet_emoji = pet_data["emoji"]
     pet.level = pet_data["level"]
