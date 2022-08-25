@@ -9,7 +9,7 @@ from discord.ext.commands import Context
 from discord import Message, Member
 from modules import bot
 from modules.pets.data import db_pets
-from modules.pets.data.models import Pet, StatusEffects, Stats
+from modules.pets.data.models import Pet, StatusEffects, Stats, BASE_MOVEMENT
 
 DUELING = 1011161175163142175
 BATTLEFIELD_SIZE = 10
@@ -61,6 +61,7 @@ class PetInDuel:
     initiative: int
     is_turn: bool
     remaining_movement: int
+    action_used: bool
 
     def __init__(self, new_pet: Pet, current_owner: Member):
         self.pet = new_pet
@@ -77,6 +78,7 @@ class Duel:
     type: int
     round: int
     turn_order: List[PetInDuel]
+    active_pet: PetInDuel
     occupied_spaces: List[([int] * 2)]
 
 
@@ -168,7 +170,10 @@ async def start_duel():
         turn_index = 0
 
         for pet_turn in current_duel.turn_order:
+            current_duel.active_pet = pet_turn
             pet_turn.is_turn = True
+            pet_turn.remaining_movement = BASE_MOVEMENT
+            pet_turn.action_used = False
             turn_order_msg = await current_duel.duel_context.send(f"{nothing_emj}\n"
                                                                   f"It is **{pet_turn.owner.mention}'s** turn.")
 
@@ -190,34 +195,65 @@ async def start_duel():
                     if reply.author.id == pet_turn.owner.id:
                         response = reply.content.lower()
 
-                        if response == "move":
+                        if response == "attack":
+                            # TODO Change this
+                            temp_action_msg = await current_duel.duel_context.send(f"Attacks are coming soon.")
+                            await asyncio.sleep(3)
+                            edit_turn_message(turn_msg)
+                            await turn_msg.edit(content=f"{nothing_emj}\n{nothing_emj}{nothing_emj}{nothing_emj}"
+                                                        f"{nothing_emj}{nothing_emj}{nothing_emj}**ACTIONS**\n"
+                                                        f"Attack  |  ~~Move~~  |  Skill  |  Item  |  End Turn  "
+                                                        f"|  Surrender")
+                            await temp_action_msg.delete()
+
+                        elif response == "move":
                             is_moving = True
                             move_msg = await current_duel.duel_context.send("Where would you like to move? "
                                                                             "(Format: \"**A 1**\". A is the column "
                                                                             "letter and 1 is the row number.)")
                             while is_moving:
-                                try:
-                                    move_reply = await bot.wait_for('message', timeout=60.0)
+                                if pet_turn.remaining_movement > 0:
+                                    try:
+                                        move_reply = await bot.wait_for('message', timeout=60.0)
 
-                                except asyncio.TimeoutError:
-                                    is_moving = False
+                                    except asyncio.TimeoutError:
+                                        is_moving = False
 
-                                else:
-                                    if move_reply.author.id == pet_turn.owner.id:
-                                        move_response = move_reply.content.lower()
+                                    else:
+                                        if move_reply.author.id == pet_turn.owner.id:
+                                            move_response = move_reply.content.lower()
 
-                                        # TODO input security
-                                        move_to = move_response.split()
-                                        if len(move_to) == 2:
-                                            if move_to[0] in COLUMN_LETTERS and move_to[1] in ROW_NUMBERS:
-                                                pet_turn.coords[0] = int(move_to[1]) - 1
-                                                pet_turn.coords[1] = COLUMN_LETTERS.find(move_to[0])
-                                                is_moving = False
+                                            move_to = move_response.split()
+                                            if len(move_to) == 2:
+                                                if move_to[0] in COLUMN_LETTERS and move_to[1] in ROW_NUMBERS:
+                                                    move_pet(move_to)
+                                                    is_moving = False
 
-                                    await delete_reply(move_reply)
+                                                    if pet_turn.remaining_movement == 0:
+                                                        await turn_msg.edit(content=f"{nothing_emj}\n{nothing_emj}"
+                                                                                    f"{nothing_emj}{nothing_emj}"
+                                                                                    f"{nothing_emj}{nothing_emj}"
+                                                                                    f"{nothing_emj}**ACTIONS**\n"
+                                                                                    f"Attack  |  ~~Move~~  |  Skill  "
+                                                                                    f"|  Item  |  End Turn  "
+                                                                                    f"|  Surrender")
+
+                                        await delete_reply(move_reply)
 
                             await move_msg.delete()
                         # End of: if response == "move"
+
+                        elif response == "skill":
+                            # TODO Change this
+                            temp_action_msg = await current_duel.duel_context.send(f"Skills are coming soon.")
+                            await asyncio.sleep(3)
+                            await temp_action_msg.delete()
+
+                        elif response == "item":
+                            # TODO Change this
+                            temp_action_msg = await current_duel.duel_context.send(f"Items are coming soon.")
+                            await asyncio.sleep(3)
+                            await temp_action_msg.delete()
 
                         elif response == "surrender":
                             remove_from_duel(int(pet_turn.owner.id), turn_index)
@@ -258,6 +294,26 @@ def build_turn_order():
         current_duel.turn_order.append(current_duel.pets[i])
 
     current_duel.turn_order.sort(key=lambda x: x.initiative)
+
+
+def move_pet(move_to: List):
+    global current_duel
+
+    amount_moved = abs(current_duel.active_pet.coords[0] - int(move_to[1]) - 1)
+    amount_moved += abs(current_duel.active_pet.coords[1] - COLUMN_LETTERS.find(move_to[0]))
+
+    if current_duel.active_pet.remaining_movement - amount_moved >= 0:
+        current_duel.active_pet.coords[0] = int(move_to[1]) - 1
+        current_duel.active_pet.coords[1] = COLUMN_LETTERS.find(move_to[0])
+
+
+async def edit_turn_msg(msg: Message):
+    global current_duel
+
+    if current_duel.active_pet.remaining_movement == 0 and current_duel.active_pet.action_used:
+        await msg.edit(content=f"{nothing_emj}\n{nothing_emj}{nothing_emj}{nothing_emj}{nothing_emj}{nothing_emj}"
+                               f"{nothing_emj}**ACTIONS**\n~~Attack~~  |  ~~Move~~  |  Skill  |  Item  |  End Turn  "
+                               f"|  Surrender")
 
 
 def remove_from_duel(pet: int, turn_index: int):

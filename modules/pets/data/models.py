@@ -6,6 +6,7 @@ from discord import Member
 from emoji import emojize
 
 PLACEHOLDER_EMJ = ":grey_question:"
+BASE_MOVEMENT = 4
 
 
 class StatusEffects(Enum):
