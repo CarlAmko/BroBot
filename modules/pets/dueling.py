@@ -77,6 +77,7 @@ class Duel:
     type: int
     round: int
     turn_order: List[PetInDuel]
+    occupied_spaces: List[([int] * 2)]
 
 
 class Turn:
@@ -93,13 +94,17 @@ async def set_starting_positions():
     if current_duel.type == DuelType.ffa.value:
         if len(current_duel.pets) == 2:
             current_duel.pets[0].coords = FFA_STARTING_COORDS[0]
+            current_duel.occupied_spaces.append(FFA_STARTING_COORDS[0])
             current_duel.pets[1].coords = FFA_STARTING_COORDS[3]
+            current_duel.occupied_spaces.append(FFA_STARTING_COORDS[3])
         else:
             for i in range(len(current_duel.pets)):
                 current_duel.pets[i].coords = FFA_STARTING_COORDS[i]
+                current_duel.occupied_spaces.append(FFA_STARTING_COORDS[i])
     else:
         for i in range(len(current_duel.pets)):
             current_duel.pets[i].coords = TEAM_STARTING_COORDS[i]
+            current_duel.occupied_spaces.append(TEAM_STARTING_COORDS[i])
 
 
 async def setup_battlefield():
