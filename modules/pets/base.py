@@ -10,7 +10,7 @@ import emoji
 from env import ADMIN_IDS
 
 PET_GENERAL = 1010952816908574750
-PET_REROLLS = 2
+PET_REROLLS = 4
 
 nothing_emj = emoji.emojize("<:nothing:1004150080779059381>")
 
@@ -74,8 +74,7 @@ async def pet(ctx: Context):
         return
 
     author = ctx.author
-    author_id = author.id
-    print(author_id)
+    author_id = int(author.id)
 
     if not db_pets.check_pet(author_id):
         print(f"{ctx.author.name} does not have a pet yet.")
@@ -92,8 +91,7 @@ async def newpet(ctx: Context):
         return
 
     author = ctx.author
-    author_id = author.id
-    print(author_id)
+    author_id = int(author.id)
 
     if db_pets.check_pet(author_id):
         print(f"{ctx.author.name} already has a pet.")
@@ -103,8 +101,7 @@ async def newpet(ctx: Context):
     command_msg = ctx.message.content.split()
     if not len(command_msg) == 2:
         print(f"{ctx.author.name} entered invalid newpet command.")
-        await ctx.send(f"{author.mention} Invalid newpet command. It should be !newpet XXXXX (XXXXX is your pets single"
-                       f" word name.")
+        await ctx.send(f"{author.mention} It should be **!newpet XXXXX** (**XXXXX** is your pets single word name.")
         return
 
     pet_name = command_msg[1].strip()
@@ -127,13 +124,13 @@ async def petemoji(ctx: Context):
 
     await ctx.message.delete()
 
-    target_id = command_msg[1].strip()
-    print(target_id)
-    desired_emoji = emoji.emojize(command_msg[2].strip())
-    print(desired_emoji)
-    if not db_pets.check_pet(author_id):
+    target_id = int(command_msg[1].strip())
+
+    if not db_pets.check_pet(target_id):
         print(f"They do not have a pet yet.")
         return
+
+    desired_emoji = emoji.emojize(command_msg[2].strip())
 
     current_pet = db_pets.get_pet(target_id)
     current_pet.pet_emoji = desired_emoji
@@ -156,6 +153,6 @@ async def resetpet(ctx: Context):
 
     await ctx.message.delete()
 
-    target_id = command_msg[1].strip()
+    target_id = int(command_msg[1].strip())
     num_removed = db_pets.delete_pet(target_id)
     print(f"{num_removed} pet has been reset for {int(target_id)}.")

@@ -4,14 +4,16 @@ import time
 from typing import List, Dict
 from enum import Enum
 
+import discord
 import emoji
 from discord.ext.commands import Context
-from discord import Message, Member
+from discord import Message, Member, TextChannel
+from discord.utils import get
 from modules import bot
 from modules.pets.data import db_pets
 from modules.pets.data.models import Pet, StatusEffects, Stats, BASE_MOVEMENT
 
-DUELING = 1011161175163142175
+PETS_CATEGORY = 1011160840201850970
 BATTLEFIELD_SIZE = 10
 ROWS_PER_MESSAGE = 5
 COLUMN_LETTERS = 'abcdefghij'
@@ -22,6 +24,7 @@ TEAM_STARTING_COORDS = [[0, 3], [0, 6], [9, 3], [9, 6]]
 nothing_emj = emoji.emojize("<:nothing:1004150080779059381>")
 grid_emj = emoji.emojize("<:Grid:1009500126177407016>")
 loading_emj = emoji.emojize("<a:loading:734622445910360105>")
+bomb_emj = emoji.emojize(":bomb:")
 letters_emjs = [
         emoji.emojize('<:A_:1009500338895732746>'),
         emoji.emojize('<:B_:1009502153980780645>'),
@@ -50,523 +53,320 @@ number_emjs = [
 
 class DuelType(Enum):
     ffa = 1
-    team = 2
+    teams = 2
 
 
-class PetInDuel:
+class DuelingPet:
     pet: Pet
     owner: Member
-    coords: [int] * 2
-    status_effects: List[StatusEffects]
+    location: List[int]
     initiative: int
-    is_turn: bool
-    remaining_movement: int
-    action_used: bool
 
-    def __init__(self, new_pet: Pet, current_owner: Member):
-        self.pet = new_pet
-        self.owner = current_owner
-        self.initiative = random.randint(1, 20) + new_pet.pet_stats[Stats.ins.value]
+    def __init__(self, owner: Member):
+        self.pet = db_pets.get_pet(owner.id)
+        self.owner = owner
+        self.location = []
+        self.initiative = random.randint(1, 20) + self.pet.pet_stats[Stats.ins.value]
 
 
 class Duel:
-    duel_context: Context
-    is_active = False
-    pets: List[PetInDuel]
-    battlefield: List[Message]
+    is_active: bool
+    can_start: bool
+    can_join: bool
+    has_started: bool
+    channel: TextChannel
     wager: int
-    type: int
-    round: int
-    turn_order: List[PetInDuel]
-    active_pet: PetInDuel
-    occupied_spaces: List[([int] * 2)]
+    ctx: Context
+    pets: List[DuelingPet]
+
+    def __init__(self, new_channel: TextChannel, ctx: Context):
+        self.is_active = True
+        self.can_start = False
+        self.can_join = False
+        self.has_started = False
+        self.channel = new_channel
+        self.wager = 0
+        self.ctx = ctx
+        self.pets = [DuelingPet(ctx.author)]
 
 
-class Turn:
-    pet: PetInDuel
-    used_action: bool
+duels: Dict[Member, Duel] = {}
+joiners: List[Member] = []
+declined: List[Member] = []
+
+new_duel_msg: Message
+host_greeting_msg: Message
 
 
-current_duel = Duel
+async def has_duel(ctx: Context) -> bool:
+    global duels, host_greeting_msg
 
+    host = ctx.author
 
-async def set_starting_positions():
-    global current_duel
-
-    if current_duel.type == DuelType.ffa.value:
-        if len(current_duel.pets) == 2:
-            current_duel.pets[0].coords = FFA_STARTING_COORDS[0]
-            current_duel.occupied_spaces.append(FFA_STARTING_COORDS[0])
-            current_duel.pets[1].coords = FFA_STARTING_COORDS[3]
-            current_duel.occupied_spaces.append(FFA_STARTING_COORDS[3])
-        else:
-            for i in range(len(current_duel.pets)):
-                current_duel.pets[i].coords = FFA_STARTING_COORDS[i]
-                current_duel.occupied_spaces.append(FFA_STARTING_COORDS[i])
+    if host in duels and duels[host].is_active:
+        await ctx.send(f"{host.mention} You have an active duel already.\n<#{duels[host].channel.id}>")
+        return True
     else:
-        for i in range(len(current_duel.pets)):
-            current_duel.pets[i].coords = TEAM_STARTING_COORDS[i]
-            current_duel.occupied_spaces.append(TEAM_STARTING_COORDS[i])
+        pet_category = get(ctx.guild.categories, id=PETS_CATEGORY)
+
+        channel_overwrites = {
+            ctx.guild.default_role: discord.PermissionOverwrite(read_messages=False),
+            host: discord.PermissionOverwrite(read_messages=True)
+        }
+
+        new_channel = await ctx.guild.create_text_channel(
+            name=f"{ctx.author.nick}'s duel",
+            overwrites=channel_overwrites,
+            category=pet_category
+        )
+
+        duels[host] = Duel(new_channel, ctx)
+        host_greeting_msg = await duels[host].channel.send(f"{host.mention} Welcome to your dueling channel.")
+        return False
 
 
-async def setup_battlefield():
-    global current_duel
+async def close_duel(ctx: Context):
+    global duels
 
-    current_duel.battlefield = []
-    if len(current_duel.battlefield) == 0:
-        header = ""
-        if current_duel.type == DuelType.ffa.value:
-            header += "Free-for-all duel with:  "
-            for pet in current_duel.pets:
-                header += f"{pet.owner.mention}  "
-        else:
-            header += "Team duel with: "
-            for i in range(2):
-                header += f"{current_duel.pets[i].owner.mention}  "
-            header += "VS  "
-            for i in range(2, len(current_duel.pets)):
-                header += f"{current_duel.pets[i].owner.mention}  "
+    host = ctx.author
 
-        header += f"\n\n{nothing_emj}"
-        for emj in letters_emjs:
-            header += emj
-        current_duel.battlefield.append(await current_duel.duel_context.send(header))
-
-    await update_battlefield()
+    await duels[host].channel.send("This channel will self-destruct in 1 minute.")
+    await duels[host].channel.send(f"{bomb_emj}")
+    await asyncio.sleep(60)
+    await duels[host].channel.delete()
+    duels[host].is_active = False
 
 
-async def update_battlefield():
-    global current_duel
+async def join_process(ctx: Context):
+    global duels, host_greeting_msg
 
-    for i in range(2):
-        row_messages = ""
-        for j in range(ROWS_PER_MESSAGE):
-            pets_in_row = []
-            for pet in current_duel.pets:
-                if pet.coords[0] == j + (ROWS_PER_MESSAGE * i):
-                    pets_in_row.append(pet)
-            row_messages += f"{number_emjs[j + (ROWS_PER_MESSAGE * i)]}"
-            for k in range(10):
-                occupied = False
-                for pet in pets_in_row:
-                    if pet.coords[1] == k:
-                        row_messages += emoji.emojize(pet.pet.pet_emoji)
-                        occupied = True
-                if not occupied:
-                    row_messages += grid_emj
-            row_messages += "\n"
+    host = ctx.author
+    current_duel = duels[host]
 
-        if len(current_duel.battlefield) <= 2:
-            current_duel.battlefield.append(await current_duel.duel_context.send(row_messages))
-        else:
-            await current_duel.battlefield[i + 1].edit(content=row_messages)
+    current_duel.can_join = True
+
+    while not current_duel.has_started:
+        if len(current_duel.pets) == 4:
+            current_duel.can_join = False
+
+        if len(current_duel.pets) > 1 and not current_duel.can_start:
+            current_duel.can_start = True
+            host_greeting_text = host_greeting_msg.content + f"\nSend \"**!start**\" start the duel now."
+            await host_greeting_msg.edit(content=host_greeting_text)
+
+        await asyncio.sleep(1)
 
 
-async def start_duel():
-    global current_duel
-
-    build_turn_order()
-    while current_duel.is_active:
-        turn_index = 0
-
-        for pet_turn in current_duel.turn_order:
-            current_duel.active_pet = pet_turn
-            pet_turn.is_turn = True
-            pet_turn.remaining_movement = BASE_MOVEMENT
-            pet_turn.action_used = False
-            turn_order_msg = await current_duel.duel_context.send(f"{nothing_emj}\n"
-                                                                  f"It is **{pet_turn.owner.mention}'s** turn.")
-
-            turn_msg = await current_duel.duel_context.send(f"{nothing_emj}\n"
-                                                            f"{nothing_emj}{nothing_emj}{nothing_emj}{nothing_emj}"
-                                                            f"{nothing_emj}{nothing_emj}"
-                                                            f"**ACTIONS**\nAttack  |  Move  |  Skill  |  Item  "
-                                                            f"|  End Turn  |  Surrender")
-
-            while pet_turn.is_turn:
-
-                try:
-                    reply = await bot.wait_for('message', timeout=600.0)
-
-                except asyncio.TimeoutError:
-                    pet_turn.is_turn = False
-
-                else:
-                    if reply.author.id == pet_turn.owner.id:
-                        response = reply.content.lower()
-
-                        if response == "attack":
-                            # TODO Change this
-                            temp_action_msg = await current_duel.duel_context.send(f"Attacks are coming soon.")
-                            await asyncio.sleep(3)
-                            edit_turn_message(turn_msg)
-                            await turn_msg.edit(content=f"{nothing_emj}\n{nothing_emj}{nothing_emj}{nothing_emj}"
-                                                        f"{nothing_emj}{nothing_emj}{nothing_emj}**ACTIONS**\n"
-                                                        f"Attack  |  ~~Move~~  |  Skill  |  Item  |  End Turn  "
-                                                        f"|  Surrender")
-                            await temp_action_msg.delete()
-
-                        elif response == "move":
-                            is_moving = True
-                            move_msg = await current_duel.duel_context.send("Where would you like to move? "
-                                                                            "(Format: \"**A 1**\". A is the column "
-                                                                            "letter and 1 is the row number.)")
-                            while is_moving:
-                                if pet_turn.remaining_movement > 0:
-                                    try:
-                                        move_reply = await bot.wait_for('message', timeout=60.0)
-
-                                    except asyncio.TimeoutError:
-                                        is_moving = False
-
-                                    else:
-                                        if move_reply.author.id == pet_turn.owner.id:
-                                            move_response = move_reply.content.lower()
-
-                                            move_to = move_response.split()
-                                            if len(move_to) == 2:
-                                                if move_to[0] in COLUMN_LETTERS and move_to[1] in ROW_NUMBERS:
-                                                    move_pet(move_to)
-                                                    is_moving = False
-
-                                                    if pet_turn.remaining_movement == 0:
-                                                        await turn_msg.edit(content=f"{nothing_emj}\n{nothing_emj}"
-                                                                                    f"{nothing_emj}{nothing_emj}"
-                                                                                    f"{nothing_emj}{nothing_emj}"
-                                                                                    f"{nothing_emj}**ACTIONS**\n"
-                                                                                    f"Attack  |  ~~Move~~  |  Skill  "
-                                                                                    f"|  Item  |  End Turn  "
-                                                                                    f"|  Surrender")
-
-                                        await delete_reply(move_reply)
-
-                            await move_msg.delete()
-                        # End of: if response == "move"
-
-                        elif response == "skill":
-                            # TODO Change this
-                            temp_action_msg = await current_duel.duel_context.send(f"Skills are coming soon.")
-                            await asyncio.sleep(3)
-                            await temp_action_msg.delete()
-
-                        elif response == "item":
-                            # TODO Change this
-                            temp_action_msg = await current_duel.duel_context.send(f"Items are coming soon.")
-                            await asyncio.sleep(3)
-                            await temp_action_msg.delete()
-
-                        elif response == "surrender":
-                            remove_from_duel(int(pet_turn.owner.id), turn_index)
-                            break
-
-                        elif response == "end turn":
-                            pet_turn.is_turn = False
-                    # End of: if reply.author.id == pet_turn.owner.id
-
-                    await delete_reply(reply)
-                    await update_battlefield()
-                # End of: try for action
-            # End of: while pet_turn.is_turn
-
-            await turn_order_msg.delete()
-            await turn_msg.delete()
-            turn_index += 1
-
-        # End of: for pet_turn in current_duel.turn_order
-
-        if len(current_duel.turn_order) < 2:
-            winner = current_duel.turn_order[0]
-            await current_duel.duel_context.send(f"{winner.owner.mention} and **{winner.pet.name}** "
-                                                 f"{emoji.emojize(winner.pet.pet_emoji)} have won the duel!")
-            current_duel.is_active = False
-            return
-
-        await update_battlefield()
-
-    # End of: while current_duel.is_active
-
-
-def build_turn_order():
-    global current_duel
-
-    current_duel.turn_order = []
-    for i in range(len(current_duel.pets)):
-        current_duel.turn_order.append(current_duel.pets[i])
-
-    current_duel.turn_order.sort(key=lambda x: x.initiative)
-
-
-def move_pet(move_to: List):
-    global current_duel
-
-    amount_moved = abs(current_duel.active_pet.coords[0] - int(move_to[1]) - 1)
-    amount_moved += abs(current_duel.active_pet.coords[1] - COLUMN_LETTERS.find(move_to[0]))
-
-    if current_duel.active_pet.remaining_movement - amount_moved >= 0:
-        current_duel.active_pet.coords[0] = int(move_to[1]) - 1
-        current_duel.active_pet.coords[1] = COLUMN_LETTERS.find(move_to[0])
-
-
-async def edit_turn_msg(msg: Message):
-    global current_duel
-
-    if current_duel.active_pet.remaining_movement == 0 and current_duel.active_pet.action_used:
-        await msg.edit(content=f"{nothing_emj}\n{nothing_emj}{nothing_emj}{nothing_emj}{nothing_emj}{nothing_emj}"
-                               f"{nothing_emj}**ACTIONS**\n~~Attack~~  |  ~~Move~~  |  Skill  |  Item  |  End Turn  "
-                               f"|  Surrender")
-
-
-def remove_from_duel(pet: int, turn_index: int):
-    global current_duel
-
-    for i in range(len(current_duel.pets)):
-        if pet == int(current_duel.pets[i].owner.id):
-            del current_duel.pets[i]
-
-    del current_duel.turn_order[turn_index]
-
-
-async def delete_reply(reply: Message):
-    if reply.channel.id == DUELING:
-        await reply.delete()
-
-
-# Command to start a new duel
 @bot.command()
 async def duel(ctx: Context):
-    global current_duel
+    global duels, new_duel_msg, host_greeting_msg
 
-    # Makes sure that the duel command is being called in #dueling_only
-    if not ctx.channel.id == DUELING:
-        await ctx.send(f"{ctx.author.mention} Please only use **!duel** in <#{DUELING}>")
+    host = ctx.author
+    host_id = host.id
+
+    if not db_pets.check_pet(host.id):
+        await ctx.send(f"{host.mention} You do not have a pet. Use \"**!newpet**\" to get one.")
         return
 
-    # If duel is already active ignore !duel commands
-    if current_duel.is_active:
-        await ctx.message.delete()
+    if await has_duel(ctx):
         return
 
-    # Store command callers info
-    author = ctx.author
-    author_id = author.id
+    current_duel = duels[host]
+    duel_channel = current_duel.channel
 
-    # Split command message to grab wager amount
     command_msg = ctx.message.content.split()
-    if not len(command_msg) == 2:
-        msg_to_delete = await ctx.send(f"{author.mention} Invalid !duel command. It should be !duel X (Where X is the "
-                                       f"diggities you would like to wager on this duel.")
-        await ctx.message.delete()
+
+    if len(command_msg) == 1:
+        current_duel.wager = 0
+
+    else:
+        wager: str = command_msg[1].strip()
+
+        if not wager.isdigit():
+            await duel_channel.send(f"{host.mention} Your wager was invalid.")
+            await close_duel(ctx)
+            return
+
+        current_duel.wager = int(wager)
+
+    diggity_text = "diggity" if current_duel.wager == 1 else "diggities"
+
+    new_duel_text = f"{host.mention} has opened a duel for **{current_duel.wager} {diggity_text}**!\n" \
+                    f"Send \"**!join {host.mention}**\" to request to join the duel."
+    new_duel_msg = await ctx.send(new_duel_text)
+
+    await join_process(ctx)
+    await current_duel.channel.purge()
+
+
+
+    await close_duel(ctx)
+
+
+@bot.command()
+async def join(ctx: Context):
+    global duels, joiners, declined, new_duel_msg
+
+    joiner = ctx.author
+
+    if not db_pets.check_pet(joiner.id):
+        await ctx.send(f"{joiner.mention} You do not have a pet. Use \"**!newpet**\" to get one.")
         return
 
-    # Grab wager
-    wager = int(command_msg[1].strip())
+    if not len(ctx.message.mentions) > 0:
+        await ctx.send(f"{joiner.mention} You need to mention the host who's duel you would like to join.")
+        return
 
-    # In new duel: Store context, set as active, store wager
-    current_duel.duel_context = ctx
-    current_duel.is_active = True
-    current_duel.wager = wager
+    host = ctx.message.mentions[0]
 
-    # Delete calling message
-    await ctx.message.delete()
+    if joiner.id == host.id:
+        await ctx.send(f"{joiner.mention} You can't join your own duel.")
+        return
 
-    # Store host's pet as a dueling pet
-    current_duel.pets = [PetInDuel(db_pets.get_pet(author_id), author)]
+    if joiner in declined:
+        await ctx.send(f"{joiner.mention} **{host.nick}** has declined your request. You cannot join.")
 
-    # Use singular form of digities for 1 in wager
-    diggities = "diggity" if wager == 1 else "diggities"
+    if host not in duels:
+        await ctx.send(f"{joiner.mention} **{host.nick}** isn't hosting a duel.")
+        return
 
-    # Output new active duel message and store the contents
-    duel_join_msg = await ctx.send(f"{author.mention} has opened a duel for **{wager} {diggities}**!\n"
-                                   f"Send \"**join**\" to request to join the duel.\n"
-                                   f"Duel shall commence in 1 minute.")
-    duel_setup_text = duel_join_msg.content
+    joined_duel = duels[host]
 
-    # Start duel joined flag and list of players who cannot join the current duel
-    duel_joined = False
-    cannot_join = [author_id]
+    if joined_duel.has_started:
+        await ctx.send(f"{joiner.mention} **{host.nick}'s** duel already began.")
+        return
 
-    # Loop until there are 4 pets in the duel (Is broken out of if host chooses to start with less)
-    while len(current_duel.pets) < 4:
+    joiners.append(joiner)
+    await joined_duel.channel.send(f"{host.mention}\n"
+                                   f"**{joiner.nick}** has requested to join your duel.\n"
+                                   f"Send \"**!accept {joiner.mention}**\" to accept their request.\n"
+                                   f"Send \"**!decline {joiner.mention}**\" to decline their request.")
 
-        # Wait for join message to come in
-        try:
-            reply = await bot.wait_for('message', timeout=60.0)
+    while joiner in joiners and not joined_duel.has_started:
+        await asyncio.sleep(1)
 
-        # New duel timed out with no new joiners
-        except asyncio.TimeoutError:
-            if not duel_joined:
-                no_one_dueling_msg = await ctx.send(f"{author.mention} Seems like no one was willing to duel. "
-                                                    f"Try again later.")
-                return
-            else:
-                await duel_join_msg.edit(content=f"Duel is about to begin {loading_emj}")
-                break
+    if joiner in joiners or joiner in declined:
+        await ctx.send(f"{joiner.mention} **{host.nick}** did not accept.\n"
+                       f"Send \"**!spectate {host.mention}**\" to watch the duel.")
+        return
 
-        else:
-            # Check if the response message was "join" and that the sender is allowed to join
-            if reply.content.lower() == "join" and reply.author.id not in cannot_join:
+    joined_duel.pets.append(DuelingPet(joiner))
+    await joined_duel.channel.set_permissions(joiner, read_messages=True)
 
-                # Checks that the joiner has a pet
-                if not db_pets.check_pet(reply.author.id):
-                    no_pet_msg = await ctx.send(f"{reply.author.mention} You do not have a pet.")
-                    continue
+    new_duel_text = new_duel_msg.content + f"\n**{joiner.nick}** has joined the duel!"
+    await new_duel_msg.edit(content=new_duel_text)
 
-                # Informs the host that someone is attempting to join and prompts them to accept or decline
-                request_msg = await ctx.send(f"{author.mention}\n**{reply.author.mention}** would like to join the "
-                                             f"duel.\nSend \"**accept**\" to accept them. "
-                                             f"\"**decline**\" to decline them.")
-                # Flag for whether the host replies to join request
-                host_responded = False
 
-                # Loop while host has not sent a valid response and request has not timed out
-                while not host_responded:
+@bot.command()
+async def accept(ctx: Context):
+    global duels, joiners
 
-                    # Wait for host to reply to join request
-                    try:
-                        host_reply = await bot.wait_for('message', timeout=60.0)
+    host = ctx.author
+    host_duel = duels[host]
 
-                    # Join request timed out without host response
-                    except asyncio.TimeoutError:
-                        host_not_accept_msg = await ctx.send(f"{reply.author.mention}\n"
-                                                             f"**{author.nick}** did not accept.")
-                        break
+    if not len(ctx.message.mentions) > 0:
+        await ctx.send(f"{host.mention} You need to mention the user your want to accept.")
+        return
 
-                    else:
-                        # Ensures the response to the join request is coming from the host
-                        if host_reply.author.id == ctx.author.id:
+    joiner = ctx.message.mentions[0]
 
-                            # Host accepts the join request
-                            if host_reply.content.lower() == "accept":
-                                host_responded = True
-                                cannot_join.append(reply.author.id)
-                                joiners_pet = db_pets.get_pet(reply.author.id)
-                                current_duel.pets.append(PetInDuel(joiners_pet, reply.author))
+    if host not in duels or not host_duel.is_active:
+        await ctx.send(f"{host.mention} You are not hosting a duel.")
+        return
 
-                                # Case where the joiner is the first joiner (Message formatting)
-                                if not duel_joined:
-                                    duel_setup_text += "\n"
+    if host_duel.has_started:
+        await ctx.send(f"{host.mention} Your duel has already started.")
+        return
 
-                                # Flag duel as joined and update message to show that the joiner is in the duel
-                                duel_joined = True
-                                duel_setup_text += f"\n**{reply.author.mention}** has joined the duel."
-                                await duel_join_msg.edit(content=(duel_setup_text + f"\n\nSend \"**start**\" to start "
-                                                                                    f"the duel now."))
-                                await request_msg.delete()
+    if joiner not in joiners:
+        await ctx.send(f"{host.mention} **{joiner.nick}** has not requested to join your duel.")
+        return
 
-                            # Host declines the join request
-                            elif host_reply.content.lower() == "decline":
-                                host_responded = True
-                                cannot_join.append(reply.author.id)
-                                await request_msg.delete()
+    for user in joiners:
+        if user.id == joiner.id:
+            joiners.remove(user)
 
-                        # Prevents bot from deleting messages in other channels while waiting for responses
-                        await delete_reply(host_reply)
 
-            # Once duel is joined allow only host to start duel with current joiners
-            elif duel_joined and reply.content.lower() == "start" and reply.author.id == author_id:
-                await duel_join_msg.edit(content=f"Duel is about to begin {loading_emj}")
-                break
+@bot.command()
+async def decline(ctx: Context):
+    global duels, joiners, declined
 
-            await delete_reply(reply)
+    host = ctx.author
+    host_duel = duels[host]
 
-    # Delete new duel info message before outputting battlefield
-    await duel_join_msg.delete()
+    if not len(ctx.message.mentions) > 0:
+        await ctx.send(f"{host.mention} You need to mention the user your want to accept.")
+        return
 
-    # If more than 1 joiner allow host to select free-for-all or teams
-    if len(current_duel.pets) > 2:
+    joiner = ctx.message.mentions[0]
 
-        # Set type to 0 to state that the type has not been selected
-        current_duel.type = 0
-        duel_type_msg = await ctx.send(f"{author.mention}\n"
-                                       f"Send \"ffa\" for a free-for-all duel or \"team\" for a team duel.")
+    if host not in duels or not host_duel.is_active:
+        await ctx.send(f"{host.mention} You are not hosting a duel.")
+        return
 
-        # Loop while a type has not been selected
-        while current_duel.type == 0:
+    if host_duel.has_started:
+        await ctx.send(f"{host.mention} Your duel has already started.")
+        return
 
-            # Wait for host to choose duel type
-            try:
-                reply = await bot.wait_for('message', timeout=60.0)
+    if joiner not in joiners:
+        await ctx.send(f"{host.mention} **{joiner.nick}** has not requested to join your duel.")
+        return
 
-            # Mode select timed out and duel is cancelled
-            except asyncio.TimeoutError:
-                type_not_selected_msg = await ctx.send(f"{author.mention} You didn't select a duel type in time. "
-                                                       f"Duel cancelled.")
-                return
+    for user in joiners:
+        if user.id == joiner.id:
+            joiners.remove(user)
+            declined.append(user)
 
-            else:
-                # Only host may choose mode
-                if reply.author.id == author_id:
 
-                    # Chose free-for-all
-                    if reply.content.lower() == "ffa":
-                        current_duel.type = DuelType.ffa.value
+@bot.command()
+async def spectate(ctx: Context):
+    global duels, new_duel_msg
 
-                    # Chose teams
-                    elif reply.content.lower() == "team":
-                        current_duel.type = DuelType.team.value
+    spectator = ctx.author
 
-                await delete_reply(reply)
+    if not len(ctx.message.mentions) > 0:
+        await ctx.send(f"{spectator.mention} You need to mention the host who's duel you would like to watch.")
+        return
 
-        # Delete mode select message before outputting battlefield
-        await duel_type_msg.delete()
+    host = ctx.message.mentions[0]
+    host_duel = duels[host]
 
-    # Only 1 joiner so free-for-all
-    else:
-        current_duel.type = DuelType.ffa.value
+    if spectator.id == host.id:
+        await ctx.send(f"{spectator.mention} It is your duel...")
+        return
 
-    # If teams allow host to choose their teammate
-    if current_duel.type == DuelType.team.value:
-        team_select_text = f"{author.mention}, enter the number of user you want to team with or send \"random\"\n"
-        for i in range(len(current_duel.pets) - 1):
-            team_select_text += f"**{i + 1}:** {current_duel.pets[i + 1].owner.nick}\n"
-        team_select_text += "You have 30 seconds to select or else it will be random."
-        team_select_msg = await ctx.send(team_select_text)
+    if host not in duels:
+        await ctx.send(f"{spectator.mention} **{host.nick}** isn't hosting a duel.")
+        return
 
-        host_teammate = -1
+    await host_duel.channel.set_permissions(spectator, read_messages=True, send_messages=False)
 
-        # Loop while host has not entered a valid teammate selection
-        while host_teammate == -1:
+    new_duel_text = new_duel_msg.content + f"\n**{spectator.nick}** is watching the duel."
+    await new_duel_msg.edit(content=new_duel_text)
 
-            # Wait for teammate selection
-            try:
-                reply = await bot.wait_for('message', timeout=30.0)
 
-            # Teammate select timed out and a random teammate was assigned
-            except asyncio.TimeoutError:
-                type_not_selected_msg = await ctx.send(f"{author.mention} Times Up!")
-                host_teammate = random.randint(1, len(current_duel.pets) - 1)
+@bot.command()
+async def start(ctx: Context):
+    global duels, new_duel_msg
 
-            else:
-                # Only host may choose their teammate
-                if reply.author.id == author_id:
-                    if reply.content == "1":
-                        host_teammate = 1
-                    elif reply.content == "2":
-                        host_teammate = 2
-                    elif reply.content == "3":
-                        if not (len(current_duel.pets) - 1) > 3:
-                            continue
-                        host_teammate = 3
+    host = ctx.author
+    host_duel = duels[host]
 
-                    # Random teammate selected
-                    elif reply.content == "random":
-                        host_teammate = random.randint(1, len(current_duel.pets) - 1)
+    if host not in duels or not host_duel.is_active:
+        await ctx.send(f"{host.mention} You are not hosting a duel.")
+        return
 
-                await delete_reply(reply)
+    if host_duel.has_started:
+        await ctx.send(f"{host.mention} Your duel has already started.")
+        return
 
-        # If the host didn't select the first joiner then rearrange pets in duel accordingly
-        if not host_teammate == 1:
-            current_duel.pets[1], current_duel.pets[host_teammate] = current_duel.pets[host_teammate], current_duel.pets[1]
+    if not host_duel.can_start:
+        await ctx.send(f"{host.mention} No one has joined your duel yet.")
+        return
 
-    # Clear channel of all messages before outputting battlefield
-    history = await bot.get_channel(ctx.channel.id).history(limit=None).flatten()
-    for msg in history:
-        await msg.delete()
+    host_duel.can_join = False
 
-    # Duel begins
+    new_duel_text = new_duel_msg.content + f"The duel has started.\n" \
+                                           f"Send \"**!spectate {host.mention}**\" to watch the duel."
 
-    await set_starting_positions()
-    await setup_battlefield()
-    await start_duel()
-
-    current_duel = Duel
+    host_duel.has_started = True
