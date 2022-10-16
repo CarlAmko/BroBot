@@ -133,14 +133,3 @@ async def volume(ctx: Context, new_volume: int):
 		await ctx.send(f"Changed volume to {new_volume}%")
 	else:
 		await ctx.send("No audio playing. Please play something first before attempting to change volume.")
-
-
-async def check_if_alone():
-	while True:
-		if _is_in_voice_channel():
-			for voice_client in bot.voice_clients:
-				# Only one member means it's alone.
-				if len(voice_client.channel.members) == 1:
-					await voice_client.disconnect()
-		# Loop every minute.
-		await asyncio.sleep(60)
