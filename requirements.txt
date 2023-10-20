@@ -1,8 +1,0 @@
-discord.py[voice]==1.7.3
-requests==2.28.1
-emoji==2.0.0
-redis==3.5.3
-yt-dlp==2022.7.18
-pytz==2022.1
-recurrent==0.4.1
-asyncpraw==7.5.0

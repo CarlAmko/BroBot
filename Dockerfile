@@ -1,10 +1,13 @@
-FROM python:3.8.10-slim
+FROM golang:1.19.5
 RUN apt-get update && apt-get install ffmpeg -y
 
-ADD requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+WORKDIR /usr/src/app
 
-ADD . .
-RUN pip install -e .
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
 
-ENTRYPOINT ["python", "-u", "./main.py"]
+COPY . .
+
+RUN go build -v -o /usr/local/bin/app ./...
+
+CMD ["app"]

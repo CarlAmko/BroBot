@@ -5,6 +5,9 @@ from modules import bot
 
 
 @bot.command()
+
+// Convert this Python code to go
+
 async def random(ctx):
 	msg = ctx.message
 	text = msg.content
