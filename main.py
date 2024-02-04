@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import discord, asyncio
 from discord import Guild, Member, Client
 
 import env
@@ -44,8 +45,12 @@ async def on_message(message):
 		await bot.process_commands(message)
 
 
-client = Client()
+client = Client(intents=discord.Intents.all())
 
-if __name__ == '__main__':
-	bot.loop.create_task(scheduler.process_scheduled_tasks())
-	bot.run(env.BOT_SECRET)
+
+async def main():
+    async with bot:
+        bot.loop.create_task(scheduler.process_scheduled_tasks())
+        await bot.start(env.BOT_SECRET)
+
+asyncio.run(main())

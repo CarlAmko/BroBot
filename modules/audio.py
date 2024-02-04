@@ -9,17 +9,19 @@ from discord.ext.commands import Context
 from modules import bot
 
 ytdl_format_options = {
-	'format': 'bestaudio/best',
-	'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
-	'restrictfilenames': True,
-	'noplaylist': True,
-	'nocheckcertificate': True,
-	'ignoreerrors': False,
-	'logtostderr': False,
-	'quiet': True,
-	'no_warnings': True,
-	'default_search': 'auto',
-	'source_address': '0.0.0.0',
+	 'format': 'bestaudio/best',
+     'outtmpl': 'downloads/%(extractor)s-%(id)s-%(title)s.%(ext)s',
+     'restrictfilenames': True,
+     'nocheckcertificate': True,
+     'ignoreerrors': False,
+     'logtostderr': False,
+     'quiet': True,
+     'extract_flat': True,
+     'skip_download': True,
+     'default_search': 'auto',
+     'source_address': '0.0.0.0',
+     'force-ipv4': True,
+     'cachedir': False
 }
 
 ffmpeg_options = {
